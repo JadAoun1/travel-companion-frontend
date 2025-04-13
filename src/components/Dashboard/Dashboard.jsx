@@ -9,6 +9,7 @@ const Dashboard = () => {
     <main>
       <h1>Trip Dashboard</h1>
       <p>Welcome, {user.username}</p>
+      <ul></ul>
     </main>
   );
 };
