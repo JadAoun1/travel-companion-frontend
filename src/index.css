@@ -40,7 +40,7 @@
     /* Typography */
     --font-family-primary: 'Nimbus Sans L', sans-serif;
 
-    
+
     --font-size-base: 1rem;
     /* Typically 16px */
     --font-size-xs: 0.75rem;
@@ -92,7 +92,14 @@
     /* ~32px */
     --space-xxl: calc(var(--spacing-unit) * 3);
 
-    /* ~48px */
+    /* Borders */
+    --border-width-thin: 1px;
+    --border-width-medium: 2px;
+    --border-width-thick: 4px;
+
+    --border-radius-sharp: 0;
+    --border-radius-slight: 4px;
+    --border-radius-round: 50%;
 }
 
 
