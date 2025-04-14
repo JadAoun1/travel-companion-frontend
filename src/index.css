@@ -1,0 +1,27 @@
+:root {
+    /* Core Palette */
+    --color-primary: #0052cc;
+    --color-secondary: #003b8e;
+    --color-black: #000000;
+    --color-white: #ffffff;
+
+    /* Grays */
+    --color-gray-dark: #333333;
+    --color-gray-medium: #888888;
+    --color-gray-light: #cccccc;
+}
+
+
+body {
+    
+    margin: 0;
+
+    /* Basic sans-serif for Brutalist feel */
+    font-family: sans-serif;
+
+    /* Default background */
+    background-color: var(--color-white);
+   
+    /* Default text color */
+    color: var(--color-black);
+}
