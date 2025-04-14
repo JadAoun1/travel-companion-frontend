@@ -1,0 +1,84 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--space-md);
+    /* Spacing below the input field */
+}
+
+.label {
+    display: block;
+    margin-bottom: var(--space-xs);
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+}
+
+.input {
+    /* Box Model */
+    display: block;
+    width: 100%;
+    /* Take full width of container */
+    padding: var(--space-sm) var(--space-md);
+    border: var(--border-width-medium) solid var(--color-border);
+    border-radius: var(--border-radius-sharp);
+    box-sizing: border-box;
+    /* Include padding and border in width */
+
+    /* Color & Background */
+    background-color: var(--color-surface);
+    /* Use surface color */
+    color: var(--color-text-primary);
+
+    /* Typography */
+    font-family: var(--font-family-primary);
+    /* Or use --font-family-secondary for monospace */
+    font-size: var(--font-size-md);
+    line-height: var(--line-height-base);
+
+    /* Transitions */
+    transition:
+        border-color var(--transition-duration-fast) var(--transition-timing-function),
+        box-shadow var(--transition-duration-fast) var(--transition-timing-function);
+}
+
+.input::placeholder {
+    color: var(--color-text-secondary);
+    opacity: 1;
+    /* Ensure placeholder is visible */
+}
+
+.input:focus,
+.input:focus-visible {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 var(--border-width-thick) var(--color-accent);
+}
+
+.input:disabled {
+    background-color: var(--color-gray-light);
+    border-color: var(--color-gray-light);
+    color: var(--color-gray-medium);
+    cursor: not-allowed;
+}
+
+.input.error {
+    border-color: var(--color-error);
+}
+
+.input.error:focus,
+.input.error:focus-visible {
+    border-color: var(--color-error);
+    box-shadow: 0 0 0 var(--border-width-thick) var(--color-error);
+}
+
+.errorMessage {
+    display: block;
+    margin-top: var(--space-xs);
+    color: var(--color-error);
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-normal);
+}
