@@ -100,6 +100,14 @@
     --border-radius-sharp: 0;
     --border-radius-slight: 4px;
     --border-radius-round: 50%;
+
+    /* Layout */
+    --container-max-width: 1200px;
+    --grid-gap: var(--space-md);
+    --navbar-height: 4rem;
+    /* ~64px */
+    --sidebar-width: 16rem;
+    /* ~256px */
 }
 
 
