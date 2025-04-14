@@ -9,11 +9,19 @@
     --color-gray-dark: #333333;
     --color-gray-medium: #888888;
     --color-gray-light: #cccccc;
+
+    /* Semantic Colors (Based on Usage) */
+    --color-background: var(--color-white);
+    --color-surface: var(--color-white);
+    --color-text-primary: var(--color-black);
+    --color-text-secondary: var(--color-gray-medium);
+    --color-border: var(--color-black);
+    --color-accent: var(--color-primary);
 }
 
 
 body {
-    
+
     margin: 0;
 
     /* Basic sans-serif for Brutalist feel */
@@ -21,7 +29,7 @@ body {
 
     /* Default background */
     background-color: var(--color-white);
-   
+
     /* Default text color */
     color: var(--color-black);
 }
