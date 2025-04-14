@@ -77,6 +77,10 @@
     --transition-duration-fast: 100ms;
     --transition-duration-base: 250ms;
     --transition-timing-function: linear;
+
+    /* Shadows */
+    --box-shadow-none: none;
+    --box-shadow-hard: 4px 4px 0 var(--color-black);
 }
 
 
