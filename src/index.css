@@ -22,81 +22,47 @@
 
     /* State/Feedback Colors */
     --color-error: #d93025;
-    /* Lighter version for backgrounds */
     --color-error-background: #fd958c;
-
     --color-success: #1e8e3e;
-    /* Lighter version for backgrounds */
     --color-success-background: #97fab3;
-
     --color-warning: #f9ab00;
-    /* Lighter version for backgrounds */
     --color-warning-background: #fcd987;
-
     --color-info: #1a73e8;
-    /* Lighter version for backgrounds */
     --color-info-background: #9dc1ff;
 
     /* Typography */
     --font-family-primary: 'Nimbus Sans L', sans-serif;
-
-
     --font-size-base: 1rem;
-    /* Typically 16px */
     --font-size-xs: 0.75rem;
-    /* 12px */
     --font-size-sm: 0.875rem;
-    /* 14px */
     --font-size-md: 1rem;
-    /* 16px */
     --font-size-lg: 1.5rem;
-    /* 24px */
     --font-size-xl: 2rem;
-    /* 32px */
     --font-size-xxl: 3rem;
-    /* 48px */
-
     --font-weight-light: 300;
     --font-weight-normal: 400;
     --font-weight-bold: 700;
     --font-weight-black: 900;
-
     --line-height-base: 1.6;
     --line-height-heading: 1.2;
-
     --letter-spacing-tight: -0.05em;
     --letter-spacing-normal: 0;
     --letter-spacing-wide: 0.1em;
 
     /* Spacing */
     --spacing-unit: 1rem;
-
-    /* Base unit (relative to root font size) */
     --space-xxs: calc(var(--spacing-unit) * 0.25);
-
-    /* ~4px */
     --space-xs: calc(var(--spacing-unit) * 0.5);
-
-    /* ~8px */
     --space-sm: calc(var(--spacing-unit) * 0.75);
-
-    /* ~12px */
     --space-md: var(--spacing-unit);
-
-    /* ~16px */
     --space-lg: calc(var(--spacing-unit) * 1.5);
-
-    /* ~24px */
     --space-xl: calc(var(--spacing-unit) * 2);
-
-    /* ~32px */
     --space-xxl: calc(var(--spacing-unit) * 3);
 
     /* Borders */
     --border-width-thin: 1px;
     --border-width-medium: 2px;
     --border-width-thick: 4px;
-
     --border-radius-sharp: 0;
     --border-radius-slight: 4px;
     --border-radius-round: 50%;
@@ -105,25 +71,21 @@
     --container-max-width: 1200px;
     --grid-gap: var(--space-md);
     --navbar-height: 4rem;
-    /* ~64px */
     --sidebar-width: 16rem;
-    /* ~256px */
+
+    /* Transitions */
+    --transition-duration-fast: 100ms;
+    --transition-duration-base: 250ms;
+    --transition-timing-function: linear;
 }
 
 
 body {
-
     margin: 0;
-
-    /* Basic sans-serif for Brutalist feel */
     font-family: var(--font-family-primary);
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-normal);
     line-height: var(--line-height-base);
-
-    /* Default background */
     background-color: var(--color-background);
-
-    /* Default text color */
     color: var(--color-text-primary);
 }
