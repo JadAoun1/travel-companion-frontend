@@ -17,6 +17,23 @@
     --color-text-secondary: var(--color-gray-medium);
     --color-border: var(--color-black);
     --color-accent: var(--color-primary);
+
+    /* State/Feedback Colors */
+    --color-error: #d93025;
+    /* Lighter version for backgrounds */
+    --color-error-background: #fd958c;
+   
+    --color-success: #1e8e3e;
+    /* Lighter version for backgrounds */
+    --color-success-background: #97fab3;
+   
+    --color-warning: #f9ab00;
+    /* Lighter version for backgrounds */
+    --color-warning-background: #fcd987;
+   
+    --color-info: #1a73e8;
+    /* Lighter version for backgrounds */
+    --color-info-background: #9dc1ff;
 }
 
 
