@@ -8,7 +8,7 @@ const NewTripForm = () => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    destination: "",
+    // destination: "", 
   });
 
   const handleChange = (event) => {
@@ -50,14 +50,14 @@ const NewTripForm = () => {
           onChange={handleChange}
         ></textarea>
 
-        <label htmlFor="destination">Destination:</label>
+        {/* <label htmlFor="destination">Destination:</label>
         <input
           type="text"
           name="destination"
           id="destination"
           value={formData.destination}
           onChange={handleChange}
-        />
+        /> */}
 
         <button type="submit">Create Trip</button>
       </form>
