@@ -1,6 +1,6 @@
 // src/components/Dashboard/Dashboard.jsx
 import { useContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router"; 
+import { useNavigate, Link } from "react-router"; 
 import { UserContext } from "../../contexts/UserContext";
 import * as tripService from "../../services/tripService";
 
@@ -35,6 +35,9 @@ const Dashboard = () => {
             {/* Maybe just keep trip title as a card on dashboard page and move description and other relevant details to the show page. */}
             <h2>{trip.title}</h2>
             <p>{trip.description}</p>
+            <Link to={`/trips/${trip._id}`}>
+                <button>View Trip</button>
+            </Link>
           </li>
         ))}
       </ul>
