@@ -25,6 +25,7 @@ const App = () => {
         <Route path="/trips/new" element={<TripForm />} />
         <Route path="/styleguide" element={<StyleGuide />} />
         <Route path="/trips/:tripId" element={<TripDetails />} />
+        <Route path="/trips/:tripId/edit" element={<TripForm />} />
       </Routes>
     </>
   );

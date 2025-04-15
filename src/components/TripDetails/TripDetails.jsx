@@ -20,7 +20,6 @@ const TripDetails = () => {
     return <div>Loading...</div>;
   }
 
-  //Delete trip function
   const handleDeleteTrip = async (tripId) => {
     const deletedTrip = await tripService.deleteTrip(tripId);
     setTrip(deletedTrip);
@@ -30,13 +29,18 @@ const TripDetails = () => {
   return (
     <main>
       <section>
-        <header>
+        <div>
           <h1>{trip.title}</h1>
           <p>{trip.description}</p>
+          <button onClick={() => navigate(`/trips/${trip._id}/edit`)}>Edit Trip</button>
           <button onClick={() => handleDeleteTrip(trip._id)}>Delete Trip</button>
-        </header>
+        </div>
+        <div>
+          <h2>Planned Destinations</h2>
+          {/* Need to add code to display the planned destinations */}
+        </div>
       </section>
-    </main>
+    </main> 
   );
 };
 export default TripDetails;
