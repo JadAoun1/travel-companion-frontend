@@ -1,0 +1,88 @@
+.alert {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: var(--space-md);
+    margin-bottom: var(--space-lg);
+    border: var(--border-width-medium) solid transparent;
+    border-radius: var(--border-radius-sharp);
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-base);
+}
+
+.mainContent {
+    display: flex;
+    align-items: flex-start;
+    flex-grow: 1;
+}
+
+.icon {
+    flex-shrink: 0;
+    margin-right: var(--space-md);
+    margin-top: 2px;
+    /* Slight adjustment for alignment */
+}
+
+.textContainer {
+    flex-grow: 1;
+}
+
+.title {
+    display: block;
+    margin-bottom: var(--space-xs);
+    font-size: var(--font-size-md);
+}
+
+.message {
+    /* Specific message styling if needed */
+}
+
+.closeButton {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    margin-left: var(--space-md);
+    cursor: pointer;
+    color: inherit;
+    /* Inherit color from parent */
+    opacity: 0.7;
+    transition: opacity var(--transition-duration-fast) var(--transition-timing-function);
+}
+
+.closeButton:hover,
+.closeButton:focus {
+    opacity: 1;
+    outline: none;
+}
+
+/* Type specific styles */
+.alert-error {
+    background-color: var(--color-error-background);
+    border-color: var(--color-error);
+    color: var(--color-error);
+}
+
+.alert-success {
+    background-color: var(--color-success-background);
+    border-color: var(--color-success);
+    color: var(--color-success);
+}
+
+.alert-warning {
+    background-color: var(--color-warning-background);
+    border-color: var(--color-warning);
+    color: var(--color-warning);
+}
+
+.alert-info {
+    background-color: var(--color-info-background);
+    border-color: var(--color-info);
+    color: var(--color-info);
+}
+
+/* Override close button color for better contrast if needed */
+/* .alert-error .closeButton { color: var(--color-error); } */
+/* etc. */
