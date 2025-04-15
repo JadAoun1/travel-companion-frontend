@@ -14,18 +14,18 @@ const show = async (tripId, destinationId) => {
 };
 
 // This isn't currently being used, and may not be at all?
-// const index = async () => {
-//   try {
-//       const res = await fetch(`${BASE_URL}/${tripId}/destinations`, {
-//       headers: {
-//         Authorization: `Bearer ${localStorage.getItem("token")}`,
-//       },
-//     });
-//     return res.json();
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+const index = async () => {
+  try {
+      const res = await fetch(`${BASE_URL}/${tripId}/destinations`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 
 // delete?
