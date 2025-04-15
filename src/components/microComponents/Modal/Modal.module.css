@@ -1,0 +1,81 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Semi-transparent black overlay */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-lg);
+    z-index: 1000;
+    /* Ensure it's above other content */
+}
+
+.modalContent {
+    /* Card component provides border, background, base padding */
+    max-width: 600px;
+    /* Max width for the modal */
+    width: 100%;
+    max-height: 90vh;
+    /* Max height to prevent overflow */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* Prevent content breaking out */
+    /* Remove margin added by Card default */
+    margin-bottom: 0;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: var(--space-md);
+    border-bottom: var(--border-width-medium) solid var(--color-border);
+    flex-shrink: 0;
+    /* Prevent header from shrinking */
+}
+
+.title {
+    margin-bottom: 0;
+    /* Remove default heading margin */
+    flex-grow: 1;
+}
+
+.closeButton {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    margin-left: var(--space-md);
+    cursor: pointer;
+    color: var(--color-text-primary);
+    line-height: 1;
+    /* Align icon better */
+    flex-shrink: 0;
+}
+
+.closeButton:hover,
+.closeButton:focus {
+    color: var(--color-accent);
+    outline: none;
+}
+
+.body {
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-lg);
+    overflow-y: auto;
+    /* Allow body content to scroll */
+    flex-grow: 1;
+}
+
+.footer {
+    padding-top: var(--space-md);
+    border-top: var(--border-width-medium) solid var(--color-border);
+    display: flex;
+    justify-content: flex-end;
+    /* Align buttons to the right */
+    gap: var(--space-md);
+    flex-shrink: 0;
+    /* Prevent footer from shrinking */
+}
