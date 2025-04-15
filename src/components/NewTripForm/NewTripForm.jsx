@@ -21,7 +21,7 @@ const NewTripForm = () => {
     try {
       await tripService.create(formData);
       setMessage("Trip created successfully!");
-      navigate("/dashboard");
+      navigate("/trips");
     } catch (error) {
       console.log(error);
       setMessage("Error creating trip. Please try again.");
