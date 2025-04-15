@@ -1,6 +1,7 @@
 // src/services/destinationService.js
 
-const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/trips/${trip._id}`;
+// Not sure if this needs trips/${trip._id}/, or just /destinations
+const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/destinations`;
 
 const index = async () => {
   try {
@@ -17,7 +18,7 @@ const index = async () => {
 
 const show = async (destinationId) => {
     try {
-        const res = await fetch(`${BASE_URL}/destinations/${destinationId}`, {
+        const res = await fetch(`${BASE_URL}/${destinationId}`, {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         return res.json();
