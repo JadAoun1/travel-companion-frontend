@@ -1,5 +1,5 @@
 // src/App.jsx
-import { Routes, Route } from "react-router"; 
+import { Routes, Route } from "react-router";
 import { useContext } from "react";
 
 import NavBar from "./components/NavBar/NavBar";
@@ -9,6 +9,7 @@ import Landing from "./components/Landing/Landing";
 import Dashboard from "./components/Dashboard/Dashboard";
 import NewTripForm from "./components/NewTripForm/NewTripForm";
 import { UserContext } from "./contexts/UserContext";
+import StyleGuide from './pages/StyleGuide';
 
 const App = () => {
   const { user } = useContext(UserContext);
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/sign-in" element={<SignInForm />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/trips/new" element={<NewTripForm />} />
+        <Route path="/styleguide" element={<StyleGuide />} />
       </Routes>
     </>
   );

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Apoc:wght@400;700;900&family=Nimbus+Sans+L:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Apoc:wght@400;700;900&family=Archivo:wght@400;700;900&display=swap');
 
 :root {
     /* Core Palette */
@@ -31,7 +31,8 @@
     --color-info-background: #9dc1ff;
 
     /* Typography */
-    --font-family-primary: 'Nimbus Sans L', sans-serif;
+    --font-family-primary: 'Archivo', sans-serif;
+    --font-family-secondary: 'Apoc', serif;
     --font-size-base: 1rem;
     --font-size-xs: 0.75rem;
     --font-size-sm: 0.875rem;
