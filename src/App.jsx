@@ -11,6 +11,8 @@ import TripForm from "./components/TripForm/TripForm";
 import { UserContext } from "./contexts/UserContext";
 import StyleGuide from './pages/StyleGuide';
 import TripDetails from "./components/TripDetails/TripDetails"; 
+import DestinationDetails from "./components/Destination/DestinationDetails";
+
 
 const App = () => {
   const { user } = useContext(UserContext);
@@ -26,6 +28,8 @@ const App = () => {
         <Route path="/styleguide" element={<StyleGuide />} />
         <Route path="/trips/:tripId" element={<TripDetails />} />
         <Route path="/trips/:tripId/edit" element={<TripForm />} />
+        <Route path="/trips/:tripId/destinations/:destinationId" element={<DestinationDetails />} />
+
       </Routes>
     </>
   );

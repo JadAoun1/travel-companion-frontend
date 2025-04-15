@@ -1,6 +1,6 @@
 // src/components/Dashboard/Dashboard.jsx
 import { useContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router"; 
+import { useNavigate, Link } from "react-router"; 
 import { UserContext } from "../../contexts/UserContext";
 import * as tripService from "../../services/tripService";
 import { Link } from "react-router"; 
@@ -37,6 +37,9 @@ const Dashboard = () => {
               <Link to={`/trips/${trip._id}`}>{trip.title}</Link> 
             </h2>
             <p>{trip.description}</p>
+            <Link to={`/trips/${trip._id}`}>
+                <button>View Trip</button>
+            </Link>
           </li>
         ))}
       </ul>
