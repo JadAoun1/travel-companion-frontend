@@ -12,7 +12,7 @@ import { UserContext } from "./contexts/UserContext";
 import StyleGuide from './pages/StyleGuide';
 import TripDetails from "./components/TripDetails/TripDetails"; 
 import DestinationDetails from "./components/Destination/DestinationDetails";
-
+import AttractionDetails from "./components/AttractionDetails/AttractionDetails";
 
 const App = () => {
   const { user } = useContext(UserContext);
@@ -29,7 +29,7 @@ const App = () => {
         <Route path="/trips/:tripId" element={<TripDetails />} />
         <Route path="/trips/:tripId/edit" element={<TripForm />} />
         <Route path="/trips/:tripId/destinations/:destinationId" element={<DestinationDetails />} />
-
+        <Route path="/trips/:tripId/destinations/:destinationId/attractions/:attractionId" element={<AttractionDetails />} />
       </Routes>
     </>
   );
