@@ -34,7 +34,6 @@ const TripDetails = () => {
           <h1>{trip.title}</h1>
           <p>{trip.description}</p>
           <button onClick={() => handleDeleteTrip(trip._id)}>Delete Trip</button>
-         
         </header>
       </section>
     </main>

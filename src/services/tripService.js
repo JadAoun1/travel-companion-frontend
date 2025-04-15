@@ -13,7 +13,7 @@ const index = async () => {
   }
 };
 
-const create = async (newTripFormData) => {
+const create = async (TripFormData) => {
   try {
     const res = await fetch(BASE_URL, {
       method: "POST",
@@ -21,7 +21,7 @@ const create = async (newTripFormData) => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(newTripFormData),
+      body: JSON.stringify(TripFormData),
     });
 
     return res.json();
@@ -43,6 +43,22 @@ const show = async (tripId) => {
   }
 };
 
+const update = async (tripId, TripFormData) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${tripId}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      }, 
+      body: JSON.stringify(TripFormData),
+    });
+    return res.json();
+  } catch (error) {
+    console.log("Error in tripService.update:", error);
+  }
+}
+
 const deleteTrip = async (tripId) => {
   try {
     const res = await fetch(`${BASE_URL}/${tripId}`, {
@@ -57,4 +73,4 @@ const deleteTrip = async (tripId) => {
   }
 };
 
-export { index, create, show, deleteTrip};
+export { index, create, show, update, deleteTrip};

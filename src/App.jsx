@@ -7,7 +7,7 @@ import SignUpForm from "./components/SignUpForm/SignUpForm";
 import SignInForm from "./components/SignInForm/SignInForm";
 import Landing from "./components/Landing/Landing";
 import Dashboard from "./components/Dashboard/Dashboard";
-import NewTripForm from "./components/NewTripForm/NewTripForm";
+import TripForm from "./components/TripForm/TripForm";
 import { UserContext } from "./contexts/UserContext";
 import StyleGuide from './pages/StyleGuide';
 import TripDetails from "./components/TripDetails/TripDetails"; 
@@ -22,7 +22,7 @@ const App = () => {
         <Route path="/sign-up" element={<SignUpForm />} />
         <Route path="/sign-in" element={<SignInForm />} />
         <Route path="/trips" element={<Dashboard />} />
-        <Route path="/trips/new" element={<NewTripForm />} />
+        <Route path="/trips/new" element={<TripForm />} />
         <Route path="/styleguide" element={<StyleGuide />} />
         <Route path="/trips/:tripId" element={<TripDetails />} />
       </Routes>
