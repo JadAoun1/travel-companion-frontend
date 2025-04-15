@@ -13,30 +13,64 @@ const index = async () => {
   }
 };
 
-
-// Not posting correctly, needs debugging 
-const create = async (newTripFormData) => {
+const create = async (TripFormData) => {
   try {
-    console.log("Data sent to Backend:", newTripFormData); 
     const res = await fetch(BASE_URL, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`, 
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(newTripFormData),
+      body: JSON.stringify(TripFormData),
     });
-
-    if (!res.ok) {
-      const errorData = await res.json();
-      throw new Error(`Failed to create trip: ${res.statusText}`);
-    }
 
     return res.json();
   } catch (error) {
-    console.log("Error in tripService.create:", error); 
-    throw error;
+    console.log("Error in tripService.create:", error);
   }
 };
 
-export { index, create};
+const show = async (tripId) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${tripId}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const update = async (tripId, TripFormData) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${tripId}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      }, 
+      body: JSON.stringify(TripFormData),
+    });
+    return res.json();
+  } catch (error) {
+    console.log("Error in tripService.update:", error);
+  }
+}
+
+const deleteTrip = async (tripId) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${tripId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { index, create, show, update, deleteTrip};
