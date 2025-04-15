@@ -25,7 +25,7 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/trips/new" element={<NewTripForm />} />
         <Route path="/styleguide" element={<StyleGuide />} />
-        <Route path="/destination" element={<DestinationDetails />} />
+        <Route path="/trips/:tripId/destinations/:destinationId" element={<DestinationDetails />} />
       </Routes>
     </>
   );
