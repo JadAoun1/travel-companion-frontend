@@ -1,0 +1,46 @@
+.button {
+    /* Reset Button Defaults */
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+
+    /* Color */
+    color: var(--color-accent);
+    /* Use accent color like a link */
+
+    /* Typography */
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-sm);
+    /* Slightly smaller maybe */
+    font-weight: var(--font-weight-bold);
+    text-decoration: none;
+    /* No underline by default */
+    text-align: left;
+
+    /* Transitions */
+    transition:
+        color var(--transition-duration-fast) var(--transition-timing-function),
+        text-decoration var(--transition-duration-fast) var(--transition-timing-function);
+}
+
+.button:hover,
+.button:focus,
+.button:focus-visible {
+    outline: none;
+    color: var(--color-secondary);
+    /* Darken text slightly */
+    text-decoration: underline;
+}
+
+.button:active {
+    color: var(--color-black);
+    text-decoration: underline;
+}
+
+.button:disabled {
+    color: var(--color-gray-medium);
+    cursor: not-allowed;
+    text-decoration: none;
+}

@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Apoc:wght@400;700;900&family=Archivo:wght@400;700;900&display=swap');
+
+:root {
+    /* Core Palette */
+    --color-primary: #0052cc;
+    --color-secondary: #003b8e;
+    --color-black: #000000;
+    --color-white: #ffffff;
+
+    /* Grays */
+    --color-gray-dark: #333333;
+    --color-gray-medium: #888888;
+    --color-gray-light: #cccccc;
+
+    /* Semantic Colors (Based on Usage) */
+    --color-background: var(--color-white);
+    --color-surface: var(--color-white);
+    --color-text-primary: var(--color-black);
+    --color-text-secondary: var(--color-gray-medium);
+    --color-border: var(--color-black);
+    --color-accent: var(--color-primary);
+
+    /* State/Feedback Colors */
+    --color-error: #d93025;
+    --color-error-background: #fd958c;
+    --color-success: #1e8e3e;
+    --color-success-background: #97fab3;
+    --color-warning: #f9ab00;
+    --color-warning-background: #fcd987;
+    --color-info: #1a73e8;
+    --color-info-background: #9dc1ff;
+
+    /* Typography */
+    --font-family-primary: 'Archivo', sans-serif;
+    --font-family-secondary: 'Apoc', serif;
+    --font-size-base: 1rem;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 1.5rem;
+    --font-size-xl: 2rem;
+    --font-size-xxl: 3rem;
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
+    --font-weight-black: 900;
+    --line-height-base: 1.6;
+    --line-height-heading: 1.2;
+    --letter-spacing-tight: -0.05em;
+    --letter-spacing-normal: 0;
+    --letter-spacing-wide: 0.1em;
+
+    /* Spacing */
+    --spacing-unit: 1rem;
+    --space-xxs: calc(var(--spacing-unit) * 0.25);
+    --space-xs: calc(var(--spacing-unit) * 0.5);
+    --space-sm: calc(var(--spacing-unit) * 0.75);
+    --space-md: var(--spacing-unit);
+    --space-lg: calc(var(--spacing-unit) * 1.5);
+    --space-xl: calc(var(--spacing-unit) * 2);
+    --space-xxl: calc(var(--spacing-unit) * 3);
+
+    /* Borders */
+    --border-width-thin: 1px;
+    --border-width-medium: 2px;
+    --border-width-thick: 4px;
+    --border-radius-sharp: 0;
+    --border-radius-slight: 4px;
+    --border-radius-round: 50%;
+
+    /* Layout */
+    --container-max-width: 1200px;
+    --grid-gap: var(--space-md);
+    --navbar-height: 4rem;
+    --sidebar-width: 16rem;
+
+    /* Transitions */
+    --transition-duration-fast: 100ms;
+    --transition-duration-base: 250ms;
+    --transition-timing-function: linear;
+
+    /* Shadows */
+    --box-shadow-none: none;
+    --box-shadow-hard: 4px 4px 0 var(--color-black);
+}
+
+
+body {
+    margin: 0;
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-base);
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+}

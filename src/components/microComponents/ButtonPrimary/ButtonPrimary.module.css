@@ -1,0 +1,64 @@
+.button {
+    /* Layout & Box Model */
+    display: inline-block;
+    padding: var(--space-sm) var(--space-lg);
+    border: var(--border-width-medium) solid transparent;
+    /* Start transparent, add on hover */
+    border-radius: var(--border-radius-sharp);
+    cursor: pointer;
+
+    /* Color & Background */
+    background-color: var(--color-accent);
+    color: var(--color-white);
+
+    /* Typography */
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    letter-spacing: var(--letter-spacing-wide);
+
+    /* Transitions */
+    transition:
+        background-color var(--transition-duration-fast) var(--transition-timing-function),
+        border-color var(--transition-duration-fast) var(--transition-timing-function),
+        color var(--transition-duration-fast) var(--transition-timing-function),
+        box-shadow var(--transition-duration-fast) var(--transition-timing-function);
+}
+
+.button:hover {
+    background-color: var(--color-secondary);
+    /* Darken background on hover */
+    border-color: var(--color-black);
+    /* Show border on hover */
+}
+
+.button:focus,
+.button:focus-visible {
+    /* Better focus visibility */
+    outline: none;
+    /* Remove default outline */
+    border-color: var(--color-black);
+    box-shadow: var(--box-shadow-hard);
+    /* Apply hard shadow for focus */
+}
+
+.button:active {
+    background-color: var(--color-black);
+    border-color: var(--color-black);
+    color: var(--color-white);
+    box-shadow: var(--box-shadow-none);
+    transform: translate(2px, 2px);
+    /* Slight move for pressed effect */
+}
+
+.button:disabled {
+    background-color: var(--color-gray-light);
+    border-color: transparent;
+    color: var(--color-gray-medium);
+    cursor: not-allowed;
+    box-shadow: var(--box-shadow-none);
+    transform: none;
+}

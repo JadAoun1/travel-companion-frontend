@@ -1,0 +1,45 @@
+.navLink {
+    /* Layout & Box Model */
+    display: inline-block;
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: var(--border-width-thick) solid transparent;
+    /* Reserve space for active border */
+    margin-bottom: calc(var(--border-width-thick) * -1);
+    /* Offset the transparent border space */
+    cursor: pointer;
+
+    /* Color & Background */
+    background-color: transparent;
+    color: var(--color-text-primary);
+
+    /* Typography */
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: var(--letter-spacing-wide);
+
+    /* Transitions */
+    transition:
+        color var(--transition-duration-fast) var(--transition-timing-function),
+        border-color var(--transition-duration-fast) var(--transition-timing-function);
+}
+
+.navLink:hover {
+    color: var(--color-accent);
+}
+
+.navLink:focus,
+.navLink:focus-visible {
+    outline: none;
+    color: var(--color-accent);
+    /* Optional: Add focus outline if needed */
+    /* box-shadow: 0 0 0 2px var(--color-accent); */
+}
+
+/* Active state (expects an 'active' class to be added, e.g., by React Router) */
+.navLink.active {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+}

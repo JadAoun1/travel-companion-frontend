@@ -1,0 +1,229 @@
+/* Base styles for all typography components (optional, can be added if needed) */
+.base {
+    font-family: var(--font-family-primary);
+    color: var(--color-text-primary);
+    margin-top: 0;
+    margin-bottom: var(--space-md);
+    /* Default bottom margin */
+}
+
+.heading1 {
+    composes: base;
+    font-size: var(--font-size-xxl);
+    font-weight: var(--font-weight-bold);
+    /* Or --font-weight-black for stronger brutalism */
+    line-height: var(--line-height-heading);
+    letter-spacing: var(--letter-spacing-tight);
+    margin-bottom: var(--space-lg);
+}
+
+.heading2 {
+    composes: base;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-heading);
+    margin-bottom: var(--space-lg);
+}
+
+.heading3 {
+    composes: base;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-heading);
+    margin-bottom: var(--space-md);
+}
+
+.heading4 {
+    composes: base;
+    font-size: var(--font-size-md);
+    /* Same as paragraph, but bolder */
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-base);
+    /* Use base line height */
+    margin-bottom: var(--space-md);
+}
+
+.heading5 {
+    composes: base;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    /* Maybe uppercase smaller headings */
+    letter-spacing: var(--letter-spacing-wide);
+    line-height: var(--line-height-base);
+    margin-bottom: var(--space-sm);
+}
+
+.heading6 {
+    composes: base;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    color: var(--color-text-secondary);
+    /* Maybe secondary color for lowest heading */
+    line-height: var(--line-height-base);
+    margin-bottom: var(--space-sm);
+}
+
+/* Add Heading3, Heading4, etc. similarly if needed */
+
+.paragraph {
+    composes: base;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-base);
+}
+
+.caption {
+    composes: base;
+    display: block;
+    /* Small tag is inline by default */
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-normal);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-base);
+    margin-bottom: var(--space-sm);
+}
+
+/* Blockquote */
+.blockquote {
+    composes: base;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-md);
+    border-left: var(--border-width-thick) solid var(--color-border);
+    font-style: italic;
+    /* Optional: Italic for quotes */
+    color: var(--color-text-secondary);
+    /* Optional: Slightly muted color */
+}
+
+/* Code Block */
+.preformatted {
+    display: block;
+    margin-bottom: var(--space-lg);
+    padding: var(--space-md);
+    background-color: var(--color-gray-light);
+    /* Subtle background */
+    border: var(--border-width-thin) solid var(--color-gray-medium);
+    border-radius: var(--border-radius-sharp);
+    overflow-x: auto;
+    /* Handle horizontal scroll for long lines */
+    white-space: pre;
+}
+
+.code {
+    font-family: var(--font-family-secondary);
+    /* Use secondary (monospace) font if defined, otherwise fallback */
+    font-size: var(--font-size-sm);
+    color: var(--color-text-primary);
+}
+
+/* Link */
+.link {
+    color: var(--color-accent);
+    text-decoration: underline;
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    transition: color var(--transition-duration-fast) var(--transition-timing-function);
+}
+
+.link:hover,
+.link:focus {
+    color: var(--color-secondary);
+    outline: none;
+    /* Add focus outline if needed, e.g., using box-shadow */
+}
+
+.link:active {
+    color: var(--color-black);
+}
+
+/* Lists */
+.unorderedList,
+.orderedList {
+    composes: base;
+    padding-left: var(--space-lg);
+    /* Indentation */
+    margin-bottom: var(--space-md);
+}
+
+.unorderedList {
+    list-style-type: disc;
+    /* Default bullet */
+}
+
+.orderedList {
+    list-style-type: decimal;
+    /* Default number */
+}
+
+.listItem {
+    /* Inherits base text styles */
+    margin-bottom: var(--space-xs);
+    /* Spacing between items */
+}
+
+/* Label (Standalone) */
+/* Reusing/adapting styles similar to InputField's label */
+.label {
+    display: inline-block;
+    /* Or block depending on usage */
+    margin-bottom: var(--space-xs);
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    line-height: var(--line-height-base);
+}
+
+/* Inline Code */
+.inlineCode {
+    font-family: var(--font-family-secondary);
+    /* Monospace preference */
+    font-size: 0.9em;
+    /* Slightly smaller than surrounding text */
+    color: var(--color-text-primary);
+    background-color: var(--color-gray-light);
+    padding: calc(var(--space-xxs) / 2) var(--space-xs);
+    border: var(--border-width-thin) solid var(--color-gray-medium);
+    border-radius: var(--border-radius-slight);
+    white-space: nowrap;
+}
+
+/* Strong Importance */
+.strong {
+    font-weight: var(--font-weight-bold);
+}
+
+/* Emphasis */
+.emphasis {
+    font-style: italic;
+}
+
+/* Marked Text */
+.mark {
+    background-color: var(--color-warning-background);
+    /* Use warning bg for highlight */
+    color: inherit;
+    /* Keep text color */
+    padding: 0 var(--space-xxs);
+}
+
+/* Inline Small Text */
+.inlineSmall {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+}
+
+/* Horizontal Rule */
+.horizontalRule {
+    border: none;
+    border-top: var(--border-width-thick) solid var(--color-border);
+    margin: var(--space-xl) 0;
+    /* Generous spacing */
+}
