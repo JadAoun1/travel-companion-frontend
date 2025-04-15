@@ -10,6 +10,8 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import NewTripForm from "./components/NewTripForm/NewTripForm";
 import { UserContext } from "./contexts/UserContext";
 import StyleGuide from './pages/StyleGuide';
+import DestinationDetails from "./components/Destination/DestinationDetails";
+
 
 const App = () => {
   const { user } = useContext(UserContext);
@@ -23,6 +25,7 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/trips/new" element={<NewTripForm />} />
         <Route path="/styleguide" element={<StyleGuide />} />
+        <Route path="/destination" element={<DestinationDetails />} />
       </Routes>
     </>
   );
