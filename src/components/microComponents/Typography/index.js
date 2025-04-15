@@ -13,6 +13,12 @@ export { default as UnorderedList } from './UnorderedList';
 export { default as OrderedList } from './OrderedList';
 export { default as ListItem } from './ListItem';
 export { default as Label } from './Label';
+export { default as InlineCode } from './InlineCode';
+export { default as Strong } from './Strong';
+export { default as Emphasis } from './Emphasis';
+export { default as Mark } from './Mark';
+export { default as InlineSmall } from './InlineSmall';
+export { default as HorizontalRule } from './HorizontalRule';
 
 // Export others here if you add them (e.g., Label, List components, etc.)
 
