@@ -26,10 +26,18 @@ const DestinationDetails = () => {
     return (
         <>
             <h1>{destination.name}</h1>
-            <p>List all attractions here...</p>
-            <p>Testing dynamic info here: {}</p>
+            <h2>Attractions</h2>
+            <div>
+                <ul>
+                    {destination.attractions.map((attraction, index) => (
+                        <li key={index}>
+                            <p>{attraction.name}</p>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </>
-    )
+    );
 
 };
 
