@@ -17,7 +17,7 @@ const index = async () => {
 
 const show = async (destinationId) => {
     try {
-        const res = await fetch(`${BASE_URL}/${destinationId}`, {
+        const res = await fetch(`${BASE_URL}/destinations/${destinationId}`, {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         return res.json();
