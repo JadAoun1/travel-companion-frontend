@@ -43,4 +43,18 @@ const show = async (tripId) => {
   }
 };
 
-export { index, create, show };
+const deleteTrip = async (tripId) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${tripId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { index, create, show, deleteTrip};
