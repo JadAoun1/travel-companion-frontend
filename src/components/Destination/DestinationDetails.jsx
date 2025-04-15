@@ -32,6 +32,7 @@ const DestinationDetails = () => {
                     {destination.attractions.map((attraction, index) => (
                         <li key={index}>
                             <p>{attraction.name}</p>
+                            <button onClick={() => navigate(`/trips/${tripId}/destinations/${destinationId}/attractions/${attractionId}`)}>View</button>
                         </li>
                     ))}
                 </ul>
