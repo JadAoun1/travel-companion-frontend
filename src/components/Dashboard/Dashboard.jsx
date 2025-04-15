@@ -3,7 +3,6 @@ import { useContext, useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router"; 
 import { UserContext } from "../../contexts/UserContext";
 import * as tripService from "../../services/tripService";
-import { Link } from "react-router"; 
 
 const Dashboard = () => {
   const { user } = useContext(UserContext);
@@ -33,9 +32,7 @@ const Dashboard = () => {
       <ul>
         {trips.map((trip) => (
           <li key={trip._id}>
-            <h2>
-              <Link to={`/trips/${trip._id}`}>{trip.title}</Link> 
-            </h2>
+            <h2>{trip.title}</h2>
             <p>{trip.description}</p>
             <Link to={`/trips/${trip._id}`}>
                 <button>View Trip</button>
