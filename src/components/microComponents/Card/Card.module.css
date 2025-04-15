@@ -1,0 +1,27 @@
+.card {
+    /* Box Model */
+    padding: var(--space-lg);
+    /* Generous internal padding */
+    border: var(--border-width-medium) solid var(--color-border);
+    /* Use medium border width and default border color */
+    border-radius: var(--border-radius-sharp);
+    /* Sharp corners */
+
+    /* Color & Background */
+    background-color: var(--color-surface);
+    /* Use surface color, distinct from main bg if needed */
+
+    /* Ensure no shadow */
+    box-shadow: var(--box-shadow-none);
+
+    /* Optional: Add margin for spacing between cards */
+    margin-bottom: var(--space-lg);
+}
+
+/* Example modifier for a card with a different background or border */
+/*
+.card.alternative {
+  background-color: var(--color-gray-light);
+  border-color: var(--color-black);
+}
+*/
