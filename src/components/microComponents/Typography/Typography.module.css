@@ -1,54 +1,58 @@
-/* Base styles for all typography components (optional, can be added if needed) */
+/* Base styles for all typography components */
 .base {
     font-family: var(--font-family-primary);
     color: var(--color-text-primary);
     margin-top: 0;
     margin-bottom: var(--space-md);
-    /* Default bottom margin */
 }
 
 .heading1 {
     composes: base;
     font-size: var(--font-size-xxl);
-    font-weight: var(--font-weight-bold);
-    /* Or --font-weight-black for stronger brutalism */
+    font-weight: var(--font-weight-black);
     line-height: var(--line-height-heading);
     letter-spacing: var(--letter-spacing-tight);
     margin-bottom: var(--space-lg);
+    text-transform: uppercase;
+    border-bottom: var(--border-width-thick) solid var(--color-black);
+    padding-bottom: var(--space-sm);
 }
 
 .heading2 {
     composes: base;
     font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-black);
     line-height: var(--line-height-heading);
     margin-bottom: var(--space-lg);
+    text-transform: uppercase;
+    border-bottom: var(--border-width-medium) solid var(--color-black);
+    padding-bottom: var(--space-xs);
 }
 
 .heading3 {
     composes: base;
     font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-black);
     line-height: var(--line-height-heading);
     margin-bottom: var(--space-md);
+    text-transform: uppercase;
 }
 
 .heading4 {
     composes: base;
     font-size: var(--font-size-md);
-    /* Same as paragraph, but bolder */
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-black);
     line-height: var(--line-height-base);
-    /* Use base line height */
     margin-bottom: var(--space-md);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
 }
 
 .heading5 {
     composes: base;
     font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-black);
     text-transform: uppercase;
-    /* Maybe uppercase smaller headings */
     letter-spacing: var(--letter-spacing-wide);
     line-height: var(--line-height-base);
     margin-bottom: var(--space-sm);
@@ -57,33 +61,30 @@
 .heading6 {
     composes: base;
     font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-black);
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-wide);
     color: var(--color-text-secondary);
-    /* Maybe secondary color for lowest heading */
     line-height: var(--line-height-base);
     margin-bottom: var(--space-sm);
 }
 
-/* Add Heading3, Heading4, etc. similarly if needed */
-
 .paragraph {
     composes: base;
     font-size: var(--font-size-md);
-    font-weight: var(--font-weight-normal);
+    font-weight: var(--font-weight-medium);
     line-height: var(--line-height-base);
 }
 
 .caption {
     composes: base;
     display: block;
-    /* Small tag is inline by default */
     font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-normal);
+    font-weight: var(--font-weight-medium);
     color: var(--color-text-secondary);
     line-height: var(--line-height-base);
     margin-bottom: var(--space-sm);
+    letter-spacing: var(--letter-spacing-wide);
 }
 
 /* Blockquote */
@@ -92,12 +93,14 @@
     margin-left: 0;
     margin-right: 0;
     margin-bottom: var(--space-lg);
-    padding-left: var(--space-md);
-    border-left: var(--border-width-thick) solid var(--color-border);
+    padding: var(--space-md);
+    border-left: var(--border-width-thick) solid var(--color-black);
     font-style: italic;
-    /* Optional: Italic for quotes */
-    color: var(--color-text-secondary);
-    /* Optional: Slightly muted color */
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-medium);
+    background-color: var(--color-gray-light);
+    position: relative;
+    box-shadow: 4px 4px 0 var(--color-black);
 }
 
 /* Code Block */
@@ -106,39 +109,46 @@
     margin-bottom: var(--space-lg);
     padding: var(--space-md);
     background-color: var(--color-gray-light);
-    /* Subtle background */
-    border: var(--border-width-thin) solid var(--color-gray-medium);
+    border: var(--border-width-thick) solid var(--color-black);
     border-radius: var(--border-radius-sharp);
     overflow-x: auto;
-    /* Handle horizontal scroll for long lines */
     white-space: pre;
+    position: relative;
+    box-shadow: var(--box-shadow-hard);
 }
 
 .code {
-    font-family: var(--font-family-secondary);
-    /* Use secondary (monospace) font if defined, otherwise fallback */
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
     font-size: var(--font-size-sm);
     color: var(--color-text-primary);
+    font-weight: var(--font-weight-medium);
 }
 
 /* Link */
 .link {
     color: var(--color-accent);
-    text-decoration: underline;
+    text-decoration: none;
     font-weight: var(--font-weight-bold);
     cursor: pointer;
-    transition: color var(--transition-duration-fast) var(--transition-timing-function);
+    border-bottom: var(--border-width-medium) solid var(--color-black);
+    padding-bottom: 2px;
+    transition:
+        color var(--transition-duration-fast) var(--transition-timing-function),
+        transform var(--transition-duration-fast) var(--transition-timing-function);
+    display: inline-block;
 }
 
 .link:hover,
 .link:focus {
-    color: var(--color-secondary);
+    color: var(--color-accent);
     outline: none;
-    /* Add focus outline if needed, e.g., using box-shadow */
+    transform: translateY(-2px);
+    border-bottom: var(--border-width-thick) solid var(--color-black);
 }
 
 .link:active {
-    color: var(--color-black);
+    color: var(--color-accent);
+    transform: translateY(1px);
 }
 
 /* Lists */
@@ -146,35 +156,29 @@
 .orderedList {
     composes: base;
     padding-left: var(--space-lg);
-    /* Indentation */
     margin-bottom: var(--space-md);
 }
 
 .unorderedList {
-    list-style-type: disc;
-    /* Default bullet */
+    list-style-type: square;
 }
 
 .orderedList {
     list-style-type: decimal;
-    /* Default number */
 }
 
 .listItem {
-    /* Inherits base text styles */
     margin-bottom: var(--space-xs);
-    /* Spacing between items */
+    font-weight: var(--font-weight-medium);
 }
 
 /* Label (Standalone) */
-/* Reusing/adapting styles similar to InputField's label */
 .label {
     display: inline-block;
-    /* Or block depending on usage */
     margin-bottom: var(--space-xs);
     font-family: var(--font-family-primary);
     font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-black);
     color: var(--color-text-primary);
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-wide);
@@ -183,47 +187,47 @@
 
 /* Inline Code */
 .inlineCode {
-    font-family: var(--font-family-secondary);
-    /* Monospace preference */
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
     font-size: 0.9em;
-    /* Slightly smaller than surrounding text */
     color: var(--color-text-primary);
     background-color: var(--color-gray-light);
     padding: calc(var(--space-xxs) / 2) var(--space-xs);
-    border: var(--border-width-thin) solid var(--color-gray-medium);
-    border-radius: var(--border-radius-slight);
+    border: var(--border-width-thin) solid var(--color-black);
+    border-radius: var(--border-radius-sharp);
     white-space: nowrap;
 }
 
 /* Strong Importance */
 .strong {
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-black);
+    text-transform: uppercase;
 }
 
 /* Emphasis */
 .emphasis {
     font-style: italic;
+    font-weight: var(--font-weight-medium);
 }
 
 /* Marked Text */
 .mark {
-    background-color: var(--color-warning-background);
-    /* Use warning bg for highlight */
-    color: inherit;
-    /* Keep text color */
+    background-color: var(--color-accent);
+    color: var(--color-black);
     padding: 0 var(--space-xxs);
+    font-weight: var(--font-weight-bold);
 }
 
 /* Inline Small Text */
 .inlineSmall {
     font-size: var(--font-size-xs);
     color: var(--color-text-secondary);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--letter-spacing-wide);
 }
 
 /* Horizontal Rule */
 .horizontalRule {
     border: none;
-    border-top: var(--border-width-thick) solid var(--color-border);
+    border-top: var(--border-width-thick) solid var(--color-black);
     margin: var(--space-xl) 0;
-    /* Generous spacing */
 }

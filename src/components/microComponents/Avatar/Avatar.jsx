@@ -6,19 +6,17 @@ const Avatar = ({
     alt = 'Avatar',
     initials,
     size = 'md', // e.g., 'sm', 'md', 'lg'
-    shape = 'circle', // 'circle' or 'square'
     bordered = false,
     className = '',
     ...props
 }) => {
 
     const sizeClass = styles[`size-${size}`] || styles['size-md'];
-    const shapeClass = styles[`shape-${shape}`] || styles['shape-circle'];
     const borderClass = bordered ? styles.bordered : '';
 
     return (
         <div
-            className={`${styles.avatar} ${sizeClass} ${shapeClass} ${borderClass} ${className}`}
+            className={`${styles.avatar} ${sizeClass} ${borderClass} ${className}`}
             aria-label={alt}
             {...props}
         >

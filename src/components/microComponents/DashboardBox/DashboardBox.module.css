@@ -1,21 +1,41 @@
 .dashboardBox {
-    /* Inherits border, padding, background etc. from Card */
+    /* Box Model */
     display: flex;
-    /* Arrange title and content vertically */
     flex-direction: column;
     height: 100%;
-    /* Allow box to fill grid cell height if needed */
+    padding: var(--space-lg);
+    border: var(--border-width-thick) solid var(--color-black);
+    border-radius: var(--border-radius-sharp);
+    position: relative;
+    margin: 4px 0 var(--space-lg) 0;
+
+    /* Color & Background */
+    background-color: var(--color-surface);
+
+    /* Brutalist Shadow */
+    box-shadow: var(--box-shadow-hard);
+
+    /* Transitions */
+    transition:
+        transform var(--transition-duration-fast) var(--transition-timing-function),
+        box-shadow var(--transition-duration-fast) var(--transition-timing-function);
+}
+
+.dashboardBox:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 8px 8px 0 var(--color-black);
 }
 
 .title {
-    /* Adjust title spacing if needed */
     margin-bottom: var(--space-md);
-    /* Space below the title */
     flex-shrink: 0;
-    /* Prevent title from shrinking */
+    font-weight: var(--font-weight-black);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    border-bottom: var(--border-width-medium) solid var(--color-black);
+    padding-bottom: var(--space-sm);
 }
 
 .content {
-    /* Allow content to grow if needed */
     flex-grow: 1;
 }

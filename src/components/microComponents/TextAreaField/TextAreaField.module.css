@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     margin-bottom: var(--space-md);
+    position: relative;
 }
 
 .label {
@@ -10,7 +11,7 @@
     margin-bottom: var(--space-xs);
     font-family: var(--font-family-primary);
     font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-black);
     color: var(--color-text-primary);
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-wide);
@@ -22,7 +23,9 @@
     color: var(--color-error);
     font-family: var(--font-family-primary);
     font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-normal);
+    font-weight: var(--font-weight-black);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
 }
 
 /* Textarea specific styles */
@@ -31,13 +34,13 @@
     display: block;
     width: 100%;
     padding: var(--space-sm) var(--space-md);
-    border: var(--border-width-medium) solid var(--color-border);
+    border: var(--border-width-thick) solid var(--color-black);
     border-radius: var(--border-radius-sharp);
     box-sizing: border-box;
     resize: vertical;
-    /* Allow vertical resize, disable horizontal */
-    min-height: calc(var(--line-height-base) * var(--font-size-md) * 4 + 2 * var(--space-sm) + 2 * var(--border-width-medium));
-    /* Approx match rows=4 */
+    min-height: calc(var(--line-height-base) * var(--font-size-md) * 4 + 2 * var(--space-sm) + 2 * var(--border-width-thick));
+    position: relative;
+    margin: 2px 0;
 
     /* Color & Background */
     background-color: var(--color-surface);
@@ -47,31 +50,41 @@
     font-family: var(--font-family-primary);
     font-size: var(--font-size-md);
     line-height: var(--line-height-base);
+    font-weight: var(--font-weight-medium);
+
+    /* Brutalist Shadow */
+    box-shadow: var(--box-shadow-hard);
 
     /* Transitions */
     transition:
-        border-color var(--transition-duration-fast) var(--transition-timing-function),
+        transform var(--transition-duration-fast) var(--transition-timing-function),
         box-shadow var(--transition-duration-fast) var(--transition-timing-function);
 }
 
 .textarea::placeholder {
     color: var(--color-text-secondary);
     opacity: 1;
+    text-transform: uppercase;
+    font-size: var(--font-size-sm);
+    letter-spacing: var(--letter-spacing-wide);
 }
 
 .textarea:focus,
 .textarea:focus-visible {
     outline: none;
-    border-color: var(--color-accent);
-    box-shadow: 0 0 0 var(--border-width-thick) var(--color-accent);
+    border-color: var(--color-black);
+    box-shadow: 6px 6px 0 var(--color-black);
+    transform: translate(-2px, -2px);
 }
 
 .textarea:disabled {
     background-color: var(--color-gray-light);
-    border-color: var(--color-gray-light);
+    border-color: var(--color-gray-medium);
     color: var(--color-gray-medium);
     cursor: not-allowed;
     resize: none;
+    box-shadow: none;
+    transform: none;
 }
 
 .textarea.error {
@@ -81,5 +94,6 @@
 .textarea.error:focus,
 .textarea.error:focus-visible {
     border-color: var(--color-error);
-    box-shadow: 0 0 0 var(--border-width-thick) var(--color-error);
+    box-shadow: 6px 6px 0 var(--color-error);
+    transform: translate(-2px, -2px);
 }

@@ -2,63 +2,64 @@
     /* Layout & Box Model */
     display: inline-block;
     padding: var(--space-sm) var(--space-lg);
-    border: var(--border-width-medium) solid transparent;
-    /* Start transparent, add on hover */
+    border: var(--border-width-thick) solid var(--color-black);
     border-radius: var(--border-radius-sharp);
     cursor: pointer;
+    position: relative;
+    margin: 2px 0;
 
     /* Color & Background */
     background-color: var(--color-accent);
-    color: var(--color-white);
+    color: var(--color-black);
 
     /* Typography */
     font-family: var(--font-family-primary);
     font-size: var(--font-size-md);
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-black);
     text-transform: uppercase;
     text-decoration: none;
     text-align: center;
     letter-spacing: var(--letter-spacing-wide);
 
+    /* Brutalist Shadow */
+    box-shadow: var(--box-shadow-hard);
+
     /* Transitions */
     transition:
-        background-color var(--transition-duration-fast) var(--transition-timing-function),
-        border-color var(--transition-duration-fast) var(--transition-timing-function),
-        color var(--transition-duration-fast) var(--transition-timing-function),
+        transform var(--transition-duration-fast) var(--transition-timing-function),
         box-shadow var(--transition-duration-fast) var(--transition-timing-function);
 }
 
 .button:hover {
-    background-color: var(--color-secondary);
-    /* Darken background on hover */
+    background-color: var(--color-accent);
     border-color: var(--color-black);
-    /* Show border on hover */
+    color: var(--color-black);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--color-black);
 }
 
 .button:focus,
 .button:focus-visible {
-    /* Better focus visibility */
     outline: none;
-    /* Remove default outline */
     border-color: var(--color-black);
-    box-shadow: var(--box-shadow-hard);
-    /* Apply hard shadow for focus */
+    background-color: var(--color-accent);
+    box-shadow: 6px 6px 0 var(--color-black);
+    transform: translate(-2px, -2px);
 }
 
 .button:active {
-    background-color: var(--color-black);
+    background-color: var(--color-accent);
     border-color: var(--color-black);
-    color: var(--color-white);
-    box-shadow: var(--box-shadow-none);
+    color: var(--color-black);
+    box-shadow: 2px 2px 0 var(--color-black);
     transform: translate(2px, 2px);
-    /* Slight move for pressed effect */
 }
 
 .button:disabled {
     background-color: var(--color-gray-light);
-    border-color: transparent;
+    border-color: var(--color-gray-medium);
     color: var(--color-gray-medium);
     cursor: not-allowed;
-    box-shadow: var(--box-shadow-none);
+    box-shadow: none;
     transform: none;
 }

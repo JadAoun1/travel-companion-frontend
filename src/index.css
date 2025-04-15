@@ -1,9 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Apoc:wght@400;700;900&family=Archivo:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;700;900&display=swap');
 
 :root {
     /* Core Palette */
-    --color-primary: #0052cc;
-    --color-secondary: #003b8e;
+    --color-primary: #4dffb4;
+    /* Mint Green from inspiration */
+    /* Vibrant Yellow */
+    --color-secondary: var(--color-gray-dark);
     --color-black: #000000;
     --color-white: #ffffff;
 
@@ -19,20 +21,24 @@
     --color-text-secondary: var(--color-gray-medium);
     --color-border: var(--color-black);
     --color-accent: var(--color-primary);
+    /* Accent is now Mint Green */
 
     /* State/Feedback Colors */
     --color-error: #d93025;
-    --color-error-background: #fd958c;
+    --color-error-background: #fce8e6;
+    /* Light Red */
     --color-success: #1e8e3e;
-    --color-success-background: #97fab3;
+    --color-success-background: #e6f4ea;
+    /* Light Green */
     --color-warning: #f9ab00;
-    --color-warning-background: #fcd987;
+    --color-warning-background: #fff0cc;
+    /* Light Yellow */
     --color-info: #1a73e8;
-    --color-info-background: #9dc1ff;
+    --color-info-background: #e8f0fe;
+    /* Light Blue */
 
     /* Typography */
     --font-family-primary: 'Archivo', sans-serif;
-    --font-family-secondary: 'Apoc', serif;
     --font-size-base: 1rem;
     --font-size-xs: 0.75rem;
     --font-size-sm: 0.875rem;

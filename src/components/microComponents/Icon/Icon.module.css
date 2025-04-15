@@ -1,0 +1,67 @@
+.icon {
+    vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Container styles for different icon variants */
+.iconContainer {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Bordered icon style */
+.bordered {
+    padding: var(--space-xs);
+    border: var(--border-width-medium) solid var(--color-black);
+    border-radius: var(--border-radius-sharp);
+    background-color: var(--color-surface);
+    box-shadow: var(--box-shadow-hard);
+}
+
+/* Background icon style */
+.background {
+    padding: var(--space-xs);
+    background-color: var(--color-accent);
+    border: var(--border-width-medium) solid var(--color-black);
+    border-radius: var(--border-radius-sharp);
+    color: var(--color-black);
+    box-shadow: var(--box-shadow-hard);
+}
+
+/* Interactive icon */
+.interactive {
+    cursor: pointer;
+    transition:
+        transform var(--transition-duration-fast) var(--transition-timing-function),
+        box-shadow var(--transition-duration-fast) var(--transition-timing-function);
+}
+
+.interactive:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 var(--color-black);
+}
+
+.interactive:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 var(--color-black);
+}
+
+/* Sizes */
+.size-sm {
+    font-size: var(--font-size-sm);
+    padding: calc(var(--space-xs) * 0.5);
+}
+
+.size-md {
+    font-size: var(--font-size-md);
+    padding: var(--space-xs);
+}
+
+.size-lg {
+    font-size: var(--font-size-lg);
+    padding: var(--space-sm);
+}
