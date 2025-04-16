@@ -12,8 +12,10 @@ import { UserContext } from "./contexts/UserContext";
 import StyleGuide from "./pages/StyleGuide";
 import TripDetails from "./components/TripDetails/TripDetails";
 import DestinationDetails from "./components/Destination/DestinationDetails";
+import AttractionDetails from "./components/AttractionDetails/AttractionDetails";
 import * as tripService from "./services/tripService";
 import * as destinationService from "./services/destinationService";
+
 
 const App = () => {
   const { user } = useContext(UserContext);
@@ -45,10 +47,9 @@ const App = () => {
           }
         />
         <Route path="/trips/:tripId/edit" element={<TripForm />} />
-        <Route
-          path="/trips/:tripId/destinations/:destinationId"
-          element={<DestinationDetails />}
-        />
+        <Route path="/trips/:tripId/destinations/:destinationId" element={<DestinationDetails />} />
+        <Route path="/trips/:tripId/destinations/:destinationId/attractions/:attractionId" element={<AttractionDetails />} />
+
       </Routes>
     </>
   );
