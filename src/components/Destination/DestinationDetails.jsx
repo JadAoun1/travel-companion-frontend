@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
 
 import * as destinationService from "../../services/destinationService.js";
-
+// AMEN'S CODE BELOW THAT CAN BE DELETED WHEN MERGED WITH MAIN
 const DestinationDetails = () => {
     const { tripId, destinationId } = useParams();
     const [destination, setDestination] = useState(null);
