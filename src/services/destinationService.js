@@ -13,8 +13,8 @@ const show = async (tripId, destinationId) => {
     };
 };
 
-// This isn't currently being used, and may not be at all?
-const index = async () => {
+// Fetches all destinations in TripDetails component. 
+const index = async (tripId) => {
   try {
       const res = await fetch(`${BASE_URL}/${tripId}/destinations`, {
       headers: {

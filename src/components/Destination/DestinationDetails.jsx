@@ -12,12 +12,20 @@ const DestinationDetails = () => {
 
     useEffect(() => {
         const fetchDestinationDetails = async () => {
-            const destinationData = await destinationService.show(tripId, destinationId);
-            setDestination(destinationData);
+            if (!tripId || !destinationId) {
+                console.error("Missing tripId or destinationId");
+                return;
+            }
+            try {
+                const destinationData = await destinationService.show(tripId, destinationId);
+                setDestination(destinationData);
+            } catch (error) {
+                console.error("Error fetching destination details:", error);
+            }
         };
-        console.log(destinationId);
+
         fetchDestinationDetails();
-    }, [destinationId]);
+    }, [tripId, destinationId]);
 
     if (!destination) {
         return <div>Looks like you haven't added any destinations yet!</div>
@@ -32,7 +40,7 @@ const DestinationDetails = () => {
                     {destination.attractions.map((attraction, index) => (
                         <li key={index}>
                             <p>{attraction.name}</p>
-                            <button onClick={() => navigate(`/trips/${tripId}/destinations/${destinationId}/attractions/${attractionId}`)}>View</button>
+                            <button onClick={() => navigate(`/trips/${tripId}/destinations/${destinationId}/attractions/${attraction._id}`)}>View</button>
                         </li>
                     ))}
                 </ul>
