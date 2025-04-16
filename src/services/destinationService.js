@@ -2,7 +2,7 @@
 
 const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/trips`;
 
-const show = async (tripId, destinationId) => {
+const showDestination = async (tripId, destinationId) => {
     try {
         const res = await fetch(`${BASE_URL}/${tripId}/destinations/${destinationId}`, {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
@@ -28,7 +28,19 @@ const index = async () => {
 };
 
 
-// delete?
+// delete
+const deleteDestination = async (tripId, destinationId) => {
+    try {
+        const res = await fetch(`${BASE_URL}/${tripId}/destinations/${destinationId}`, {
+            method: 'DELETE',
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}`},
+        });
+        return res.json();
+    } catch (error) {
+        console.log(error);
+    };
+};
+
 // create?
 
-export { index, show };
+export { index, showDestination, deleteDestination };
