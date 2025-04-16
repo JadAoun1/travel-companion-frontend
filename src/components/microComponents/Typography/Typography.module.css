@@ -14,8 +14,6 @@
     letter-spacing: var(--letter-spacing-tight);
     margin-bottom: var(--space-lg);
     text-transform: uppercase;
-    border-bottom: var(--border-width-thick) solid var(--color-black);
-    padding-bottom: var(--space-sm);
 }
 
 .heading2 {
@@ -25,8 +23,6 @@
     line-height: var(--line-height-heading);
     margin-bottom: var(--space-lg);
     text-transform: uppercase;
-    border-bottom: var(--border-width-medium) solid var(--color-black);
-    padding-bottom: var(--space-xs);
 }
 
 .heading3 {
