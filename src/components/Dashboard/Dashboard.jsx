@@ -1,14 +1,13 @@
 // src/components/Dashboard/Dashboard.jsx
 import { useContext, useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router"; 
+import { useNavigate, Link } from "react-router";
 import { UserContext } from "../../contexts/UserContext";
 import * as tripService from "../../services/tripService";
-import { Link } from "react-router"; 
 
 const Dashboard = () => {
   const { user } = useContext(UserContext);
   const [trips, setTrips] = useState([]);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTrips = async () => {
@@ -24,21 +23,18 @@ const Dashboard = () => {
     }
   }, [user]);
 
-
   return (
     <main>
       <h1>Trip Dashboard</h1>
       <p>Welcome, {user.username}</p>
-      <button onClick={() => navigate("/trips/new")}>New Trip</button> 
+      <button onClick={() => navigate("/trips/new")}>New Trip</button>
       <ul>
         {trips.map((trip) => (
           <li key={trip._id}>
-            <h2>
-              <Link to={`/trips/${trip._id}`}>{trip.title}</Link> 
-            </h2>
+            <h2>{trip.title}</h2>
             <p>{trip.description}</p>
             <Link to={`/trips/${trip._id}`}>
-                <button>View Trip</button>
+              <button>View Trip</button>
             </Link>
           </li>
         ))}
