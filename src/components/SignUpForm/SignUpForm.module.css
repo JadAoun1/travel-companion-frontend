@@ -1,0 +1,49 @@
+.pageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: calc(100vh - var(--navbar-height, 4rem));
+    padding: var(--space-xl, 2rem);
+    padding-top: 4rem;
+    /* Maintain top padding */
+    background-color: var(--color-background, #ffffff);
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg, 1.5rem);
+    padding: var(--space-xl, 2rem);
+    border: var(--border-width-medium, 2px) solid var(--color-border, #000000);
+    background-color: var(--color-surface, #ffffff);
+    border-radius: var(--border-radius-slight, 4px);
+    box-shadow: var(--box-shadow-hard, 4px 4px 0 var(--color-black));
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
+}
+
+.formHeader {
+    text-align: center;
+    margin-bottom: var(--space-sm, 0.75rem);
+}
+
+.buttonGroup {
+    display: flex;
+    justify-content: center;
+    /* Center button */
+    gap: var(--space-md, 1rem);
+    margin-top: var(--space-sm, 0.75rem);
+}
+
+.errorMessage {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.signInLink {
+    /* Renamed from signUpLink */
+    margin-top: var(--space-lg, 1.5rem);
+    text-align: center;
+    width: 100%;
+}
