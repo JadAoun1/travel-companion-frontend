@@ -1,6 +1,6 @@
 // src/App.jsx
 import { Routes, Route } from "react-router";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import NavBar from "./components/NavBar/NavBar";
 import SignUpForm from "./components/SignUpForm/SignUpForm";
@@ -9,13 +9,27 @@ import Landing from "./components/Landing/Landing";
 import Dashboard from "./components/Dashboard/Dashboard";
 import TripForm from "./components/TripForm/TripForm";
 import { UserContext } from "./contexts/UserContext";
-import StyleGuide from './pages/StyleGuide';
-import TripDetails from "./components/TripDetails/TripDetails"; 
+import StyleGuide from "./pages/StyleGuide";
+import TripDetails from "./components/TripDetails/TripDetails";
 import DestinationDetails from "./components/Destination/DestinationDetails";
 import AttractionDetails from "./components/AttractionDetails/AttractionDetails";
+import * as tripService from "./services/tripService";
+import * as destinationService from "./services/destinationService";
+
 
 const App = () => {
   const { user } = useContext(UserContext);
+  const [trip, setTrip] = useState(null);
+
+  const fetchTripDetails = async (tripId) => {
+    try {
+      const tripData = await tripService.show(tripId);
+      setTrip(tripData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <NavBar />
@@ -26,10 +40,16 @@ const App = () => {
         <Route path="/trips" element={<Dashboard />} />
         <Route path="/trips/new" element={<TripForm />} />
         <Route path="/styleguide" element={<StyleGuide />} />
-        <Route path="/trips/:tripId" element={<TripDetails />} />
+        <Route
+          path="/trips/:tripId"
+          element={
+            <TripDetails trip={trip} fetchTripDetails={fetchTripDetails} />
+          }
+        />
         <Route path="/trips/:tripId/edit" element={<TripForm />} />
         <Route path="/trips/:tripId/destinations/:destinationId" element={<DestinationDetails />} />
         <Route path="/trips/:tripId/destinations/:destinationId/attractions/:attractionId" element={<AttractionDetails />} />
+
       </Routes>
     </>
   );

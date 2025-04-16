@@ -12,12 +12,25 @@ const DestinationDetails = () => {
 
     useEffect(() => {
         const fetchDestinationDetails = async () => {
+
             const destinationData = await destinationService.showDestination(tripId, destinationId);
             setDestination(destinationData);
+
+            if (!tripId || !destinationId) {
+                console.error("Missing tripId or destinationId");
+                return;
+            }
+            try {
+                const destinationData = await destinationService.show(tripId, destinationId);
+                setDestination(destinationData);
+            } catch (error) {
+                console.error("Error fetching destination details:", error);
+            }
+
         };
-        console.log(destinationId);
+
         fetchDestinationDetails();
-    }, [destinationId]);
+    }, [tripId, destinationId]);
 
     if (!destination) {
         return <div>Looks like you haven't added any destinations yet!</div>
@@ -49,6 +62,7 @@ const DestinationDetails = () => {
                             <p>{attraction.name}</p>
                             {/* need to figure out how to pass attractionId forward onto this page (through props?) */}
                             <button onClick={() => navigate(`/trips/${tripId}/destinations/${destinationId}/attractions/${attractionId}`)}>View Attraction</button>
+
                         </li>
                     ))}
                 </ul>
