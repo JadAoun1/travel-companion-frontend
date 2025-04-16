@@ -25,7 +25,9 @@ const DestinationDetails = () => {
 
     const handleDeleteDestination = async () => {
         try {
-
+            const deletedDestination = await destinationService.deleteDestination(tripId, destinationId);
+            console.log(deletedDestination);
+            navigate(`/trips/${tripId}`);
         } catch (error) {
             console.log(error);
         };
@@ -35,10 +37,11 @@ const DestinationDetails = () => {
         <>
             <h1>{destination.name}</h1>
             {/* delete button */}
-            <button>Delete Destination</button>
+            <button onClick={() => handleDeleteDestination()}>Delete Destination</button>
             {/* edit button to edit start and end dates */}
             <button>Edit Destination</button>
             <h2>Attractions</h2>
+            
             <div>
                 <ul>
                     {destination.attractions.map((attraction, index) => (
