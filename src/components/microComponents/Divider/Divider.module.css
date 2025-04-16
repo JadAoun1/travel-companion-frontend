@@ -1,0 +1,31 @@
+.divider {
+    background-color: transparent;
+    /* Ensure no background */
+    border: 0;
+    /* Reset default borders */
+}
+
+/* Horizontal Orientation */
+.orientation-horizontal {
+    width: 100%;
+    height: var(--border-width-thick);
+    background-color: var(--color-border);
+    /* Use background for horizontal */
+    margin: var(--space-lg) 0;
+    /* Default spacing for horizontal */
+}
+
+/* Vertical Orientation */
+/* Note: Vertical dividers often need a specific height set by the parent container */
+/* or be placed within a flex container that stretches them. */
+.orientation-vertical {
+    width: var(--border-width-thick);
+    height: auto;
+    /* Default height, rely on parent */
+    align-self: stretch;
+    /* Stretch in flex containers */
+    background-color: var(--color-border);
+    /* Use background for vertical */
+    margin: 0 var(--space-lg);
+    /* Default spacing for vertical */
+}

@@ -1,0 +1,71 @@
+.avatar {
+    display: inline-flex;
+    /* Use inline-flex for alignment */
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    overflow: hidden;
+    background-color: var(--color-gray-light);
+    /* Fallback background */
+    color: var(--color-text-primary);
+    border: var(--border-width-thin) solid transparent;
+    /* Base border for structure */
+}
+
+/* Sizes */
+.size-sm {
+    width: calc(var(--spacing-unit) * 1.5);
+    /* ~24px */
+    height: calc(var(--spacing-unit) * 1.5);
+    font-size: var(--font-size-xs);
+}
+
+.size-md {
+    width: calc(var(--spacing-unit) * 2.5);
+    /* ~40px */
+    height: calc(var(--spacing-unit) * 2.5);
+    font-size: var(--font-size-md);
+}
+
+.size-lg {
+    width: calc(var(--spacing-unit) * 4);
+    /* ~64px */
+    height: calc(var(--spacing-unit) * 4);
+    font-size: var(--font-size-lg);
+}
+
+/* Shapes */
+.shape-circle {
+    border-radius: var(--border-radius-round);
+}
+
+.shape-square {
+    border-radius: var(--border-radius-sharp);
+    /* Brutalist sharp corners */
+}
+
+/* Border */
+.bordered {
+    border-width: var(--border-width-medium);
+    /* Thicker border */
+    border-color: var(--color-border);
+}
+
+/* Image */
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Cover the area, crop if needed */
+}
+
+/* Initials */
+.initials {
+    font-family: var(--font-family-primary);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    line-height: 1;
+    /* Ensure text stays centered vertically */
+    user-select: none;
+    /* Prevent text selection */
+}

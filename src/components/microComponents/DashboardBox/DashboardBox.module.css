@@ -1,0 +1,21 @@
+.dashboardBox {
+    /* Inherits border, padding, background etc. from Card */
+    display: flex;
+    /* Arrange title and content vertically */
+    flex-direction: column;
+    height: 100%;
+    /* Allow box to fill grid cell height if needed */
+}
+
+.title {
+    /* Adjust title spacing if needed */
+    margin-bottom: var(--space-md);
+    /* Space below the title */
+    flex-shrink: 0;
+    /* Prevent title from shrinking */
+}
+
+.content {
+    /* Allow content to grow if needed */
+    flex-grow: 1;
+}

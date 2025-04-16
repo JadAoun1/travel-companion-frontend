@@ -1,0 +1,69 @@
+.sidebarLink {
+    /* Layout & Box Model */
+    display: flex;
+    align-items: center;
+    padding: var(--space-sm) var(--space-md);
+    margin-bottom: var(--space-xs);
+    /* Spacing between links */
+    border-radius: var(--border-radius-sharp);
+    border-left: var(--border-width-thick) solid transparent;
+    /* Reserve space for active border */
+    margin-left: calc(var(--border-width-thick) * -1);
+    /* Offset */
+    cursor: pointer;
+
+    /* Color & Background */
+    background-color: transparent;
+    color: var(--color-text-primary);
+
+    /* Typography & Content Alignment */
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-bold);
+    text-decoration: none;
+
+    /* Transitions */
+    transition:
+        color var(--transition-duration-fast) var(--transition-timing-function),
+        background-color var(--transition-duration-fast) var(--transition-timing-function),
+        border-color var(--transition-duration-fast) var(--transition-timing-function);
+}
+
+.icon {
+    flex-shrink: 0;
+    /* Prevent icon from shrinking */
+    margin-right: var(--space-md);
+    /* Icon color will inherit from .sidebarLink color */
+}
+
+.text {
+    flex-grow: 1;
+    /* Allow text to take remaining space */
+}
+
+.sidebarLink:hover {
+    color: var(--color-accent);
+    background-color: var(--color-gray-light);
+}
+
+.sidebarLink:focus,
+.sidebarLink:focus-visible {
+    outline: none;
+    color: var(--color-accent);
+    background-color: var(--color-gray-light);
+    /* Optional: Add stronger focus outline if needed */
+    /* box-shadow: inset 0 0 0 2px var(--color-accent); */
+}
+
+/* Active state (expects an 'active' class) */
+.sidebarLink.active {
+    color: var(--color-accent);
+    background-color: transparent;
+    /* Or maybe a different background like --color-primary-light */
+    border-left-color: var(--color-accent);
+}
+
+/* Adjust icon color specifically for active state if needed */
+.sidebarLink.active .icon {
+    /* Color is already set to accent via parent .active rule, but could override */
+}
