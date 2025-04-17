@@ -15,7 +15,7 @@ import TripDetails from "./components/TripDetails/TripDetails";
 import DestinationDetails from "./components/Destination/DestinationDetails";
 import AttractionDetails from "./components/AttractionDetails/AttractionDetails";
 import * as tripService from "./services/tripService";
-import * as destinationService from "./services/destinationService";
+import MapView from './components/MapView/MapView.jsx';
 
 // goal is to prevent React from re-triggering your useEffect in TripDetails unnecessarily, which happens when the fetchTripDetails function changes on every render of App
 const App = () => {
@@ -52,6 +52,8 @@ const App = () => {
         <Route path="/trips/:tripId/destinations/:destinationId" element={<DestinationDetails />} />
         <Route path="/trips/:tripId/destinations/:destinationId/attractions/:attractionId" element={<AttractionDetails />} />
 
+        {/* Just for testing purposes at this point... */}
+        <Route path='/map' element={<MapView />} />
       </Routes>
     </>
   );
