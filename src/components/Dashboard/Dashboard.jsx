@@ -37,10 +37,17 @@ const Dashboard = () => {
     return <div>Loading...</div>;
   }
 
+  const createTripButton = (
+    <ButtonPrimary onClick={() => navigate("/trips/new")}>Create New Trip</ButtonPrimary>
+  );
+
   return (
     <main className={styles.dashboardGrid}>
-
-      <DashboardBox title="My Trips" className={styles.myTrips}>
+      <DashboardBox
+        title="MY TRIPS"
+        className={styles.myTrips}
+        rightElement={createTripButton}
+      >
         <ul className={styles.tripListInsideBox}>
           {trips.length > 0 ? (
             trips.map((trip) => (
@@ -60,23 +67,9 @@ const Dashboard = () => {
         </ul>
       </DashboardBox>
 
-      <DashboardBox title="Current Trip" className={styles.currentTrip}>
+      <DashboardBox title="CURRENT TRIP" className={styles.currentTrip}>
         <div className={styles.placeholderContent}>No current trip details available.</div>
       </DashboardBox>
-
-      <DashboardBox title="Map Overview" className={styles.map}>
-        <div className={styles.placeholderContent}>Map component will go here.</div>
-      </DashboardBox>
-
-      <DashboardBox title="Messages" className={styles.messages}>
-        <div className={styles.placeholderContent}>Messages component will go here.</div>
-      </DashboardBox>
-
-      <DashboardBox title="Quick Actions" className={styles.actions}>
-        <Paragraph>Welcome, {user.username}!</Paragraph>
-        <ButtonPrimary onClick={() => navigate("/trips/new")}>Create New Trip</ButtonPrimary>
-      </DashboardBox>
-
     </main>
   );
 };
