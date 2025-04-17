@@ -3,6 +3,8 @@
 // imports
 import { useState } from 'react';
 import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
+import { useParams } from 'react-router';
+
 
 const MapView = () => {
     const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
@@ -12,6 +14,9 @@ const MapView = () => {
     const [coordinates, setCoordinates] = useState(null);
     // Display feedback if the entered data (city, state) is not found (i.e. mispelled)
     const [error, setError] = useState(null);
+
+    // I'm going use this when adding a destination or attraction
+    const { tripId, destinationId } = useParams();
 
     // Update location state as user types in input field
     const handleLocationChange = (event) => {
@@ -48,6 +53,34 @@ const MapView = () => {
         };
     };
 
+    const handleAdd = async () => {
+        // Some kind of error logic here (setError('')) if a user hasn't added an actual location?
+
+        const newLocation = {
+            name: location,
+            lat: coordinates.lat,
+            lng: coordinates.lng,
+        };
+
+        try {
+            // Add a searched and selected attraction to the destination
+            // Since adding an attraction is done on the destination route (/trip/:tripId/destination/:destinationId), we need to check first if there's a destinationId in params (via useParams()), and then we can add the logic to add the location to the destination (I think...)
+            if (destinationId) {
+                // Logic here
+            };
+            
+            // Add a searched and selected destination to the trip
+            // Since adding a destination is done on the trip route (/trip/:tripId), we need to first deal with destinationId (above) and catch the rest to add a destination to a trip
+            if (tripId) {
+                // Logic here
+            };
+
+        } catch (error) {
+            console.log(error);
+            // Maybe another setError('') here? Could not add location?
+        };
+    };
+
     // Handle changes to the view of the map
     // event.detail contains { center, zoom, tilt, heading }
     const handleCameraChange = (event) => {
@@ -70,6 +103,10 @@ const MapView = () => {
                     />
                     <button onClick={handleSearch}>Search</button>
                     {error && <p>{error}</p>}
+                </div>
+                <div>
+                    {/* "add" button; onClick={handleAdd} */}
+                    <button>Add</button>
                 </div>
                 <Map
                     defaultZoom={10}
