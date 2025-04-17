@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import * as tripService from "../../services/tripService";
 import * as destinationService from "../../services/destinationService";
+import MapView from "../MapView/MapView";
 
 const TripDetails = ({ trip, fetchTripDetails }) => {
   const { tripId } = useParams();
@@ -66,6 +67,7 @@ const TripDetails = ({ trip, fetchTripDetails }) => {
                   >
                     View Destination
                   </button>
+                  <MapView />
                 </li>
               ))}
             </ul>
