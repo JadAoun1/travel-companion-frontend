@@ -67,12 +67,16 @@ const TripDetails = ({ trip, fetchTripDetails }) => {
                   >
                     View Destination
                   </button>
-                  <MapView />
                 </li>
               ))}
             </ul>
           ) : (
-            <p>No destinations planned yet!</p>
+            <>
+                <p>No destinations planned yet!</p>
+                <p>Where do you want to travel to?</p>
+
+                <MapView />
+            </>
           )}
         </div>
       </section>
