@@ -4,7 +4,8 @@ import { useParams, useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
 
 import * as destinationService from "../../services/destinationService.js";
-// AMEN'S CODE BELOW THAT CAN BE DELETED WHEN MERGED WITH MAIN
+import MapView from '../MapView/MapView.jsx';
+
 const DestinationDetails = () => {
     const { tripId, destinationId } = useParams();
     const [destination, setDestination] = useState(null);
@@ -50,7 +51,7 @@ const DestinationDetails = () => {
                             <p>{attraction.name}</p>
                             {/* need to figure out how to pass attractionId forward onto this page (through props?) */}
                             <button onClick={() => navigate(`/trips/${tripId}/destinations/${destinationId}/attractions/${attraction._id}`)}>View Attraction</button>
-
+                            <MapView />
                         </li>
                     ))}
                 </ul>
