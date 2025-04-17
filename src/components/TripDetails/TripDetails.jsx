@@ -82,6 +82,9 @@ const TripDetails = ({ trip, fetchTripDetails }) => {
               </li>
             ))}
           </ul>
+          <button onClick={() => navigate(`/trips/${tripId}/travellers/`)}>
+            Add Traveller
+          </button>
         </div>
       </section>
     </main>
