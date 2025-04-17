@@ -73,6 +73,16 @@ const TripDetails = ({ trip, fetchTripDetails }) => {
             <p>No destinations planned yet!</p>
           )}
         </div>
+        <div>
+          <h2>Travellers</h2>
+          <ul>
+            {trip.travellers.map((traveller) => (
+              <li key={traveller.user._id}>
+                {traveller.user.username}
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
     </main>
   );
