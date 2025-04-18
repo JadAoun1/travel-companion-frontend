@@ -38,6 +38,16 @@ const TripDetails = ({ trip, fetchTripDetails }) => {
     }
   };
 
+    // Since destinations is referenced in trip (versus embedded like references in destinations), we need an async function to call on the backend, then update state (conversely, attractions is embedded in destinations, we already have the primary destination object accessible in state, so we just update it right then and there)
+    const handleAddDestination = async () => {
+        try {
+            const updatedDestinations = await destinationService.index(tripId);
+            setDestinations(updatedDestinations);
+        } catch (error) {
+            console.log("Error fetching updated destinations:", error);
+        }
+    };
+    
   return (
     <main>
       <section>
@@ -54,7 +64,7 @@ const TripDetails = ({ trip, fetchTripDetails }) => {
         <div>
               <p>Where do you want to travel to?</p>
 
-              <MapView />
+              <MapView onAddDestination={handleAddDestination}/>
         </div>
         <div>
           <h2>Planned Destinations</h2>
