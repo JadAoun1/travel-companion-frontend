@@ -48,9 +48,25 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
                 // geometry => an object from the returned API results that holds spatial info; location holds lat and lng within the geometry object, so it's just pulling that data and setting it to lat and lng
                 // const { lat, lng } = data.results[0].geometry.location;
                 const { lat, lng } = result.geometry.location;
+                const placeId = result.place_id
                 // Set coordinates
                 setCoordinates({ lat, lng });
-                setGeocodeData(result);
+
+                // Updates here to further incorporate Places API
+                // Once fetchPlacesDetails runs using placeId, assign to value placeDetails
+                const placeDetails = await fetchPlaceDetails(placeId);
+
+                if (placeDetails) {
+                    // Then updated GeocodeData state to includ old results (via spread operator) and add on newly fetched placeDetails
+                    // This means that we can now access placeDetails (from Places API) via geocodeData.placeDetails
+                    setGeocodeData({
+                        ...result,
+                        placeDetails,
+                    });
+                } else {
+                    setGeocodeData(result);
+                }
+                // setGeocodeData(result);
                 // Clear any errors
                 setError(null);
             } else {
@@ -62,6 +78,25 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
             console.log(error);
         };
     };
+
+    // Trying to incorporate Google Places API on top of Google Geocoding API (I'm not sure if this was the cleanest way of doing things, but it's where I'm at right now...)
+    // Pass in placeId which was gathered through Geocoding API, so that can be used in Places API
+    const fetchPlaceDetails = async (placeId) => {
+        try {
+            // Places API URL here with dynamically added placeId and apiKey
+            const response = await fetch(
+                `https://places.googleapis.com/v1/places/${placeId}?fields=displayName,formattedAddress,location,photos,websiteUri,rating,userRatingCount,regularOpeningHours,shortFormattedAddress,primaryType&key=${apiKey}`
+            );
+
+            const placeData = await response.json();
+            // Just get the data to display in the UI
+            // This could potentially be a place to refactor the use of Geocoding API. Maybe everything I've been doing using that API can be done using Places API instead?
+            return placeData;
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
 
     const handleAdd = async () => {
         // Some kind of error logic here (setError('')) if a user hasn't added an actual location?
@@ -138,7 +173,12 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
                         placeholder='Enter city, state'
                     />
                     <button onClick={handleSearch}>Search</button>
+
+                    {/* Update UI to show results from Places API. This is just a temporary placeholder for now. */}
+                    <p>{geocodeData?.placeDetails.displayName.text}</p>
+                    
                     {geocodeData && <p>Found: {geocodeData.formatted_address}</p>}
+
                     {error && <p>{error}</p>}
                 </div>
                 <div>
