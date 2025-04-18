@@ -41,6 +41,21 @@ const deleteDestination = async (tripId, destinationId) => {
     };
 };
 
-// create?
+// create
+const createDestination = async (tripId, destinationData) => {
+    try {
+        const res = await fetch(`${BASE_URL}/${tripId}/destinations`, {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('token')}` 
+            },
+            body: JSON.stringify(destinationData),
+        });
+        return res.json();
+    } catch {
+        console.log(error);
+    }
+};
 
-export { index, showDestination, deleteDestination };
+export { index, showDestination, deleteDestination, createDestination };

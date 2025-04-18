@@ -5,6 +5,21 @@ const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/trips`;
 // index
 
 // create
+const createAttraction = async (tripId, destinationId, attractionData) => {
+    try {
+        const res = await fetch(`${BASE_URL}/${tripId}/destinations/${destinationId}/attractions/`, {
+            method: 'POST',
+            
+            headers: { 
+                'Content-Type': 'application/json', 
+                Authorization: `Bearer ${localStorage.getItem('token')}` },
+            body: JSON.stringify(attractionData),
+        });
+        return res.json();
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 // show
 const showAttraction = async (tripId, destinationId, attractionId) => {
@@ -33,4 +48,4 @@ const deleteAttraction = async (tripId, destinationId, attractionId) => {
     };
 };
 
-export { showAttraction, deleteAttraction };
+export { showAttraction, deleteAttraction, createAttraction };
