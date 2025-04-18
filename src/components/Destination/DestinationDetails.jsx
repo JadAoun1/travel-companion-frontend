@@ -16,7 +16,7 @@ const DestinationDetails = () => {
             const destinationData = await destinationService.showDestination(tripId, destinationId);
             setDestination(destinationData);
         };
-        console.log(destinationId);
+        // console.log(destinationId);
         fetchDestinationDetails();
     }, [destinationId]);
 
@@ -27,7 +27,7 @@ const DestinationDetails = () => {
     const handleDeleteDestination = async () => {
         try {
             const deletedDestination = await destinationService.deleteDestination(tripId, destinationId);
-            console.log(deletedDestination);
+            // console.log(deletedDestination);
             navigate(`/trips/${tripId}`);
         } catch (error) {
             console.log(error);
@@ -42,7 +42,11 @@ const DestinationDetails = () => {
             {/* edit button to edit start and end dates */}
             <button>Edit Destination</button>
             <h2>Attractions</h2>
+            <div>
+                <p>Where do you want to travel to?</p>
 
+                <MapView />
+            </div>
             <div>
                 <ul>
                     {destination.attractions.map((attraction, index) => (
@@ -51,7 +55,6 @@ const DestinationDetails = () => {
                             <p>{attraction.name}</p>
                             {/* need to figure out how to pass attractionId forward onto this page (through props?) */}
                             <button onClick={() => navigate(`/trips/${tripId}/destinations/${destinationId}/attractions/${attraction._id}`)}>View Attraction</button>
-                            <MapView />
                         </li>
                     ))}
                 </ul>
