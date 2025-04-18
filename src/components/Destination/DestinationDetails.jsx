@@ -35,6 +35,7 @@ const DestinationDetails = () => {
     };
 
     // Function written to manage update to state when attraction is added; so the new attraction will be shown immediately in UI
+    // See more notes about this in TripDetails.jsx handleAddDestination
     const handleAddAttraction = (newAttraction) => {
         // Update the list of attractions in setDestination state
         setDestination(prev => ({
