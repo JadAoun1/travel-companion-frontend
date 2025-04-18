@@ -52,6 +52,11 @@ const TripDetails = ({ trip, fetchTripDetails }) => {
           </button>
         </div>
         <div>
+              <p>Where do you want to travel to?</p>
+
+              <MapView />
+        </div>
+        <div>
           <h2>Planned Destinations</h2>
           {destinations.length > 0 ? (
             <ul>
@@ -73,9 +78,6 @@ const TripDetails = ({ trip, fetchTripDetails }) => {
           ) : (
             <>
                 <p>No destinations planned yet!</p>
-                <p>Where do you want to travel to?</p>
-
-                <MapView />
             </>
           )}
         </div>
