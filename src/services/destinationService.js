@@ -42,12 +42,15 @@ const deleteDestination = async (tripId, destinationId) => {
 };
 
 // create
-const createDestination = async (tripId, locationData) => {
+const createDestination = async (tripId, destinationData) => {
     try {
         const res = await fetch(`${BASE_URL}/${tripId}/destinations`, {
             method: 'POST',
-            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-            body: JSON.stringify(locationData),
+            headers: { 
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('token')}` 
+            },
+            body: JSON.stringify(destinationData),
         });
         return res.json();
     } catch {
