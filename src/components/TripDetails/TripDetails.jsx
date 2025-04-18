@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router";
 import * as tripService from "../../services/tripService";
 import * as destinationService from "../../services/destinationService";
+import { UserContext } from "../../contexts/UserContext";
 
 const TripDetails = ({ trip, fetchTripDetails }) => {
   const { tripId } = useParams();
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
   const [destinations, setDestinations] = useState([]);
 
   const fetchDestinationDetails = async (tripId) => {
@@ -28,6 +30,14 @@ const TripDetails = ({ trip, fetchTripDetails }) => {
     return <div>Loading...</div>;
   }
 
+  // Check to see if user is in travellers and is the owner of the trip 
+  // Adding so only owner can delete the complete trip. 
+  const isOwner = trip.travellers.some(
+    (traveller) =>
+      traveller.role === "Owner" && traveller.user._id === user._id
+  );
+
+
   const handleDeleteTrip = async (tripId) => {
     try {
       await tripService.deleteTrip(tripId);
@@ -46,10 +56,14 @@ const TripDetails = ({ trip, fetchTripDetails }) => {
           <button onClick={() => navigate(`/trips/${trip._id}/edit`)}>
             Edit Trip
           </button>
-          <button onClick={() => handleDeleteTrip(trip._id)}>
-            Delete Trip
-          </button>
+
+          {isOwner && (
+            <button onClick={() => handleDeleteTrip(trip._id)}>
+              Delete Trip
+            </button>
+          )}
         </div>
+        
         <div>
           <h2>Planned Destinations</h2>
           {destinations.length > 0 ? (
