@@ -3,7 +3,9 @@
 // imports
 import { useState } from 'react';
 import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
-import { useParams } from 'react-router';
+import { data, useParams } from 'react-router';
+import * as destinationService from '../../services/destinationService.js';
+import * as attractionService from '../../services/attractionService.js';
 
 
 const MapView = () => {
@@ -17,7 +19,11 @@ const MapView = () => {
 
     // I'm going use this when adding a destination or attraction
     const { tripId, destinationId } = useParams();
-
+    // What needs to be passed into useState to not fuck up the current attractions/destinations?
+    const [attractions, setAttractions] = useState([]);
+    const [destinations, setDestinations] = useState([]);
+    // Adding this to set the searched data (using Google Geocoding API) in handleSearch to overall state so it can be accessed in handleAdd
+    const [geocodeData, setGeocodeData] = useState(null)
     // Update location state as user types in input field
     const handleLocationChange = (event) => {
         setLocation(event.target.value);
@@ -36,17 +42,21 @@ const MapView = () => {
 
             // If status of response is 'OK' (i.e. a location match was found in the API)...
             if (data.status === 'OK') {
+                const result = data.results[0];
                 // Extract lat and lng and set equal to the deconstructed object from the API
                 // data.results[0] => results of possible matches from the API call; takes the first (and most likely) match
                 // geometry => an object from the returned API results that holds spatial info; location holds lat and lng within the geometry object, so it's just pulling that data and setting it to lat and lng
-                const { lat, lng } = data.results[0].geometry.location;
+                // const { lat, lng } = data.results[0].geometry.location;
+                const { lat, lng } = result.geometry.location;
                 // Set coordinates
                 setCoordinates({ lat, lng });
+                setGeocodeData(result);
                 // Clear any errors
                 setError(null);
             } else {
                 setError('Location not found.');
                 setCoordinates(null);
+                setGeocodeData(null);
             }
         } catch (error) {
             console.log(error);
@@ -57,9 +67,15 @@ const MapView = () => {
         // Some kind of error logic here (setError('')) if a user hasn't added an actual location?
 
         const newLocation = {
-            name: location,
-            lat: coordinates.lat,
-            lng: coordinates.lng,
+            // The way the data was being passed to the backend meant that it was receiving req.body.name as undefined. I updated to this because I knew it was working as "address", but now name and address are the same. I'm going to come back to this later to work on because ultimately it's still working right now, just doesn't look the best. (Data is currently being sent accurately to the backend, but then the name is just set to the address instead of "Oregon Zoo" or the like.)
+            name: geocodeData.formatted_address || 'Unnamed Location',
+            // Fixed this to match backend schema
+            location: {
+                lat: coordinates.lat,
+                lng: coordinates.lng,
+            },
+            address: geocodeData.formatted_address || '',
+            placeId: geocodeData.place_id || '',
         };
 
         try {
@@ -67,14 +83,21 @@ const MapView = () => {
             // Since adding an attraction is done on the destination route (/trip/:tripId/destination/:destinationId), we need to check first if there's a destinationId in params (via useParams()), and then we can add the logic to add the location to the destination (I think...)
             if (destinationId) {
                 // Logic here
-            };
+                // Make sure to pass in newLocation (declared above) so it can be added to the newAttraction
+                const newAttraction = await attractionService.createAttraction(tripId, destinationId, newLocation);
+                setAttractions([...attractions, newAttraction]);
+                console.log("Submitting newLocation to backend:", newLocation);
+
+            }
             
             // Add a searched and selected destination to the trip
             // Since adding a destination is done on the trip route (/trip/:tripId), we need to first deal with destinationId (above) and catch the rest to add a destination to a trip
-            if (tripId) {
-                // Logic here
-            };
-
+            // if (tripId) {
+            //     // Logic here
+            // };
+            else {
+                console.log(error);
+            }
         } catch (error) {
             console.log(error);
             // Maybe another setError('') here? Could not add location?
@@ -102,11 +125,12 @@ const MapView = () => {
                         placeholder='Enter city, state'
                     />
                     <button onClick={handleSearch}>Search</button>
+                    {geocodeData && <p>Found: {geocodeData.formatted_address}</p>}
                     {error && <p>{error}</p>}
                 </div>
                 <div>
                     {/* "add" button; onClick={handleAdd} */}
-                    <button>Add</button>
+                    <button onClick={handleAdd}>Add</button>
                 </div>
                 <Map
                     defaultZoom={10}
