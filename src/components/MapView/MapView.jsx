@@ -7,8 +7,8 @@ import { data, useParams } from 'react-router';
 import * as destinationService from '../../services/destinationService.js';
 import * as attractionService from '../../services/attractionService.js';
 
-
-const MapView = () => {
+// Destructuring onAddAttraction from DestinationDetails
+const MapView = ({ onAddAttraction }) => {
     const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
     // Store user input (city, state)
     const [location, setLocation] = useState('');
@@ -87,7 +87,11 @@ const MapView = () => {
                 const newAttraction = await attractionService.createAttraction(tripId, destinationId, newLocation);
                 setAttractions([...attractions, newAttraction]);
                 console.log("Submitting newLocation to backend:", newLocation);
-
+                // Once setAttractions successfully updates, call the function and pass it newAttraction (which prompts the function in DestinationDetails to run again, state updates and React responds by rerendering so the new attraction shows up on the page)
+                if (onAddAttraction) onAddAttraction(newAttraction);
+                setLocation('');
+                setCoordinates(null);
+                setGeocodeData(null);
             }
             
             // Add a searched and selected destination to the trip

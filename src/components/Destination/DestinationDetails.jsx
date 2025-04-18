@@ -34,6 +34,17 @@ const DestinationDetails = () => {
         };
     };
 
+    // Function written to manage update to state when attraction is added; so the new attraction will be shown immediately in UI
+    const handleAddAttraction = (newAttraction) => {
+        // Update the list of attractions in setDestination state
+        setDestination(prev => ({
+            // Use spread operator to create a copy of the old destination object into a new one called prev
+            ...prev, 
+            // Then overwrite attractions with the copy (prev) and add on the newAttraction
+            attractions: [...prev.attractions, newAttraction]
+        }));
+    };
+
     return (
         <>
             <h1>{destination.name}</h1>
@@ -45,7 +56,9 @@ const DestinationDetails = () => {
             <div>
                 <p>Where do you want to travel to?</p>
 
-                <MapView />
+                {/* Parent component (DestinationDetails) passes this function down to MapView */}
+                {/* MapView, if you add something, call the function and give it the new thing */}
+                <MapView onAddAttraction={handleAddAttraction}/>
             </div>
             <div>
                 <ul>
