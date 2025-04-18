@@ -8,7 +8,7 @@ import * as destinationService from '../../services/destinationService.js';
 import * as attractionService from '../../services/attractionService.js';
 
 // Destructuring onAddAttraction from DestinationDetails
-const MapView = ({ onAddAttraction }) => {
+const MapView = ({ onAddAttraction, onAddDestination }) => {
     const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
     // Store user input (city, state)
     const [location, setLocation] = useState('');
@@ -101,6 +101,12 @@ const MapView = ({ onAddAttraction }) => {
                 const newDestination = await destinationService.createDestination(tripId, newLocation);
                 setDestinations([...destinations, newDestination]);
                 console.log("Submitting newLocation to backend:", newLocation);
+                if (onAddDestination) {
+                    await onAddDestination(newDestination)
+                };
+                setLocation('');
+                setCoordinates(null);
+                setGeocodeData(null);
             }
             else {
                 console.log(error);
