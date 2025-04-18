@@ -92,9 +92,12 @@ const MapView = () => {
             
             // Add a searched and selected destination to the trip
             // Since adding a destination is done on the trip route (/trip/:tripId), we need to first deal with destinationId (above) and catch the rest to add a destination to a trip
-            // if (tripId) {
-            //     // Logic here
-            // };
+            else if (tripId) {
+                // Logic here
+                const newDestination = await destinationService.createDestination(tripId, newLocation);
+                setDestinations([...destinations, newDestination]);
+                console.log("Submitting newLocation to backend:", newLocation);
+            }
             else {
                 console.log(error);
             }
