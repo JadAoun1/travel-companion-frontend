@@ -36,8 +36,6 @@ const AttractionDetails = () => {
     return (
         <>
             <h1>{attraction.name}</h1>
-            <p>Lat: {attraction.location.lat}</p>
-            <p>Lng: {attraction.location.lng}</p>
             <MapView />
             <button onClick={() => handleDeleteAttraction()}>Delete Attraction</button>
         </>
