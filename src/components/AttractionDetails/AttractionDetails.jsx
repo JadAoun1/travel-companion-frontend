@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router';
 import { useState, useEffect } from 'react';
 
 import * as attractionService from '../../services/attractionService.js';
+import MapView from '../MapView/MapView.jsx';
 
 const AttractionDetails = () => {
     const { tripId, destinationId, attractionId } = useParams();
@@ -35,12 +36,10 @@ const AttractionDetails = () => {
     return (
         <>
             <h1>{attraction.name}</h1>
-            <p>Lat: {attraction.location.lat}</p>
-            <p>Lng: {attraction.location.lng}</p>
-            {/* Edit an attraction (this page isn't a thing yet...) */}
-            <button onClick={() => navigate(`/trips/${tripId}/destinations/${destinationId}/attractions/${attractionId}/edit`)}>Edit Attraction</button>
-            {/* Delete an attraction */}
+            <MapView />
             <button onClick={() => handleDeleteAttraction()}>Delete Attraction</button>
+            {/* Back to Destination Details Button */}
+            <button onClick={() => navigate(`/trips/${tripId}/destinations/${destinationId}`)}>Back</button>
         </>
     );
 };

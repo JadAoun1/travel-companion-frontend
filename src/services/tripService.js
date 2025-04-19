@@ -67,10 +67,33 @@ const deleteTrip = async (tripId) => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
+
+    if (!res.ok) {
+      const errorMsg = await res.json(); 
+      throw new Error(errorMsg.message);
+    }
+
     return res.json();
   } catch (error) {
     console.log(error);
   }
 };
 
-export { index, create, show, update, deleteTrip};
+/*------------------------------------------------------------------ User Collaboration -------------------------------------------------------------------*/
+const addTraveller = async (tripId, travellerData) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${tripId}/travellers`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(travellerData), 
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { index, create, show, update, deleteTrip, addTraveller };
