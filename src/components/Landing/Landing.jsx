@@ -7,9 +7,8 @@ const Landing = () => {
 
   return (
     <main>
-      <h1>App Title</h1>
-      {/* Title Suggestions: Altoura, Aurevia, Trevia? Open to more ideas! */}
-
+      <h1>TripLab</h1>
+      {/* <h2>Plan Your Next Adventure with Ease</h2> */}
       {/* <h2>Discover, Plan, and Share Your Adventures</h2> */}
       {/* <h2>Plan trips, Make memories, Stay connected! </h2> */}
       <h2>Seamless planning for unforgettable escapes. </h2>
