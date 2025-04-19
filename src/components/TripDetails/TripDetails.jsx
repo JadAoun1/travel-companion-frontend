@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router";
 import * as tripService from "../../services/tripService";
 import * as destinationService from "../../services/destinationService";
 import { UserContext } from "../../contexts/UserContext";
+import MapView from "../MapView/MapView";
 
 const TripDetails = ({ trip, fetchTripDetails }) => {
   const { tripId } = useParams();
@@ -47,6 +48,16 @@ const TripDetails = ({ trip, fetchTripDetails }) => {
     }
   };
 
+    // Since destinations is referenced in trip (versus embedded like references in destinations), we need an async function to call on the backend, then update state (conversely, attractions is embedded in destinations, we already have the primary destination object accessible in state, so we just update it right then and there)
+    const handleAddDestination = async () => {
+        try {
+            const updatedDestinations = await destinationService.index(tripId);
+            setDestinations(updatedDestinations);
+        } catch (error) {
+            console.log("Error fetching updated destinations:", error);
+        }
+    };
+    
   return (
     <main>
       <section>
@@ -62,6 +73,11 @@ const TripDetails = ({ trip, fetchTripDetails }) => {
               Delete Trip
             </button>
           )}
+        </div>
+        <div>
+              <p>Where do you want to travel to?</p>
+
+              <MapView onAddDestination={handleAddDestination}/>
         </div>
         
         <div>
@@ -84,7 +100,9 @@ const TripDetails = ({ trip, fetchTripDetails }) => {
               ))}
             </ul>
           ) : (
-            <p>No destinations planned yet!</p>
+            <>
+                <p>No destinations planned yet!</p>
+            </>
           )}
         </div>
         <div>

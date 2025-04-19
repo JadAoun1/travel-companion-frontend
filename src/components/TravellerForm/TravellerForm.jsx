@@ -3,12 +3,13 @@ import * as userService from "../../services/userService";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 
-const TravellerForm = () => {
+const TravellerForm = ({ trip, fetchTripDetails }) => {
   const { tripId } = useParams();
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [selectedUsers, setSelectedUsers] = useState("");
   const [role, setRole] = useState("");
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -20,10 +21,21 @@ const TravellerForm = () => {
       }
     };
     fetchUsers();
-  }, []);
+    fetchTripDetails(tripId);
+  }, [tripId, fetchTripDetails]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    // This check should now remove ability to add same user multiple times.
+    const existingTraveller = trip.travellers.some(
+      (traveller) => traveller.user.username === selectedUsers
+    );
+    if (existingTraveller) {
+      setMessage("Traveller is already part of the trip.");
+      return;
+    }
+
     try {
       // Send username instead of userId
       await tripService.addTraveller(tripId, { username: selectedUsers, role });
@@ -41,7 +53,10 @@ const TravellerForm = () => {
         <select
           id="user"
           value={selectedUsers}
-          onChange={(event) => setSelectedUsers(event.target.value)}
+          onChange={(event) => {
+            setSelectedUsers(event.target.value); 
+            setMessage("");
+          }}
           required
         >
           <option value="">Select a user</option>
@@ -64,6 +79,8 @@ const TravellerForm = () => {
           <option value="Editor">Editor</option>
           <option value="Viewer">Viewer</option>
         </select>
+
+        {message && <p>{message}</p>}
 
         <button type="submit">Add Traveller</button>
         <button type="button" onClick={() => navigate(`/trips/${tripId}`)}>
