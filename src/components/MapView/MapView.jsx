@@ -18,7 +18,7 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
     const [error, setError] = useState(null);
 
     // I'm going use this when adding a destination or attraction
-    const { tripId, destinationId } = useParams();
+    const { tripId, destinationId, attractionId } = useParams();
     // What needs to be passed into useState to not fuck up the current attractions/destinations?
     const [attractions, setAttractions] = useState([]);
     const [destinations, setDestinations] = useState([]);
@@ -128,7 +128,7 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
                 setCoordinates(null);
                 setGeocodeData(null);
             }
-            
+
             // Add a searched and selected destination to the trip
             // Since adding a destination is done on the trip route (/trip/:tripId), we need to first deal with destinationId (above) and catch the rest to add a destination to a trip
             else if (tripId) {
@@ -165,32 +165,40 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
     return (
         <>
             <APIProvider apiKey={apiKey}>
-                <div>
-                    <input
-                        type='text'
-                        value={location}
-                        onChange={handleLocationChange}
-                        placeholder='Enter city, state'
-                    />
-                    <button onClick={handleSearch}>Search</button>
+                {attractionId ? (
+                    <>
+                    </>
+                ) : (
 
-                    {/* Update UI to show results from Places API. This is just a temporary placeholder for now. */}
-                    <p>{geocodeData?.placeDetails.displayName.text}</p>
-                    
-                    {geocodeData && <p>Found: {geocodeData.formatted_address}</p>}
 
-                    {error && <p>{error}</p>}
-                </div>
-                <div>
-                    {/* "add" button; onClick={handleAdd} */}
-                    <button onClick={handleAdd}>Add</button>
-                </div>
+                    <>
+                        <div>
+                            <input
+                                type='text'
+                                value={location}
+                                onChange={handleLocationChange}
+                                placeholder='Enter city, state'
+                            />
+                            <button onClick={handleSearch}>Search</button>
+
+                            {/* Update UI to show results from Places API. This is just a temporary placeholder for now. */}
+                            <p>{geocodeData?.placeDetails.displayName.text}</p>
+
+                            {geocodeData && <p>Found: {geocodeData.formatted_address}</p>}
+
+                            {error && <p>{error}</p>}
+                        </div>
+                        <div>
+                            <button onClick={handleAdd}>Add</button>
+                        </div>
+                    </>
+                )}
                 <Map
                     defaultZoom={10}
-                    center ={ coordinates || { lat: -33.860664, lng: 151.208138 }}
+                    center={coordinates || { lat: -33.860664, lng: 151.208138 }}
                     // Change view of map changes. 
                     onCameraChanged={handleCameraChange}
-                    style={{ width: '50%', height: '400px' }} 
+                    style={{ width: '50%', height: '400px' }}
                 >
                     {/* If there are coordinates, set Marker position to those coordinates */}
                     {coordinates && <Marker position={coordinates} />}

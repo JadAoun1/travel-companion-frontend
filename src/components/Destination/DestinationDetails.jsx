@@ -49,12 +49,8 @@ const DestinationDetails = () => {
     return (
         <>
             <h1>{destination.name}</h1>
-            {/* Back to Trip Details Button */}
             <button onClick={() => navigate(`/trips/${tripId}`)}>Back</button>
-            {/* delete button */}
             <button onClick={() => handleDeleteDestination()}>Delete Destination</button>
-            {/* edit button to edit start and end dates */}
-            <button>Edit Destination</button>
             <h2>Attractions</h2>
             <div>
                 <p>Where do you want to travel to?</p>
