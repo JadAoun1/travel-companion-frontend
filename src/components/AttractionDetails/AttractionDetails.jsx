@@ -39,9 +39,6 @@ const AttractionDetails = () => {
             <p>Lat: {attraction.location.lat}</p>
             <p>Lng: {attraction.location.lng}</p>
             <MapView />
-            {/* Edit an attraction (this page isn't a thing yet...) */}
-            <button onClick={() => navigate(`/trips/${tripId}/destinations/${destinationId}/attractions/${attractionId}/edit`)}>Edit Attraction</button>
-            {/* Delete an attraction */}
             <button onClick={() => handleDeleteAttraction()}>Delete Attraction</button>
         </>
     );
