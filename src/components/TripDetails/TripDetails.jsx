@@ -64,6 +64,7 @@ const TripDetails = ({ trip, fetchTripDetails }) => {
         <div>
           <h1>{trip.title}</h1>
           <p>{trip.description}</p>
+          <button onClick={() => navigate("/trips")}>Back</button>
           <button onClick={() => navigate(`/trips/${trip._id}/edit`)}>
             Edit Trip
           </button>

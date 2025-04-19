@@ -38,6 +38,8 @@ const AttractionDetails = () => {
             <h1>{attraction.name}</h1>
             <MapView />
             <button onClick={() => handleDeleteAttraction()}>Delete Attraction</button>
+            {/* Back to Destination Details Button */}
+            <button onClick={() => navigate(`/trips/${tripId}/destinations/${destinationId}`)}>Back</button>
         </>
     );
 };

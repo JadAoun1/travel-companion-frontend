@@ -87,6 +87,9 @@ const TripForm = () => {
         ></textarea>
 
         <button type="submit">Submit</button>
+        <button type="button" onClick={() => navigate("/trips")}>
+          Cancel
+        </button>
       </form>
     </main>
   );

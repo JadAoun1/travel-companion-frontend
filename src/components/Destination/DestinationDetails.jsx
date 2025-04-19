@@ -49,6 +49,7 @@ const DestinationDetails = () => {
     return (
         <>
             <h1>{destination.name}</h1>
+            <button onClick={() => navigate(`/trips/${tripId}`)}>Back</button>
             <button onClick={() => handleDeleteDestination()}>Delete Destination</button>
             <h2>Attractions</h2>
             <div>
