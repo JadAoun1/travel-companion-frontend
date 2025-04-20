@@ -1,7 +1,7 @@
 # TripLab
 
-#### Caption
-<img src="" alt="TripLab Home Page"/>
+#### Seamless planning for unforgettable escapes.
+<img src="public/images/triplab.png" alt="TripLab Home Page"/>
 
 ## Description
 TripLab is a collaborative travel planning platform designed to make organizing your next adventure simple and seamless. Whether you're mapping out a weekend getaway or a bucket-list journey with friends, TripLab brings your plans together in one easy-to-use space.
@@ -19,7 +19,7 @@ TripLab is a collaborative travel planning platform designed to make organizing 
 * [Features](#features)
 * [Design](#design)
 * [Project Next Steps](#nextsteps)
-* [About the Author](#author)
+* [Team](#team)
 * [Works Cited](#workscited)
 
 ## <a name="technologiesused"></a>Technologies Used
@@ -49,8 +49,10 @@ TripLab is a collaborative travel planning platform designed to make organizing 
 * Show multiple markers on trip and destination show page maps. 
 * Utilize more capababilities of the Google Maps Places (New) API to allow users to find additional nearby attractions.
 
-## <a name="author"></a>About The Author
-Enter brief description here. 
+## <a name="Team"></a>Team
+* Scrummaster: Jad Aaoun
+* Backend-Lead: Anna Steckel
+* Frontend-Lead: Amen Ali
 
 ## <a name="workscited"></a>Works Cited:
 * **[git revert vs reset](https://medium.com/@halilatilla/git-revert-and-reset-understanding-their-purpose-and-differences-d11a913e288)**: This project was a crash course in github collaboration so we utilized git reset on multiple occasions to get to our last working version.
@@ -58,5 +60,11 @@ Enter brief description here.
 * **[How to Implement Google Places API in Your Application (JS, Express, Node.js)](https://medium.com/swlh/how-to-implement-google-places-api-in-your-application-js-express-node-js-97b16da24835)**: This was a super brief overview of how to implement Google Places API. The research that followed reading this article included a deep rabbit hole of guides that required Typescript translation into Javascript, lots of chatGPT prompts like, "Can you explain _____ concept when implementing Google Maps API?", and many YouTube tutorials. 
 * **[SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON](https://stackoverflow.com/questions/73359274/syntaxerror-unexpected-token-doctype-is-not-valid-json)**: This was just one of many resources we used when getting this error message (which happened far more than we would have liked). 
 * **[Full React Tutorial by Net Ninja](https://www.youtube.com/watch?v=PHaECbrKgs0)**: And other YouTube tutorials refreshing our understanding of React.
-* **[enter name of method/theory/etc](link)**: Description of how this resource was utilized.
-* **[enter name of method/theory/etc](link)**: Description of how this resource was utilized.
+* **[React DOM Components](https://react.dev/reference/react-dom/components)**: This resource was used to understand form components and how to use select in different ways.  
+* **[StackOverflow: Generate options by mapping over array of objects with react-select ](https://stackoverflow.com/questions/55173409/generate-options-by-mapping-over-array-of-objects-with-react-select/55173797#55173797)**: This helped understand how to generate select options by mapping over an array so users can be seen in a dropdown.  
+* **[GeeksforGeeks: Mongoose Populate Method](https://www.geeksforgeeks.org/mongoose-populate-method/)**: This helped give a better understanding on the .populate() method and how to use it to retrieve data in queries. 
+* **[MDN: .toString() Method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/toString)**: This filled learning gaps and helped in understanding how the toString() method works, and how it can be used in different parts of the code to convert values to strings.
+* **[General Assembly Hoot Front-End](https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-hoot-front-end/setup/)**: Helped with initial front end set-up. 
+* **[General Assembly Hoot Back-End](https://pages.git.generalassemb.ly/modular-curriculum-all-courses/express-api-hoot-back-end/create-hoot/)**: Helped with initial back-end set up for routes 
+* **[General Assembly JWT-Auth in React](https://pages.git.generalassemb.ly/modular-curriculum-all-courses/jwt-authentication-in-react/setup/)**: This lecture helped setup user authorization and JWT token based authentication to signup, signin, and signout.
+* **[How To Manage User Roles In Node.js – Web Dev Simplified:](https://www.youtube.com/watch?v=jI4K7L-LI58&ab_channel=WebDevSimplified)**: This video helped to understand how to add roles to different users and control what they have access to.
