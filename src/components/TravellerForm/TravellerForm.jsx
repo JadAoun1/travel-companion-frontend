@@ -3,6 +3,14 @@ import * as userService from "../../services/userService";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 
+// Import micro components and styles
+import { Heading2 } from "../microComponents/Typography"; // Using Heading2 for form title
+import ButtonPrimary from "../microComponents/ButtonPrimary/ButtonPrimary";
+import ButtonSecondary from "../microComponents/ButtonSecondary/ButtonSecondary";
+import Alert from "../microComponents/Alert/Alert";
+import DashboardBox from "../microComponents/DashboardBox/DashboardBox";
+import styles from "./TravellerForm.module.css";
+
 const TravellerForm = ({ trip, fetchTripDetails }) => {
   const { tripId } = useParams();
   const navigate = useNavigate();
@@ -15,20 +23,35 @@ const TravellerForm = ({ trip, fetchTripDetails }) => {
     const fetchUsers = async () => {
       try {
         const fetchedUsers = await userService.index();
-        setUsers(fetchedUsers);
+        // Filter out users already in the trip travellers list
+        const availableUsers = fetchedUsers.filter(user =>
+          !trip?.travellers.some(traveller => traveller.user._id === user._id)
+        );
+        setUsers(availableUsers);
       } catch (error) {
         console.log(error);
       }
     };
-    fetchUsers();
-    fetchTripDetails(tripId);
-  }, [tripId, fetchTripDetails]);
+    // Ensure trip details (including travellers) are fetched first
+    if (tripId) {
+      fetchTripDetails(tripId).then(() => {
+        if (trip) { // Check if trip data is available after fetch
+          fetchUsers();
+        }
+      });
+    } else {
+      // Handle case where tripId is not available, maybe navigate away or show error
+      console.error("Trip ID not found");
+    }
+    // Include trip in dependencies to refetch users when trip details change
+  }, [tripId, fetchTripDetails, trip]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // This check should now remove ability to add same user multiple times.
-    const existingTraveller = trip.travellers.some(
+    // Check if the selected user is already in the trip (double check - client side)
+    // This check might be redundant if the dropdown is filtered correctly, but good safeguard
+    const existingTraveller = trip?.travellers.some(
       (traveller) => traveller.user.username === selectedUsers
     );
     if (existingTraveller) {
@@ -36,60 +59,86 @@ const TravellerForm = ({ trip, fetchTripDetails }) => {
       return;
     }
 
+    // Ensure a user and role are selected
+    if (!selectedUsers || !role) {
+      setMessage("Please select a user and a role.");
+      return;
+    }
+
     try {
-      // Send username instead of userId
       await tripService.addTraveller(tripId, { username: selectedUsers, role });
+      // Navigate back to trip details page after successful add
       navigate(`/trips/${tripId}`);
     } catch (error) {
       console.log(error);
+      setMessage("Failed to add traveller. Please try again."); // Provide user feedback on error
     }
   };
 
   return (
-    <main>
-      <h1>Add a Traveller</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="user">Select User:</label>
-        <select
-          id="user"
-          name="user"
-          value={selectedUsers}
-          onChange={(event) => {
-            setSelectedUsers(event.target.value); 
-            setMessage("");
-          }}
-          required
-        >
-          <option value="">Select a user</option>
-          {users.map((user) => (
-            <option key={user._id} value={user.username}>
-              {user.username}
-            </option>
-          ))}
-        </select>
+    <div className={styles.formContainer}>
+      <DashboardBox className={styles.formBox}>
+        <Heading2>Add a Traveller</Heading2>
+        <form onSubmit={handleSubmit}>
+          {/* User Selection Field */}
+          <div className={styles.fieldGroup}>
+            <label htmlFor="user">Select User:</label>
+            <select
+              id="user"
+              name="user"
+              value={selectedUsers}
+              onChange={(event) => {
+                setSelectedUsers(event.target.value);
+                setMessage(""); // Clear message on new selection
+              }}
+              required
+            >
+              <option value="">-- Select a user --</option>
+              {users.map((user) => (
+                <option key={user._id} value={user.username}>
+                  {user.username}
+                </option>
+              ))}
+            </select>
+          </div>
 
-        <label htmlFor="role">Select Role:</label>
-        <select
-          id="role"
-          name="role"
-          value={role}
-          onChange={(event) => setRole(event.target.value)}
-          required
-        >
-          <option value="">Select a role</option>
-          <option value="Owner">Owner</option>
-          <option value="Editor">Editor</option>np
-          <option value="Viewer">Viewer</option>
-        </select>
+          {/* Role Selection Field */}
+          <div className={styles.fieldGroup}>
+            <label htmlFor="role">Select Role:</label>
+            <select
+              id="role"
+              name="role"
+              value={role}
+              onChange={(event) => {
+                setRole(event.target.value)
+                setMessage(""); // Clear message on new selection
+              }}
+              required
+            >
+              <option value="">-- Select a role --</option>
+              <option value="Owner">Owner</option>
+              <option value="Editor">Editor</option>
+              <option value="Viewer">Viewer</option>
+            </select>
+          </div>
 
-        {message && <p>{message}</p>}
+          {/* Display Message/Alert */}
+          {message && (
+            <Alert severity="warning" style={{ marginTop: '1rem' }}>
+              {message}
+            </Alert>
+          )}
 
-        <button type="submit">Add Traveller</button>
-        <button type="button" onClick={() => navigate(`/trips/${tripId}`)}>
-          Cancel
-        </button>
-      </form>
-    </main>
+          {/* Button Group */}
+          <div className={styles.buttonGroup}>
+            <ButtonSecondary type="button" onClick={() => navigate(`/trips/${tripId}`)}>
+              Cancel
+            </ButtonSecondary>
+            <ButtonPrimary type="submit">Add Traveller</ButtonPrimary>
+          </div>
+        </form>
+      </DashboardBox>
+    </div>
   );
 };
 
