@@ -4,14 +4,17 @@ import NavLink from "../microComponents/NavLink/NavLink";
 import ButtonSecondary from "../microComponents/ButtonSecondary/ButtonSecondary";
 import Divider from "../microComponents/Divider/Divider";
 import styles from './NavBar.module.css';
+import { useNavigate } from "react-router";
 
 const NavBar = () => {
   const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleSignOut = () => {
     localStorage.removeItem("token");
     setUser(null);
-  };
+    navigate("/"); 
+  }
 
   return (
     <header className={styles.navbarContainer}>
