@@ -78,7 +78,7 @@ const TravellerForm = ({ trip, fetchTripDetails }) => {
         >
           <option value="">Select a role</option>
           <option value="Owner">Owner</option>
-          <option value="Editor">Editor</option>np
+          <option value="Editor">Editor</option>
           <option value="Viewer">Viewer</option>
         </select>
 
