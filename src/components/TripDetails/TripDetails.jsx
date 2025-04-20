@@ -48,7 +48,7 @@ const TripDetails = ({ trip, fetchTripDetails }) => {
   // Adding so only owner can delete the complete trip. 
   const isOwner = trip.travellers.some(
     (traveller) =>
-      traveller.role === "Owner" && traveller.user._id === user._id
+      traveller.role === "Owner" && user && traveller.user._id === user._id // SignOut functionality was not working in deployed server and giving error in local server because user was not being passed in as a prop to the NavBar component, adding user adds a null check before accessing traveller.user._id and allowing signout to function without error. 
   );
 
 
