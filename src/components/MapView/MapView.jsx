@@ -142,7 +142,6 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
                 // Once setAttractions successfully updates, call the function and pass it newAttraction (which prompts the function in DestinationDetails to run again, state updates and React responds by rerendering so the new attraction shows up on the page)
                 if (onAddAttraction) onAddAttraction(newAttraction);
                 setLocation('');
-                setCoordinates(null);
                 setGeocodeData(null);
             }
 
@@ -156,7 +155,6 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
                     await onAddDestination(newDestination)
                 };
                 setLocation('');
-                setCoordinates(null);
                 setGeocodeData(null);
             }
             else {
@@ -191,7 +189,7 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
                                 type='text'
                                 value={location}
                                 onChange={handleLocationChange}
-                                placeholder='Enter city, state'
+                                placeholder='Enter location'
                             />
                             <button onClick={handleSearch}>Search</button>
 
