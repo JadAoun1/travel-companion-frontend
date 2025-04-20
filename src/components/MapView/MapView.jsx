@@ -1,7 +1,7 @@
 // src/components/MapView/MapView.jsx
 
 // imports
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
 import { data, useParams } from 'react-router';
 import * as destinationService from '../../services/destinationService.js';
@@ -28,6 +28,24 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
     const handleLocationChange = (event) => {
         setLocation(event.target.value);
     };
+
+    // Adding so that destination and attraction show pages show marker at the lat and lng
+    useEffect(() => {
+        const fetchLocation = async () => {
+            try {
+                if (attractionId) {
+                    const attraction = await attractionService.showAttraction(tripId, destinationId, attractionId);
+                    setCoordinates(attraction.location);
+                } else if (destinationId) {
+                    const destination = await destinationService.showDestination(tripId, destinationId);
+                    setCoordinates(destination.location);
+                };
+            } catch (err) {
+                console.error('Error fetching location data:', err);
+            };
+        };
+        fetchLocation();
+    }, [tripId, destinationId, attractionId]);
 
     const handleSearch = async () => {
         if (!location) return;
@@ -121,7 +139,6 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
                 // Make sure to pass in newLocation (declared above) so it can be added to the newAttraction
                 const newAttraction = await attractionService.createAttraction(tripId, destinationId, newLocation);
                 setAttractions([...attractions, newAttraction]);
-                console.log("Submitting newLocation to backend:", newLocation);
                 // Once setAttractions successfully updates, call the function and pass it newAttraction (which prompts the function in DestinationDetails to run again, state updates and React responds by rerendering so the new attraction shows up on the page)
                 if (onAddAttraction) onAddAttraction(newAttraction);
                 setLocation('');
@@ -135,7 +152,6 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
                 // Logic here
                 const newDestination = await destinationService.createDestination(tripId, newLocation);
                 setDestinations([...destinations, newDestination]);
-                console.log("Submitting newLocation to backend:", newLocation);
                 if (onAddDestination) {
                     await onAddDestination(newDestination)
                 };
@@ -169,8 +185,6 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
                     <>
                     </>
                 ) : (
-
-
                     <>
                         <div>
                             <input
