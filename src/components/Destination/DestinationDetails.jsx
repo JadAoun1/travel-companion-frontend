@@ -6,74 +6,122 @@ import { useEffect, useState } from 'react';
 import * as destinationService from "../../services/destinationService.js";
 import MapView from '../MapView/MapView.jsx';
 
+// Import micro components and styles
+import {
+    Heading1,
+    Heading2,
+    Paragraph,
+    UnorderedList,
+    ListItem
+} from "../microComponents/Typography";
+import ButtonPrimary from "../microComponents/ButtonPrimary/ButtonPrimary";
+import ButtonSecondary from "../microComponents/ButtonSecondary/ButtonSecondary";
+import ButtonTertiary from "../microComponents/ButtonTertiary/ButtonTertiary";
+import DashboardBox from "../microComponents/DashboardBox/DashboardBox";
+import styles from "./DestinationDetails.module.css";
+
 const DestinationDetails = () => {
     const { tripId, destinationId } = useParams();
     const [destination, setDestination] = useState(null);
+    const [error, setError] = useState(null); // Add error state
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchDestinationDetails = async () => {
-            const destinationData = await destinationService.showDestination(tripId, destinationId);
-            setDestination(destinationData);
+            try {
+                setError(null); // Clear previous errors
+                const destinationData = await destinationService.showDestination(tripId, destinationId);
+                setDestination(destinationData);
+            } catch (err) {
+                console.error("Error fetching destination details:", err);
+                setError("Failed to load destination details.");
+                setDestination(null); // Clear destination data on error
+            }
         };
-        // console.log(destinationId);
-        fetchDestinationDetails();
-    }, [destinationId]);
-
-    if (!destination) {
-        return <div>Looks like you haven't added any destinations yet!</div>
-    };
+        if (tripId && destinationId) {
+            fetchDestinationDetails();
+        }
+    }, [tripId, destinationId]);
 
     const handleDeleteDestination = async () => {
         try {
-            const deletedDestination = await destinationService.deleteDestination(tripId, destinationId);
-            // console.log(deletedDestination);
+            await destinationService.deleteDestination(tripId, destinationId);
             navigate(`/trips/${tripId}`);
-        } catch (error) {
-            console.log(error);
-        };
+        } catch (err) {
+            console.error("Error deleting destination:", err);
+            // Optionally set an error message to display to the user
+            setError("Failed to delete destination.");
+        }
     };
 
-    // Function written to manage update to state when attraction is added; so the new attraction will be shown immediately in UI
-    // See more notes about this in TripDetails.jsx handleAddDestination
     const handleAddAttraction = (newAttraction) => {
-        // Update the list of attractions in setDestination state
         setDestination(prev => ({
-            // Use spread operator to create a copy of the old destination object into a new one called prev
-            ...prev, 
-            // Then overwrite attractions with the copy (prev) and add on the newAttraction
+            ...prev,
             attractions: [...prev.attractions, newAttraction]
         }));
     };
 
+    // Loading State
+    if (!destination && !error) {
+        return <Paragraph>Loading destination details...</Paragraph>;
+    }
+
+    // Error State
+    if (error) {
+        // Consider using an Alert component here if available
+        return <Paragraph>Error: {error}</Paragraph>;
+    }
+
+    // Check if destination is truly loaded (might be null even if no error initially)
+    if (!destination) {
+        return <Paragraph>Destination data not found.</Paragraph>
+    }
+
     return (
-        <>
-            <h1>{destination.name}</h1>
-            <button onClick={() => navigate(`/trips/${tripId}`)}>Back</button>
-            <button onClick={() => handleDeleteDestination()}>Delete Destination</button>
-            <h2>Attractions</h2>
-            <div>
-                <p>Where do you want to travel to?</p>
+        <main className={styles.detailsGrid}>
+            {/* Destination Info and Actions Box */}
+            <DashboardBox className={styles.infoBox}>
+                <Heading1>{destination.name}</Heading1>
+                {/* Add description if available: <Paragraph>{destination.description}</Paragraph> */}
+                <div> {/* Button Group */}
+                    <ButtonSecondary onClick={() => navigate(`/trips/${tripId}`)}>
+                        Back to Trip
+                    </ButtonSecondary>
+                    {/* Add Edit Button if functionality exists */}
+                    {/* <ButtonSecondary onClick={() => navigate(`/trips/${tripId}/destinations/${destinationId}/edit`)}>Edit</ButtonSecondary> */}
+                    <ButtonTertiary onClick={handleDeleteDestination}>
+                        Delete Destination
+                    </ButtonTertiary>
+                </div>
+            </DashboardBox>
 
-                {/* Parent component (DestinationDetails) passes this function down to MapView */}
-                {/* MapView, if you add something, call the function and give it the new thing */}
-                <MapView onAddAttraction={handleAddAttraction}/>
-            </div>
-            <div>
-                <ul>
-                    {destination.attractions.map((attraction, index) => (
-                        // Updating key so that if the order or attractions changes (from deleting or adding), React knows exactly which li is which.
-                        <li key={attraction._id}>
-                            <p>{attraction.name}</p>
-                            {/* need to figure out how to pass attractionId forward onto this page (through props?) */}
-                            <button onClick={() => navigate(`/trips/${tripId}/destinations/${destinationId}/attractions/${attraction._id}`)}>View Attraction</button>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        </>
+            {/* Map View Box */}
+            <DashboardBox className={styles.mapBox}>
+                <Heading2>Add Attractions</Heading2>
+                <Paragraph>Search for places to add to your itinerary for {destination.name}.</Paragraph>
+                <MapView onAddAttraction={handleAddAttraction} />
+            </DashboardBox>
+
+            {/* Attractions List Box */}
+            <DashboardBox className={styles.attractionsBox}>
+                <Heading2>Planned Attractions</Heading2>
+                {destination.attractions && destination.attractions.length > 0 ? (
+                    <UnorderedList>
+                        {destination.attractions.map((attraction) => (
+                            <ListItem key={attraction._id} className={styles.attractionItem}>
+                                <Paragraph>{attraction.name}</Paragraph>
+                                <ButtonPrimary onClick={() => navigate(`/trips/${tripId}/destinations/${destinationId}/attractions/${attraction._id}`)}>
+                                    View Attraction
+                                </ButtonPrimary>
+                            </ListItem>
+                        ))}
+                    </UnorderedList>
+                ) : (
+                    <Paragraph>No attractions added yet for {destination.name}!</Paragraph>
+                )}
+            </DashboardBox>
+        </main>
     );
-
 };
 
 export default DestinationDetails;

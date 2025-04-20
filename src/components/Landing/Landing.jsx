@@ -12,7 +12,7 @@ const Landing = () => {
   return (
     <main className={styles.landingContainer}>
       <Heading1 className={styles.title}>
-        App Title
+        TripLab
       </Heading1>
       <Heading2 className={styles.subtitle}>
         Seamless planning for unforgettable escapes.
