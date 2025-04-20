@@ -1,0 +1,13 @@
+.dashboardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust minmax as needed */
+  gap: 1rem; /* Adjust gap as needed */
+  padding: 1rem; /* Add padding around the grid */
+}
+
+.mapBox {
+  /* Allow the map box to span 2 columns if space allows */
+  grid-column: span 2;
+}
+
+/* Add any additional styles for TripDetails here */ 

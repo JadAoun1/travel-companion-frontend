@@ -7,6 +7,14 @@ import { data, useParams } from 'react-router';
 import * as destinationService from '../../services/destinationService.js';
 import * as attractionService from '../../services/attractionService.js';
 
+// Import micro components
+import InputField from '../microComponents/InputField/InputField';
+import ButtonPrimary from '../microComponents/ButtonPrimary/ButtonPrimary';
+import ButtonSecondary from '../microComponents/ButtonSecondary/ButtonSecondary';
+import { Paragraph } from '../microComponents/Typography';
+import Alert from '../microComponents/Alert/Alert';
+import styles from './MapView.module.css'; // Import styles
+
 // Destructuring onAddAttraction from DestinationDetails
 const MapView = ({ onAddAttraction, onAddDestination }) => {
     const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
@@ -175,49 +183,61 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
     };
 
     if (!apiKey) {
-        return <div>Error: API key is missing.</div>
+        // Use Alert for API key error
+        return <Alert severity="error">Error: API key is missing.</Alert>
     }
 
     return (
+        // Wrap everything in a fragment or div if needed, but apply mapContainer style to the Map's parent
         <>
             <APIProvider apiKey={apiKey}>
-                {attractionId ? (
+                {!attractionId && (
                     <>
-                    </>
-                ) : (
-                    <>
-                        <div>
-                            <input
+                        {/* Group search controls */}
+                        <div className={styles.searchControls}>
+                            <InputField
                                 type='text'
+                                label="Location Search"
                                 value={location}
                                 onChange={handleLocationChange}
-                                placeholder='Enter city, state'
+                                placeholder='Enter city, state, or place name'
                             />
-                            <button onClick={handleSearch}>Search</button>
-
-                            {/* Update UI to show results from Places API. This is just a temporary placeholder for now. */}
-                            <p>{geocodeData?.placeDetails.displayName.text}</p>
-
-                            {geocodeData && <p>Found: {geocodeData.formatted_address}</p>}
-
-                            {error && <p>{error}</p>}
+                            <ButtonSecondary onClick={handleSearch}>Search</ButtonSecondary>
                         </div>
-                        <div>
-                            <button onClick={handleAdd}>Add</button>
-                        </div>
+
+                        {/* Display feedback using Typography and Alert */}
+                        {geocodeData?.placeDetails.displayName.text && (
+                            <Paragraph>Place: {geocodeData.placeDetails.displayName.text}</Paragraph>
+                        )}
+                        {geocodeData?.formatted_address && (
+                            <Paragraph>Address: {geocodeData.formatted_address}</Paragraph>
+                        )}
+                        {error && <Alert severity="error">{error}</Alert>}
+
+                        {/* Group add controls - only show if coordinates are found */}
+                        {coordinates && (
+                            <div className={styles.addControls}>
+                                <ButtonPrimary onClick={handleAdd}>Add Location</ButtonPrimary>
+                            </div>
+                        )}
                     </>
                 )}
-                <Map
-                    defaultZoom={10}
-                    center={coordinates || { lat: -33.860664, lng: 151.208138 }}
-                    // Change view of map changes. 
-                    onCameraChanged={handleCameraChange}
-                    style={{ width: '50%', height: '400px' }}
-                >
-                    {/* If there are coordinates, set Marker position to those coordinates */}
-                    {coordinates && <Marker position={coordinates} />}
-                </Map>
-
+                {/* Apply map container style here */}
+                <div className={styles.mapContainer}>
+                    <Map
+                        defaultZoom={10}
+                        center={coordinates || { lat: -33.860664, lng: 151.208138 }}
+                        onCameraChanged={handleCameraChange}
+                        // Remove inline style
+                        // style={{ width: '50%', height: '400px' }}
+                        mapId={'YOUR_MAP_ID'} // Recommended by @vis.gl/react-google-maps for styling/control options
+                        // Ensure interaction controls are enabled (usually default)
+                        gestureHandling={'greedy'} // Ensures map handles gestures
+                        disableDefaultUI={false} // Ensure default controls (zoom, fullscreen) are shown
+                    >
+                        {coordinates && <Marker position={coordinates} />}
+                    </Map>
+                </div>
             </APIProvider>
         </>
     );
