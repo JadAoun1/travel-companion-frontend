@@ -2,10 +2,20 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import * as tripService from "../../services/tripService";
 
+// Import Micro Components
+import InputField from "../microComponents/InputField/InputField";
+import TextAreaField from "../microComponents/TextAreaField/TextAreaField"; // Import TextAreaField
+import ButtonPrimary from "../microComponents/ButtonPrimary/ButtonPrimary";
+import ButtonSecondary from "../microComponents/ButtonSecondary/ButtonSecondary"; // Changed from Tertiary
+import { Heading2 } from "../microComponents/Typography";
+
+// Import CSS Module
+import styles from "./TripForm.module.css";
+
 const TripForm = () => {
   const navigate = useNavigate();
   const { tripId } = useParams();
-  //   const [message, setMessage] = useState(""); Not needed for now
+  // const [message, setMessage] = useState(""); // Could add Alert later if needed
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -13,83 +23,87 @@ const TripForm = () => {
 
   useEffect(() => {
     const fetchTripDetails = async () => {
-      const tripData = await tripService.show(tripId);
-      setFormData(tripData);
+      try {
+        const tripData = await tripService.show(tripId);
+        setFormData(tripData);
+      } catch (error) {
+        console.log("Error fetching trip details:", error);
+        // Handle error, e.g., navigate back or show message
+        navigate("/trips"); // Navigate back if trip doesn't exist
+      }
     };
     if (tripId) {
       fetchTripDetails();
     }
+    // Reset form on unmount or tripId change
     return () => setFormData({ title: "", description: "" });
-  }, [tripId]);
+  }, [tripId, navigate]);
 
   const handleChange = (event) => {
-    // setMessage("");
-    setFormData({ ...formData, [event.target.name]: event.target.value });
+    // Assuming InputField/TextAreaField pass name/value in event or event.target
+    const { name, value } = event.target ? event.target : event;
+    setFormData({ ...formData, [name]: value });
   };
-
-  //   const handleSubmit = async (event) => {
-  //     event.preventDefault();
-  //     try {
-  //       await tripService.create(formData);
-  //       setMessage("Trip created successfully!");
-  //       navigate("/trips");
-  //     } catch (error) {
-  //       console.log(error);
-  //       setMessage("Error creating trip. Please try again.");
-  //     }
-  //   };
-
-  //   const handleUpdateTrip = async (tripId, TripFormData) => {
-  //     const updatedTrip = await tripService.update(tripId, TripFormData);
-  //     setTrip(
-  //       tripService.map((trip) => (trip._id === tripId ? updatedTrip : trip))
-  //     );
-  //     navigate(`/trips/${tripId}`);
-  //   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       if (tripId) {
         await tripService.update(tripId, formData);
-        //   setMessage("Trip updated successfully!");
         navigate(`/trips/${tripId}`);
       } else {
-        await tripService.create(formData);
-        //   setMessage("Trip created successfully!");
-        navigate("/trips");
+        const newTrip = await tripService.create(formData);
+        // Navigate to the new trip's page or dashboard
+        navigate(`/trips/${newTrip._id}`); // Example: Navigate to the new trip detail
+        // navigate("/trips"); // Or back to dashboard
       }
     } catch (error) {
-      console.log(error);
+      console.log("Error submitting trip:", error);
+      // Add user-facing error handling here (e.g., set message state and show Alert)
     }
   };
 
-  return (
-    <main>
-      <h1>{tripId ? `Edit ${formData.title}` : "Create a New Trip"}</h1>
+  // Basic validation for submit button
+  const isFormInvalid = () => {
+    return !(formData.title && formData.description);
+  };
 
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="title">Title:</label>
-        <input
+  return (
+    <main className={styles.pageContainer}>
+      <form className={styles.formContainer} onSubmit={handleSubmit}>
+        <Heading2 className={styles.formHeader}>
+          {tripId ? `Edit ${formData.title || 'Trip'}` : "Create a New Trip"}
+        </Heading2>
+
+        {/* Could add Alert component here for messages */}
+
+        <InputField
+          label="Title"
           type="text"
           name="title"
           id="title"
           value={formData.title}
           onChange={handleChange}
+          required
         />
 
-        <label htmlFor="description">Description:</label>
-        <textarea
+        <TextAreaField
+          label="Description"
           name="description"
           id="description"
           value={formData.description}
           onChange={handleChange}
-        ></textarea>
+          required
+          rows={6} // Example: Set number of rows
+        />
 
-        <button type="submit">Submit</button>
-        <button type="button" onClick={() => navigate("/trips")}>
-          Cancel
-        </button>
+        <div className={styles.buttonGroup}>
+          {/* Changed ButtonTertiary to ButtonSecondary */}
+          <ButtonSecondary type="button" onClick={() => navigate(tripId ? `/trips/${tripId}` : '/trips')}>Cancel</ButtonSecondary>
+          <ButtonPrimary type="submit" disabled={isFormInvalid()}>
+            {tripId ? "Update Trip" : "Create Trip"}
+          </ButtonPrimary>
+        </div>
       </form>
     </main>
   );

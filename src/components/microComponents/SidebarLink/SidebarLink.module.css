@@ -3,67 +3,77 @@
     display: flex;
     align-items: center;
     padding: var(--space-sm) var(--space-md);
-    margin-bottom: var(--space-xs);
-    /* Spacing between links */
+    margin-bottom: var(--space-sm);
+    position: relative;
+    border: var(--border-width-medium) solid var(--color-black);
     border-radius: var(--border-radius-sharp);
-    border-left: var(--border-width-thick) solid transparent;
-    /* Reserve space for active border */
-    margin-left: calc(var(--border-width-thick) * -1);
-    /* Offset */
     cursor: pointer;
 
     /* Color & Background */
-    background-color: transparent;
     color: var(--color-text-primary);
+    background-color: var(--color-surface);
 
     /* Typography & Content Alignment */
     font-family: var(--font-family-primary);
     font-size: var(--font-size-md);
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-black);
     text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+
+    /* Brutalist Shadow */
+    box-shadow: var(--box-shadow-hard);
 
     /* Transitions */
     transition:
-        color var(--transition-duration-fast) var(--transition-timing-function),
-        background-color var(--transition-duration-fast) var(--transition-timing-function),
-        border-color var(--transition-duration-fast) var(--transition-timing-function);
+        transform var(--transition-duration-fast) var(--transition-timing-function),
+        box-shadow var(--transition-duration-fast) var(--transition-timing-function);
 }
 
 .icon {
     flex-shrink: 0;
-    /* Prevent icon from shrinking */
     margin-right: var(--space-md);
-    /* Icon color will inherit from .sidebarLink color */
+    color: var(--color-black);
 }
 
 .text {
     flex-grow: 1;
-    /* Allow text to take remaining space */
 }
 
 .sidebarLink:hover {
-    color: var(--color-accent);
-    background-color: var(--color-gray-light);
+    color: var(--color-text-primary);
+    background-color: var(--color-surface);
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 var(--color-black);
 }
 
 .sidebarLink:focus,
 .sidebarLink:focus-visible {
     outline: none;
-    color: var(--color-accent);
-    background-color: var(--color-gray-light);
-    /* Optional: Add stronger focus outline if needed */
-    /* box-shadow: inset 0 0 0 2px var(--color-accent); */
+    color: var(--color-text-primary);
+    background-color: var(--color-surface);
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 var(--color-black);
 }
 
-/* Active state (expects an 'active' class) */
+.sidebarLink:active {
+    transform: translate(1px, 1px);
+    box-shadow: 2px 2px 0 var(--color-black);
+}
+
+/* Active state */
 .sidebarLink.active {
-    color: var(--color-accent);
-    background-color: transparent;
-    /* Or maybe a different background like --color-primary-light */
-    border-left-color: var(--color-accent);
+    color: var(--color-black);
+    background-color: var(--color-accent);
+    border-color: var(--color-black);
+    box-shadow: 4px 4px 0 var(--color-black);
 }
 
-/* Adjust icon color specifically for active state if needed */
 .sidebarLink.active .icon {
-    /* Color is already set to accent via parent .active rule, but could override */
+    color: var(--color-black);
+}
+
+.sidebarLink.active:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--color-black);
 }

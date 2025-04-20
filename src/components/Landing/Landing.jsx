@@ -1,27 +1,29 @@
 // Landing Page Component
 import React from "react";
 import { useNavigate } from "react-router";
+import ButtonPrimary from "../microComponents/ButtonPrimary/ButtonPrimary";
+// Import specific typography components from the directory's index.js
+import { Heading1, Heading2, Strong } from "../microComponents/Typography";
+import styles from "./Landing.module.css";
 
 const Landing = () => {
   const navigate = useNavigate();
 
   return (
-    <main>
-      <h1>TripLab</h1>
-      {/* <h2>Plan Your Next Adventure with Ease</h2> */}
-      {/* <h2>Discover, Plan, and Share Your Adventures</h2> */}
-      {/* <h2>Plan trips, Make memories, Stay connected! </h2> */}
-      <h2>Seamless planning for unforgettable escapes. </h2>
-
-      <p>
+    <main className={styles.landingContainer}>
+      <Heading1 className={styles.title}>
+        TripLab
+      </Heading1>
+      <Heading2 className={styles.subtitle}>
+        Seamless planning for unforgettable escapes.
+      </Heading2>
+      <Strong className={styles.description}>
         Whether you're planning a solo trip or a family vacation, our platform
         is here to help you every step of the way. From finding the perfect
         destination to sharing your memories, we make travel planning easy and
         enjoyable.
-      </p>
-
-      <button onClick={() => navigate("/sign-up")}>Sign Up</button>
-      <button onClick={() => navigate("/sign-in")}>Sign In</button>
+      </Strong>
+      <ButtonPrimary onClick={() => navigate("/sign-up")}>Get Started</ButtonPrimary>
     </main>
   );
 };

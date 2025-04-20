@@ -4,11 +4,16 @@
     align-items: flex-start;
     padding: var(--space-md);
     margin-bottom: var(--space-lg);
-    border: var(--border-width-medium) solid transparent;
+    border: var(--border-width-thick) solid var(--color-black);
     border-radius: var(--border-radius-sharp);
     font-family: var(--font-family-primary);
     font-size: var(--font-size-sm);
     line-height: var(--line-height-base);
+    font-weight: var(--font-weight-medium);
+    position: relative;
+    box-shadow: var(--box-shadow-hard);
+    margin-left: 4px;
+    margin-top: 4px;
 }
 
 .mainContent {
@@ -21,7 +26,7 @@
     flex-shrink: 0;
     margin-right: var(--space-md);
     margin-top: 2px;
-    /* Slight adjustment for alignment */
+    font-weight: var(--font-weight-black);
 }
 
 .textContainer {
@@ -32,57 +37,78 @@
     display: block;
     margin-bottom: var(--space-xs);
     font-size: var(--font-size-md);
+    font-weight: var(--font-weight-black);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
 }
 
 .message {
-    /* Specific message styling if needed */
+    font-weight: var(--font-weight-medium);
 }
 
 .closeButton {
-    flex-shrink: 0;
-    background: none;
-    border: none;
-    padding: 0;
+    width: 24px;
+    height: 24px;
+    background: var(--color-surface);
+    border: var(--border-width-medium) solid var(--color-black);
+    border-radius: var(--border-radius-sharp);
     margin: 0;
     margin-left: var(--space-md);
     cursor: pointer;
-    color: inherit;
-    /* Inherit color from parent */
-    opacity: 0.7;
-    transition: opacity var(--transition-duration-fast) var(--transition-timing-function);
+    color: var(--color-black);
+    line-height: 1;
+    flex-shrink: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--box-shadow-hard);
+    transition: transform var(--transition-duration-fast) var(--transition-timing-function),
+        box-shadow var(--transition-duration-fast) var(--transition-timing-function);
 }
 
 .closeButton:hover,
 .closeButton:focus {
-    opacity: 1;
     outline: none;
+    transform: translate(-1px, -1px);
+    box-shadow: 2px 2px 0 var(--color-black);
+}
+
+.closeButton:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 var(--color-black);
 }
 
 /* Type specific styles */
 .alert-error {
     background-color: var(--color-error-background);
-    border-color: var(--color-error);
-    color: var(--color-error);
+    border-color: var(--color-black);
+    color: var(--color-black);
+    box-shadow: 6px 6px 0 var(--color-error);
 }
 
 .alert-success {
     background-color: var(--color-success-background);
-    border-color: var(--color-success);
-    color: var(--color-success);
+    border-color: var(--color-black);
+    color: var(--color-black);
+    box-shadow: 6px 6px 0 var(--color-success);
 }
 
 .alert-warning {
     background-color: var(--color-warning-background);
-    border-color: var(--color-warning);
-    color: var(--color-warning);
+    border-color: var(--color-black);
+    color: var(--color-black);
+    box-shadow: 6px 6px 0 var(--color-warning);
 }
 
 .alert-info {
     background-color: var(--color-info-background);
-    border-color: var(--color-info);
-    color: var(--color-info);
+    border-color: var(--color-black);
+    color: var(--color-black);
+    box-shadow: 6px 6px 0 var(--color-info);
 }
 
-/* Override close button color for better contrast if needed */
+/* Remove specific white text overrides for close button */
+/* Close button color will now inherit from the main color */
 /* .alert-error .closeButton { color: var(--color-error); } */
 /* etc. */

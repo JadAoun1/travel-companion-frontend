@@ -2,45 +2,50 @@
     /* Reset Button Defaults */
     background: none;
     border: none;
-    padding: 0;
+    padding: var(--space-xs) var(--space-sm);
     margin: 0;
     cursor: pointer;
+    position: relative;
 
     /* Color */
     color: var(--color-accent);
-    /* Use accent color like a link */
 
     /* Typography */
     font-family: var(--font-family-primary);
     font-size: var(--font-size-sm);
-    /* Slightly smaller maybe */
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-black);
     text-decoration: none;
-    /* No underline by default */
     text-align: left;
+    letter-spacing: var(--letter-spacing-wide);
+    text-transform: uppercase;
+
+    /* Brutalist Border Bottom Only */
+    border-bottom: var(--border-width-medium) solid var(--color-black);
 
     /* Transitions */
     transition:
-        color var(--transition-duration-fast) var(--transition-timing-function),
-        text-decoration var(--transition-duration-fast) var(--transition-timing-function);
+        transform var(--transition-duration-fast) var(--transition-timing-function),
+        color var(--transition-duration-fast) var(--transition-timing-function);
 }
 
 .button:hover,
 .button:focus,
 .button:focus-visible {
     outline: none;
-    color: var(--color-secondary);
-    /* Darken text slightly */
-    text-decoration: underline;
+    color: var(--color-accent);
+    border-bottom: var(--border-width-thick) solid var(--color-black);
+    transform: translateY(-2px);
 }
 
 .button:active {
-    color: var(--color-black);
-    text-decoration: underline;
+    color: var(--color-accent);
+    border-bottom: var(--border-width-thick) solid var(--color-black);
+    transform: translateY(1px);
 }
 
 .button:disabled {
     color: var(--color-gray-medium);
     cursor: not-allowed;
-    text-decoration: none;
+    border-bottom: var(--border-width-medium) solid var(--color-gray-medium);
+    transform: none;
 }

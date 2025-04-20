@@ -1,9 +1,12 @@
-import { Link } from "react-router";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
+import NavLink from "../microComponents/NavLink/NavLink";
+import ButtonSecondary from "../microComponents/ButtonSecondary/ButtonSecondary";
+import Divider from "../microComponents/Divider/Divider";
+import styles from './NavBar.module.css';
 
 const NavBar = () => {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   const handleSignOut = () => {
     localStorage.removeItem("token");
@@ -11,32 +14,31 @@ const NavBar = () => {
   };
 
   return (
-    <nav>
-      {user ? (
-        <ul>
-          <li>
-            <Link to="/">Dashboard</Link>
-          </li>
-          <li>
-            <Link to="/" onClick={handleSignOut}>
-              Sign Out
-            </Link>
-          </li>
-        </ul>
-      ) : (
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/sign-up">Sign Up</Link>
-          </li>
-          <li>
-            <Link to="/sign-in">Sign In</Link>
-          </li>
-        </ul>
-      )}
-    </nav>
+    <header className={styles.navbarContainer}>
+      <div className={styles.contentWrapper}>
+        <div className={styles.navLinks}>
+          {user ? (
+            <NavLink to="/">Dashboard</NavLink>
+          ) : (
+            <NavLink to="/">Home</NavLink>
+          )}
+        </div>
+
+        <div className={styles.userActions}>
+          {user ? (
+            <>
+              <ButtonSecondary onClick={handleSignOut}>Sign Out</ButtonSecondary>
+            </>
+          ) : (
+            <>
+              <NavLink to="/sign-up">Sign Up</NavLink>
+              <NavLink to="/sign-in">Sign In</NavLink>
+            </>
+          )}
+        </div>
+      </div>
+      <Divider />
+    </header>
   );
 };
 

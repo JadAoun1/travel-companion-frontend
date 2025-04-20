@@ -1,0 +1,39 @@
+.formContainer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: calc(100vh - 80px); /* Adjust based on actual header height */
+  padding: 5rem 1rem 1rem 1rem; /* Increased top padding */
+}
+
+.formBox {
+  width: 100%;
+  max-width: 450px; /* Or adjust as needed */
+  /* Assuming DashboardBox provides internal padding/styling */
+}
+
+.fieldGroup {
+  margin-bottom: 1rem; /* Space between form fields */
+}
+
+.fieldGroup label {
+  display: block;
+  margin-bottom: 0.25rem; /* Space between label and select */
+  /* Add font styles from Typography if needed */
+  font-weight: 500; 
+}
+
+.fieldGroup select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc; /* Example border */
+  border-radius: 4px; /* Example border radius */
+  /* Inherit font styles or apply specific ones */
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  justify-content: flex-end;
+} 

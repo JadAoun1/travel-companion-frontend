@@ -2,44 +2,61 @@
     /* Layout & Box Model */
     display: inline-block;
     padding: var(--space-sm) var(--space-md);
-    border-bottom: var(--border-width-thick) solid transparent;
-    /* Reserve space for active border */
-    margin-bottom: calc(var(--border-width-thick) * -1);
-    /* Offset the transparent border space */
+    border: var(--border-width-medium) solid var(--color-black);
+    border-radius: var(--border-radius-sharp);
+    margin: 0 var(--space-xs) var(--space-xs) 0;
+    position: relative;
     cursor: pointer;
 
     /* Color & Background */
-    background-color: transparent;
+    background-color: var(--color-surface);
     color: var(--color-text-primary);
 
     /* Typography */
     font-family: var(--font-family-primary);
     font-size: var(--font-size-md);
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-black);
     text-transform: uppercase;
     text-decoration: none;
     letter-spacing: var(--letter-spacing-wide);
 
+    /* Brutalist Shadow */
+    box-shadow: var(--box-shadow-hard);
+
     /* Transitions */
     transition:
-        color var(--transition-duration-fast) var(--transition-timing-function),
-        border-color var(--transition-duration-fast) var(--transition-timing-function);
+        transform var(--transition-duration-fast) var(--transition-timing-function),
+        box-shadow var(--transition-duration-fast) var(--transition-timing-function);
 }
 
 .navLink:hover {
-    color: var(--color-accent);
+    color: var(--color-text-primary);
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 var(--color-black);
 }
 
 .navLink:focus,
 .navLink:focus-visible {
     outline: none;
-    color: var(--color-accent);
-    /* Optional: Add focus outline if needed */
-    /* box-shadow: 0 0 0 2px var(--color-accent); */
+    color: var(--color-text-primary);
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 var(--color-black);
 }
 
-/* Active state (expects an 'active' class to be added, e.g., by React Router) */
+.navLink:active {
+    transform: translate(1px, 1px);
+    box-shadow: 2px 2px 0 var(--color-black);
+}
+
+/* Active state */
 .navLink.active {
-    color: var(--color-accent);
-    border-bottom-color: var(--color-accent);
+    color: var(--color-black);
+    background-color: var(--color-accent);
+    border-color: var(--color-black);
+    box-shadow: 4px 4px 0 var(--color-black);
+}
+
+.navLink.active:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--color-black);
 }

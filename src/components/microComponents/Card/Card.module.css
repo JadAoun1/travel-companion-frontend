@@ -1,21 +1,40 @@
 .card {
-    /* Box Model */
-    padding: var(--space-lg);
-    /* Generous internal padding */
-    border: var(--border-width-medium) solid var(--color-border);
-    /* Use medium border width and default border color */
-    border-radius: var(--border-radius-sharp);
-    /* Sharp corners */
+  /* Box Model */
+  padding: var(--space-lg);
+  /* Generous internal padding */
+  border: var(--border-width-thick) solid var(--color-black);
+  /* Use thick border */
+  border-radius: var(--border-radius-sharp);
+  /* Sharp corners */
+  position: relative;
+  margin: 4px 0 var(--space-lg) 0;
 
-    /* Color & Background */
-    background-color: var(--color-surface);
-    /* Use surface color, distinct from main bg if needed */
+  /* Color & Background */
+  background-color: var(--color-surface);
+  /* Use surface color, distinct from main bg if needed */
 
-    /* Ensure no shadow */
-    box-shadow: var(--box-shadow-none);
+  /* Brutalist Shadow */
+  box-shadow: var(--box-shadow-hard);
 
-    /* Optional: Add margin for spacing between cards */
-    margin-bottom: var(--space-lg);
+  /* Transitions */
+  transition:
+    transform var(--transition-duration-fast) var(--transition-timing-function),
+    box-shadow var(--transition-duration-fast) var(--transition-timing-function);
+}
+
+.card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 8px 8px 0 var(--color-black);
+}
+
+/* Interactive card style for clickable cards */
+.interactive {
+  cursor: pointer;
+}
+
+.interactive:active {
+  transform: translate(2px, 2px);
+  box-shadow: 3px 3px 0 var(--color-black);
 }
 
 /* Example modifier for a card with a different background or border */

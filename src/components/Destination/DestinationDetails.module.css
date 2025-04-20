@@ -1,0 +1,26 @@
+.detailsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.infoBox {
+  /* Style for the main info/actions box if needed */
+}
+
+.mapBox {
+  grid-column: span 2; /* Allow map to span multiple columns */
+}
+
+.attractionsBox {
+  /* Style for the attractions list box if needed */
+}
+
+/* Styles for items within the attractions list */
+.attractionItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0; /* Add some vertical padding */
+} 

@@ -1,5 +1,6 @@
 import React from 'react';
 import * as FeatherIcons from 'react-icons/fi';
+import styles from './Icon.module.css';
 
 const Icon = ({
     name, // The name of the Feather icon (e.g., 'FiCamera', 'FiUser')
@@ -7,11 +8,12 @@ const Icon = ({
     color = 'var(--color-text-primary)', // Default color using CSS variable
     className = '',
     style = {},
+    variant = '', // '', 'bordered', or 'background'
+    interactive = false, // Whether the icon is interactive (clickable)
+    sizeClass = 'md', // 'sm', 'md', or 'lg'
     ...props
 }) => {
-
     // Find the icon component from the FeatherIcons object
-    // Ensure the name matches the export format (e.g., 'FiCamera')
     const IconComponent = FeatherIcons[name];
 
     if (!IconComponent) {
@@ -27,14 +29,25 @@ const Icon = ({
         ...style,
     };
 
+    // Combine class names based on props
+    const containerClassNames = [
+        styles.iconContainer,
+        variant && styles[variant],
+        interactive && styles.interactive,
+        sizeClass && styles[`size-${sizeClass}`],
+        className
+    ].filter(Boolean).join(' ');
+
     return (
-        <IconComponent
-            size={size}
-            color={color}
-            className={className}
-            style={combinedStyle}
-            {...props}
-        />
+        <span className={containerClassNames}>
+            <IconComponent
+                size={size}
+                color={color}
+                className={styles.icon}
+                style={combinedStyle}
+                {...props}
+            />
+        </span>
     );
 };
 

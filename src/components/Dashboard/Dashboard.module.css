@@ -1,0 +1,97 @@
+/* Remove previous styles or comment them out */
+
+.dashboardGrid {
+    display: grid;
+    /* Define grid columns - example: 2 main columns */
+    grid-template-columns: repeat(2, 1fr);
+    /* Define grid rows - let them size automatically */
+    grid-auto-rows: minmax(200px, auto);
+    /* Min height for rows */
+    gap: var(--space-xl, 2rem);
+    /* Gap between boxes */
+    padding: var(--space-xl, 2rem);
+    min-height: calc(100vh - var(--navbar-height, 4rem));
+    box-sizing: border-box;
+}
+
+/* My Trips container to handle the title bar and dashboard box */
+.myTripsContainer {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Title bar that appears above the dashboard box */
+.titleBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-md, 1rem);
+}
+
+.titleText {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-bold, 700);
+    text-transform: uppercase;
+}
+
+/* My Trips dashboard box */
+.myTrips {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Current Trip takes the entire right side */
+.currentTrip {
+    grid-column: 2 / 3;
+    grid-row: 1 / 3;
+}
+
+/* Welcome message inside My Trips */
+.welcomeMessage {
+    margin-bottom: var(--space-md, 1rem);
+    font-weight: 500;
+}
+
+/* Style for the list of trips inside the My Trips box */
+.tripListInsideBox {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    /* Use flex column for list items */
+    flex-direction: column;
+    gap: var(--space-md, 1rem);
+}
+
+.tripListItem {
+    /* Style for each trip item, maybe using Card? Or simpler divs */
+    padding: var(--space-sm);
+    border: 1px solid var(--color-gray-light);
+    border-radius: var(--border-radius-slight);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tripListItemContent {
+    /* For title/description */
+}
+
+.tripListItemActions {
+    /* For the view button */
+}
+
+.placeholderContent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--color-text-secondary);
+    font-style: italic;
+}

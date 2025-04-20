@@ -23,7 +23,14 @@
     overflow: hidden;
     /* Prevent content breaking out */
     /* Remove margin added by Card default */
-    margin-bottom: 0;
+    margin: 0;
+    background-color: var(--color-surface);
+    border: var(--border-width-thick) solid var(--color-black);
+    border-radius: var(--border-radius-sharp);
+    padding: var(--space-lg);
+    position: relative;
+    box-shadow: 12px 12px 0 var(--color-black);
+    transform: translate(-6px, -6px);
 }
 
 .header {
@@ -31,7 +38,7 @@
     justify-content: space-between;
     align-items: center;
     padding-bottom: var(--space-md);
-    border-bottom: var(--border-width-medium) solid var(--color-border);
+    border-bottom: var(--border-width-medium) solid var(--color-black);
     flex-shrink: 0;
     /* Prevent header from shrinking */
 }
@@ -40,12 +47,17 @@
     margin-bottom: 0;
     /* Remove default heading margin */
     flex-grow: 1;
+    font-weight: var(--font-weight-black);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
 }
 
 .closeButton {
-    background: none;
-    border: none;
-    padding: 0;
+    width: 32px;
+    height: 32px;
+    background: var(--color-surface);
+    border: var(--border-width-medium) solid var(--color-black);
+    border-radius: var(--border-radius-sharp);
     margin: 0;
     margin-left: var(--space-md);
     cursor: pointer;
@@ -53,12 +65,26 @@
     line-height: 1;
     /* Align icon better */
     flex-shrink: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--box-shadow-hard);
+    transition: transform var(--transition-duration-fast) var(--transition-timing-function),
+        box-shadow var(--transition-duration-fast) var(--transition-timing-function);
 }
 
 .closeButton:hover,
 .closeButton:focus {
-    color: var(--color-accent);
+    color: var(--color-text-primary);
     outline: none;
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 var(--color-black);
+}
+
+.closeButton:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 var(--color-black);
 }
 
 .body {
@@ -71,7 +97,7 @@
 
 .footer {
     padding-top: var(--space-md);
-    border-top: var(--border-width-medium) solid var(--color-border);
+    border-top: var(--border-width-medium) solid var(--color-black);
     display: flex;
     justify-content: flex-end;
     /* Align buttons to the right */

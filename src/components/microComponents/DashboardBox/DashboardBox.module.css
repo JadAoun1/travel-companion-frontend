@@ -1,21 +1,67 @@
 .dashboardBox {
-    /* Inherits border, padding, background etc. from Card */
+    /* Box Model */
     display: flex;
-    /* Arrange title and content vertically */
     flex-direction: column;
-    height: 100%;
-    /* Allow box to fill grid cell height if needed */
+    /* height: 100%; */
+    /* Remove fixed height */
+    padding: var(--space-md);
+    /* Reduced padding */
+    border: var(--border-width-thick) solid var(--color-black);
+    border-radius: var(--border-radius-sharp);
+    position: relative;
+    /* margin: 4px 0 var(--space-lg) 0; */
+    /* Removed top/bottom margin if any */
+    margin: 0;
+
+    /* Color & Background */
+    background-color: var(--color-surface);
+
+    /* Brutalist Shadow */
+    box-shadow: var(--box-shadow-hard);
+
+    /* Transitions */
+    transition:
+        /* transform var(--transition-duration-fast) var(--transition-timing-function), */
+        /* Already removed transform */
+        box-shadow var(--transition-duration-fast) var(--transition-timing-function);
+}
+
+.dashboardBox:hover {
+    /* transform: translate(-3px, -3px); */
+    /* Already removed */
+    box-shadow: 8px 8px 0 var(--color-black);
+}
+
+.titleContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-md);
+    flex-shrink: 0;
+    border-bottom: var(--border-width-medium) solid var(--color-black);
+    padding-bottom: var(--space-md);
+    height: 48px; /* Increased height to accommodate the additional padding */
 }
 
 .title {
-    /* Adjust title spacing if needed */
-    margin-bottom: var(--space-md);
-    /* Space below the title */
+    margin-bottom: 0;
+    /* Removed margin since titleContainer handles spacing */
     flex-shrink: 0;
-    /* Prevent title from shrinking */
+    font-weight: var(--font-weight-black);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    line-height: 1.2; /* Consistent line height */
+}
+
+.rightElement {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
 }
 
 .content {
-    /* Allow content to grow if needed */
     flex-grow: 1;
+    overflow: auto;
+    padding-top: var(--space-md);
+    /* Added consistent top padding */
 }
