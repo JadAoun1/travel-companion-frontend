@@ -52,6 +52,7 @@ const TravellerForm = ({ trip, fetchTripDetails }) => {
         <label htmlFor="user">Select User:</label>
         <select
           id="user"
+          name="user"
           value={selectedUsers}
           onChange={(event) => {
             setSelectedUsers(event.target.value); 
@@ -70,13 +71,14 @@ const TravellerForm = ({ trip, fetchTripDetails }) => {
         <label htmlFor="role">Select Role:</label>
         <select
           id="role"
+          name="role"
           value={role}
           onChange={(event) => setRole(event.target.value)}
           required
         >
           <option value="">Select a role</option>
           <option value="Owner">Owner</option>
-          <option value="Editor">Editor</option>
+          <option value="Editor">Editor</option>np
           <option value="Viewer">Viewer</option>
         </select>
 
