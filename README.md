@@ -4,11 +4,7 @@
 <img src="" alt="TripLab Home Page"/>
 
 ## Description
-
-<!-- Include a description of your app and its functionality. Background info about the app and why you built it is a nice touch. -->
-TripLab is a collaborative travel planning web application that helps users plan and organize their trips with ease. 
-
-
+TripLab is a collaborative travel planning platform designed to make organizing your next adventure simple and seamless. Whether you're mapping out a weekend getaway or a bucket-list journey with friends, TripLab brings your plans together in one easy-to-use space.
 
 ## Quick Links
 * **Project planning** can be found [here](https://trello.com/b/epUCcSl0/travel-app).
@@ -37,12 +33,9 @@ TripLab is a collaborative travel planning web application that helps users plan
 * bcrypt
 * dotenv
 
-<!-- List the principal technologies used by your application, for example: JavaScript and any major frameworks or libraries. -->
-
 ## <a name="attributions"></a>Attributions
-* Google Maps API used to search for destinations and attractions. 
-* 
-* 
+* [Google Maps Geocoding API](https://developers.google.com/maps/documentation/geocoding): used to convert addresses or Place IDs to latitude/longitude coordinates, add markers on the map
+* [Google Maps Places (New) API](https://developers.google.com/maps/documentation/places/web-service/op-overview): used to convert geocoding data to place details, including location name ('displayName').
 <!-- This section should include links to any external resources (such as libraries or assets) you used to develop your application that require attribution. You can exclude this section if it does not apply to your application. -->
 
 ## <a name="design"></a>Design
@@ -50,16 +43,20 @@ TripLab is a collaborative travel planning web application that helps users plan
 
 ## <a name="nextsteps"></a>Project Next Steps
 * Replace current dropdown for adding users to a trip with a searchable input field allowing users to search by usernames to easily add others to their trips. 
-* 
-* 
+* Refactor MapView.jsx to lift state so that Google Maps Places (New) API data can be rendered elsewhere.
+* Build out models to incorporate more data within the UI (including, but not limited to user profiles, and destination/attraction details)
+* Incorporate in-app messaging system so users assigned to the same trip can communicate. 
+* Show multiple markers on trip and destination show page maps. 
+* Utilize more capababilities of the Google Maps Places (New) API to allow users to find additional nearby attractions.
 
 ## <a name="author"></a>About The Author
 Enter brief description here. 
 
 ## <a name="workscited"></a>Works Cited:
-* **[enter name of method/theory/etc](link)**: Description of how this resource was utilized.
-* **[enter name of method/theory/etc](link)**: Description of how this resource was utilized.
-* **[enter name of method/theory/etc](link)**: Description of how this resource was utilized.
-* **[enter name of method/theory/etc](link)**: Description of how this resource was utilized.
+* **[git revert vs reset](https://medium.com/@halilatilla/git-revert-and-reset-understanding-their-purpose-and-differences-d11a913e288)**: This project was a crash course in github collaboration so we utilized git reset on multiple occasions to get to our last working version.
+* **[Google API docs](https://developers.google.com/maps)**: Anna learned firsthand just how hard these docs are to navigate (pun intended).
+* **[How to Implement Google Places API in Your Application (JS, Express, Node.js)](https://medium.com/swlh/how-to-implement-google-places-api-in-your-application-js-express-node-js-97b16da24835)**: This was a super brief overview of how to implement Google Places API. The research that followed reading this article included a deep rabbit hole of guides that required Typescript translation into Javascript, lots of chatGPT prompts like, "Can you explain _____ concept when implementing Google Maps API?", and many YouTube tutorials. 
+* **[SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON](https://stackoverflow.com/questions/73359274/syntaxerror-unexpected-token-doctype-is-not-valid-json)**: This was just one of many resources we used when getting this error message (which happened far more than we would have liked). 
+* **[Full React Tutorial by Net Ninja](https://www.youtube.com/watch?v=PHaECbrKgs0)**: And other YouTube tutorials refreshing our understanding of React.
 * **[enter name of method/theory/etc](link)**: Description of how this resource was utilized.
 * **[enter name of method/theory/etc](link)**: Description of how this resource was utilized.
