@@ -46,7 +46,7 @@ const TripDetails = ({ trip, fetchTripDetails, isViewer }) => {
 
   const isOwner = trip.travellers.some(
     (traveller) =>
-      traveller.role === "Owner" && user && traveller.user._id === user._id 
+      traveller.role === "Owner" && user && traveller.user._id === user._id
   );
 
   const handleDeleteTrip = async (tripId) => {
@@ -69,7 +69,7 @@ const TripDetails = ({ trip, fetchTripDetails, isViewer }) => {
 
   return (
     <main className={styles.dashboardGrid}>
-      <DashboardBox>
+      <DashboardBox className={styles.infoBox}>
         <Heading1>{trip.title}</Heading1>
         <Paragraph>{trip.description}</Paragraph>
         <div>
@@ -98,7 +98,7 @@ const TripDetails = ({ trip, fetchTripDetails, isViewer }) => {
         <MapView onAddDestination={handleAddDestination} />
       </DashboardBox>
 
-      <DashboardBox>
+      <DashboardBox className={styles.destinationsBox}>
         <Heading2>Planned Destinations</Heading2>
         {destinations.length > 0 ? (
           <UnorderedList>
@@ -120,12 +120,12 @@ const TripDetails = ({ trip, fetchTripDetails, isViewer }) => {
         )}
       </DashboardBox>
 
-      <DashboardBox>
+      <DashboardBox className={styles.travellersBox}>
         <Heading2>Travellers</Heading2>
         <UnorderedList>
           {trip.travellers.map((traveller) => (
             <ListItem key={traveller.user._id}>
-              <Paragraph>{traveller.user.username}</Paragraph>
+              <Paragraph>{traveller.user.username} ({traveller.role})</Paragraph>
             </ListItem>
           ))}
         </UnorderedList>
