@@ -3,8 +3,7 @@ import * as userService from "../../services/userService";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 
-// Import micro components and styles
-import { Heading2 } from "../microComponents/Typography"; // Using Heading2 for form title
+import { Heading2 } from "../microComponents/Typography"; 
 import ButtonPrimary from "../microComponents/ButtonPrimary/ButtonPrimary";
 import ButtonSecondary from "../microComponents/ButtonSecondary/ButtonSecondary";
 import Alert from "../microComponents/Alert/Alert";
@@ -23,7 +22,6 @@ const TravellerForm = ({ trip, fetchTripDetails }) => {
     const fetchUsers = async () => {
       try {
         const fetchedUsers = await userService.index();
-        // Filter out users already in the trip travellers list
         const availableUsers = fetchedUsers.filter(user =>
           !trip?.travellers.some(traveller => traveller.user._id === user._id)
         );
@@ -32,25 +30,21 @@ const TravellerForm = ({ trip, fetchTripDetails }) => {
         console.log(error);
       }
     };
-    // Ensure trip details (including travellers) are fetched first
+
     if (tripId) {
       fetchTripDetails(tripId).then(() => {
-        if (trip) { // Check if trip data is available after fetch
+        if (trip) { 
           fetchUsers();
         }
       });
     } else {
-      // Handle case where tripId is not available, maybe navigate away or show error
       console.error("Trip ID not found");
     }
-    // Include trip in dependencies to refetch users when trip details change
   }, [tripId, fetchTripDetails, trip]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Check if the selected user is already in the trip (double check - client side)
-    // This check might be redundant if the dropdown is filtered correctly, but good safeguard
     const existingTraveller = trip?.travellers.some(
       (traveller) => traveller.user.username === selectedUsers
     );
@@ -59,7 +53,6 @@ const TravellerForm = ({ trip, fetchTripDetails }) => {
       return;
     }
 
-    // Ensure a user and role are selected
     if (!selectedUsers || !role) {
       setMessage("Please select a user and a role.");
       return;
@@ -67,11 +60,10 @@ const TravellerForm = ({ trip, fetchTripDetails }) => {
 
     try {
       await tripService.addTraveller(tripId, { username: selectedUsers, role });
-      // Navigate back to trip details page after successful add
       navigate(`/trips/${tripId}`);
     } catch (error) {
       console.log(error);
-      setMessage("Failed to add traveller. Please try again."); // Provide user feedback on error
+      setMessage("Failed to add traveller. Please try again."); 
     }
   };
 
@@ -89,7 +81,7 @@ const TravellerForm = ({ trip, fetchTripDetails }) => {
               value={selectedUsers}
               onChange={(event) => {
                 setSelectedUsers(event.target.value);
-                setMessage(""); // Clear message on new selection
+                setMessage(""); 
               }}
               required
             >
@@ -111,7 +103,7 @@ const TravellerForm = ({ trip, fetchTripDetails }) => {
               value={role}
               onChange={(event) => {
                 setRole(event.target.value)
-                setMessage(""); // Clear message on new selection
+                setMessage(""); 
               }}
               required
             >

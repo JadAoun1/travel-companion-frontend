@@ -1,4 +1,3 @@
-// "/auth" path is used for authentication-related operations in the backend
 const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/auth`;
 
 const signUp = async (formData) => {

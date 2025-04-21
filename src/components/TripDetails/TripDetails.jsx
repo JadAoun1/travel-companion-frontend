@@ -18,7 +18,7 @@ import ButtonTertiary from "../microComponents/ButtonTertiary/ButtonTertiary";
 import DashboardBox from "../microComponents/DashboardBox/DashboardBox";
 import styles from "./TripDetails.module.css";
 
-const TripDetails = ({ trip, fetchTripDetails }) => {
+const TripDetails = ({ trip, fetchTripDetails, isViewer }) => {
   const { tripId } = useParams();
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
@@ -44,16 +44,9 @@ const TripDetails = ({ trip, fetchTripDetails }) => {
     return <Paragraph>Loading...</Paragraph>;
   }
 
-  // Check to see if user is in travellers and is the owner of the trip
-  // Adding so only owner can delete the complete trip.
   const isOwner = trip.travellers.some(
     (traveller) =>
-      traveller.role === "Owner" && user && traveller.user._id === user._id // SignOut functionality was not working in deployed server and giving error in local server because user was not being passed in as a prop to the NavBar component, adding user adds a null check before accessing traveller.user._id and allowing signout to function without error.
-  );
-
-  const isViewer = trip.travellers.some(
-    (traveller) =>
-      traveller.role === "Viewer" && user && traveller.user._id === user._id
+      traveller.role === "Owner" && user && traveller.user._id === user._id 
   );
 
   const handleDeleteTrip = async (tripId) => {
@@ -65,7 +58,6 @@ const TripDetails = ({ trip, fetchTripDetails }) => {
     }
   };
 
-  // Since destinations is referenced in trip (versus embedded like references in destinations), we need an async function to call on the backend, then update state (conversely, attractions is embedded in destinations, we already have the primary destination object accessible in state, so we just update it right then and there)
   const handleAddDestination = async () => {
     try {
       const updatedDestinations = await destinationService.index(tripId);
@@ -80,7 +72,6 @@ const TripDetails = ({ trip, fetchTripDetails }) => {
       <DashboardBox>
         <Heading1>{trip.title}</Heading1>
         <Paragraph>{trip.description}</Paragraph>
-        {/* Consider adding spacing/layout components if needed */}
         <div>
           <ButtonSecondary onClick={() => navigate("/trips")}>
             Back

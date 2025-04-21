@@ -13,7 +13,6 @@ const showDestination = async (tripId, destinationId) => {
     };
 };
 
-// Fetches all destinations in TripDetails component. 
 const index = async (tripId) => {
   try {
       const res = await fetch(`${BASE_URL}/${tripId}/destinations`, {
@@ -28,7 +27,6 @@ const index = async (tripId) => {
 };
 
 
-// delete
 const deleteDestination = async (tripId, destinationId) => {
     try {
         const res = await fetch(`${BASE_URL}/${tripId}/destinations/${destinationId}`, {
@@ -41,7 +39,6 @@ const deleteDestination = async (tripId, destinationId) => {
     };
 };
 
-// create
 const createDestination = async (tripId, destinationData) => {
     try {
         const res = await fetch(`${BASE_URL}/${tripId}/destinations`, {
