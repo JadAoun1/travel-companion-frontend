@@ -1,5 +1,3 @@
-// src/components/AttractionDetails/AttractionDetails.jsx
-
 import { useNavigate, useParams } from "react-router";
 import { useState, useEffect } from "react";
 
@@ -51,7 +49,6 @@ const AttractionDetails = ({ isViewer }) => {
         </button>
       )}
 
-      {/* Back to Destination Details Button */}
       <button
         onClick={() =>
           navigate(`/trips/${tripId}/destinations/${destinationId}`)
