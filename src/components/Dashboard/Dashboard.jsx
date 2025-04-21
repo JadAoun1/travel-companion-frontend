@@ -1,17 +1,14 @@
-// src/components/Dashboard/Dashboard.jsx
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { UserContext } from "../../contexts/UserContext";
 import * as tripService from "../../services/tripService";
 
-// Import Micro Components
 import { Heading2, Paragraph, Link as TypographyLink } from "../microComponents/Typography";
 import ButtonPrimary from "../microComponents/ButtonPrimary/ButtonPrimary";
 import ButtonSecondary from "../microComponents/ButtonSecondary/ButtonSecondary";
 import DashboardBox from "../microComponents/DashboardBox/DashboardBox";
 import NavLink from "../microComponents/NavLink/NavLink";
 
-// Import CSS Module
 import styles from "./Dashboard.module.css";
 
 const Dashboard = () => {

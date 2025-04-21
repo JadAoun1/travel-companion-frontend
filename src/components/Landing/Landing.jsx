@@ -2,7 +2,7 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import ButtonPrimary from "../microComponents/ButtonPrimary/ButtonPrimary";
-// Import specific typography components from the directory's index.js
+
 import { Heading1, Heading2, Strong } from "../microComponents/Typography";
 import styles from "./Landing.module.css";
 

@@ -1,10 +1,5 @@
-// src/services/attractionService.js
-
 const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/trips`;
 
-// index
-
-// create
 const createAttraction = async (tripId, destinationId, attractionData) => {
     try {
         const res = await fetch(`${BASE_URL}/${tripId}/destinations/${destinationId}/attractions/`, {
@@ -21,7 +16,6 @@ const createAttraction = async (tripId, destinationId, attractionData) => {
     }
 }
 
-// show
 const showAttraction = async (tripId, destinationId, attractionId) => {
     try {
         const res = await fetch(`${BASE_URL}/${tripId}/destinations/${destinationId}/attractions/${attractionId}`, {
@@ -33,9 +27,6 @@ const showAttraction = async (tripId, destinationId, attractionId) => {
     }
 };
 
-// edit
-
-// delete
 const deleteAttraction = async (tripId, destinationId, attractionId) => {
     try {
         const res = await fetch(`${BASE_URL}/${tripId}/destinations/${destinationId}/attractions/${attractionId}`, {

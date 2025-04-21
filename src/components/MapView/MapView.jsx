@@ -179,7 +179,7 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
                     <Map
                         defaultZoom={10}
                         center={coordinates || { lat: -33.860664, lng: 151.208138 }}
-                        mapId={'YOUR_MAP_ID'} 
+                        mapId={'YOUR_MAP_ID'}
                         gestureHandling={'greedy'}
                         disableDefaultUI={false}
                     >

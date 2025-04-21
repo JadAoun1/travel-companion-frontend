@@ -18,7 +18,6 @@ import * as tripService from "./services/tripService";
 import MapView from './components/MapView/MapView.jsx';
 import TravellerForm from "./components/TravellerForm/TravellerForm";
 
-// goal is to prevent React from re-triggering your useEffect in TripDetails unnecessarily, which happens when the fetchTripDetails function changes on every render of App
 const App = () => {
   const { user } = useContext(UserContext);
   const [trip, setTrip] = useState(null);
@@ -30,7 +29,6 @@ const App = () => {
     } catch (error) {
       console.log(error);
     }
-    // Empty dependency array means the function will only ever be created once when the component first mounts.
   }, []);
 
   const isViewer = useCallback(
@@ -66,7 +64,6 @@ const App = () => {
         <Route path="/trips/:tripId/destinations/:destinationId" element={<DestinationDetails isViewer={isViewer(trip)}/>} />
         <Route path="/trips/:tripId/destinations/:destinationId/attractions/:attractionId" element={<AttractionDetails isViewer={isViewer(trip)}/>} />
         <Route path="/trips/:tripId/travellers" element={<TravellerForm trip={trip} fetchTripDetails={fetchTripDetails} />} />
-        {/* Just for testing purposes at this point... */}
         <Route path='/map' element={<MapView isViewer={isViewer(trip)} />} />
       </Routes>
     </>

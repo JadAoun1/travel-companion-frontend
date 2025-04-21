@@ -1,12 +1,9 @@
-// src/components/Destination/DestinationDetails.jsx
-
 import { useParams, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 
 import * as destinationService from "../../services/destinationService.js";
 import MapView from "../MapView/MapView.jsx";
 
-// Import micro components and styles
 import {
   Heading1,
   Heading2,
@@ -23,13 +20,13 @@ import styles from "./DestinationDetails.module.css";
 const DestinationDetails = ({ isViewer }) => {
   const { tripId, destinationId } = useParams();
   const [destination, setDestination] = useState(null);
-  const [error, setError] = useState(null); // Add error state
+  const [error, setError] = useState(null); 
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDestinationDetails = async () => {
       try {
-        setError(null); // Clear previous errors
+        setError(null); 
         const destinationData = await destinationService.showDestination(
           tripId,
           destinationId
@@ -38,7 +35,7 @@ const DestinationDetails = ({ isViewer }) => {
       } catch (err) {
         console.error("Error fetching destination details:", err);
         setError("Failed to load destination details.");
-        setDestination(null); // Clear destination data on error
+        setDestination(null); 
       }
     };
     if (tripId && destinationId) {
@@ -52,7 +49,6 @@ const DestinationDetails = ({ isViewer }) => {
       navigate(`/trips/${tripId}`);
     } catch (err) {
       console.error("Error deleting destination:", err);
-      // Optionally set an error message to display to the user
       setError("Failed to delete destination.");
     }
   };
@@ -64,18 +60,14 @@ const DestinationDetails = ({ isViewer }) => {
     }));
   };
 
-  // Loading State
   if (!destination && !error) {
     return <Paragraph>Loading destination details...</Paragraph>;
   }
 
-  // Error State
   if (error) {
-    // Consider using an Alert component here if available
     return <Paragraph>Error: {error}</Paragraph>;
   }
 
-  // Check if destination is truly loaded (might be null even if no error initially)
   if (!destination) {
     return <Paragraph>Destination data not found.</Paragraph>;
   }
@@ -85,14 +77,11 @@ const DestinationDetails = ({ isViewer }) => {
       {/* Destination Info and Actions Box */}
       <DashboardBox className={styles.infoBox}>
         <Heading1>{destination.name}</Heading1>
-        {/* Add description if available: <Paragraph>{destination.description}</Paragraph> */}
         <div>
           {" "}
-          {/* Button Group */}
           <ButtonSecondary onClick={() => navigate(`/trips/${tripId}`)}>
             Back to Trip
           </ButtonSecondary>
-          {/* Add Edit Button if functionality exists */}
           {/* <ButtonSecondary onClick={() => navigate(`/trips/${tripId}/destinations/${destinationId}/edit`)}>Edit</ButtonSecondary> */}
           {!isViewer && (
             <ButtonTertiary onClick={handleDeleteDestination}>
