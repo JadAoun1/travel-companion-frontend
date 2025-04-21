@@ -1,38 +1,30 @@
 // src/components/MapView/MapView.jsx
 
-// imports
 import { useState, useEffect } from 'react';
 import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
 import { data, useParams } from 'react-router';
 import * as destinationService from '../../services/destinationService.js';
 import * as attractionService from '../../services/attractionService.js';
 
-// Import micro components
 import InputField from '../microComponents/InputField/InputField';
 import ButtonPrimary from '../microComponents/ButtonPrimary/ButtonPrimary';
 import ButtonSecondary from '../microComponents/ButtonSecondary/ButtonSecondary';
 import { Paragraph } from '../microComponents/Typography';
 import Alert from '../microComponents/Alert/Alert';
-import styles from './MapView.module.css'; // Import styles
+import styles from './MapView.module.css';
 
-// Destructuring onAddAttraction from DestinationDetails
 const MapView = ({ onAddAttraction, onAddDestination }) => {
     const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
-    // Store user input (city, state)
-    const [location, setLocation] = useState('');
-    // Store location as lat/lng once fetched from Google Geocoding API
-    const [coordinates, setCoordinates] = useState(null);
-    // Display feedback if the entered data (city, state) is not found (i.e. mispelled)
-    const [error, setError] = useState(null);
-
-    // I'm going use this when adding a destination or attraction
     const { tripId, destinationId, attractionId } = useParams();
-    // What needs to be passed into useState to not fuck up the current attractions/destinations?
+    // Store user input in search field:
+    const [location, setLocation] = useState('');
+    // Store location as lat/lng once fetched from Google Geocoding API:
+    const [coordinates, setCoordinates] = useState(null);
+    const [error, setError] = useState(null);
     const [attractions, setAttractions] = useState([]);
     const [destinations, setDestinations] = useState([]);
-    // Adding this to set the searched data (using Google Geocoding API) in handleSearch to overall state so it can be accessed in handleAdd
     const [geocodeData, setGeocodeData] = useState(null)
-    // Update location state as user types in input field
+
     const handleLocationChange = (event) => {
         setLocation(event.target.value);
     };
@@ -59,31 +51,24 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
         if (!location) return;
 
         try {
-            // Use location input to send a GET request to Google Geocoding API
             const response = await fetch(
                 `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(location)}&key=${apiKey}`
             );
-            // Convert response into an object
+
             const data = await response.json();
 
-            // If status of response is 'OK' (i.e. a location match was found in the API)...
             if (data.status === 'OK') {
-                const result = data.results[0];
                 // Extract lat and lng and set equal to the deconstructed object from the API
                 // data.results[0] => results of possible matches from the API call; takes the first (and most likely) match
-                // geometry => an object from the returned API results that holds spatial info; location holds lat and lng within the geometry object, so it's just pulling that data and setting it to lat and lng
-                // const { lat, lng } = data.results[0].geometry.location;
+                const result = data.results[0];
+                // geometry = an object from the returned API results that holds spatial info; location holds lat and lng within the geometry object, so it's just pulling that data and setting it to lat and lng
                 const { lat, lng } = result.geometry.location;
                 const placeId = result.place_id
-                // Set coordinates
                 setCoordinates({ lat, lng });
 
-                // Updates here to further incorporate Places API
-                // Once fetchPlacesDetails runs using placeId, assign to value placeDetails
                 const placeDetails = await fetchPlaceDetails(placeId);
 
                 if (placeDetails) {
-                    // Then updated GeocodeData state to includ old results (via spread operator) and add on newly fetched placeDetails
                     // This means that we can now access placeDetails (from Places API) via geocodeData.placeDetails
                     setGeocodeData({
                         ...result,
@@ -92,8 +77,6 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
                 } else {
                     setGeocodeData(result);
                 }
-                // setGeocodeData(result);
-                // Clear any errors
                 setError(null);
             } else {
                 setError('Location not found.');
@@ -105,18 +88,13 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
         };
     };
 
-    // Trying to incorporate Google Places API on top of Google Geocoding API (I'm not sure if this was the cleanest way of doing things, but it's where I'm at right now...)
-    // Pass in placeId which was gathered through Geocoding API, so that can be used in Places API
     const fetchPlaceDetails = async (placeId) => {
         try {
-            // Places API URL here with dynamically added placeId and apiKey
             const response = await fetch(
                 `https://places.googleapis.com/v1/places/${placeId}?fields=displayName,formattedAddress,location,photos,websiteUri,rating,userRatingCount,regularOpeningHours,shortFormattedAddress,primaryType&key=${apiKey}`
             );
 
             const placeData = await response.json();
-            // Just get the data to display in the UI
-            // This could potentially be a place to refactor the use of Geocoding API. Maybe everything I've been doing using that API can be done using Places API instead?
             return placeData;
         } catch (error) {
             console.log(error);
@@ -125,12 +103,8 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
 
 
     const handleAdd = async () => {
-        // Some kind of error logic here (setError('')) if a user hasn't added an actual location?
-
         const newLocation = {
-            // The way the data was being passed to the backend meant that it was receiving req.body.name as undefined. I updated to this because I knew it was working as "address", but now name and address are the same. I'm going to come back to this later to work on because ultimately it's still working right now, just doesn't look the best. (Data is currently being sent accurately to the backend, but then the name is just set to the address instead of "Oregon Zoo" or the like.)
             name: geocodeData.formatted_address || 'Unnamed Location',
-            // Fixed this to match backend schema
             location: {
                 lat: coordinates.lat,
                 lng: coordinates.lng,
@@ -140,11 +114,7 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
         };
 
         try {
-            // Add a searched and selected attraction to the destination
-            // Since adding an attraction is done on the destination route (/trip/:tripId/destination/:destinationId), we need to check first if there's a destinationId in params (via useParams()), and then we can add the logic to add the location to the destination (I think...)
             if (destinationId) {
-                // Logic here
-                // Make sure to pass in newLocation (declared above) so it can be added to the newAttraction
                 const newAttraction = await attractionService.createAttraction(tripId, destinationId, newLocation);
                 setAttractions([...attractions, newAttraction]);
                 // Once setAttractions successfully updates, call the function and pass it newAttraction (which prompts the function in DestinationDetails to run again, state updates and React responds by rerendering so the new attraction shows up on the page)
@@ -153,10 +123,7 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
                 setGeocodeData(null);
             }
 
-            // Add a searched and selected destination to the trip
-            // Since adding a destination is done on the trip route (/trip/:tripId), we need to first deal with destinationId (above) and catch the rest to add a destination to a trip
             else if (tripId) {
-                // Logic here
                 const newDestination = await destinationService.createDestination(tripId, newLocation);
                 setDestinations([...destinations, newDestination]);
                 if (onAddDestination) {
@@ -170,28 +137,18 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
             }
         } catch (error) {
             console.log(error);
-            // Maybe another setError('') here? Could not add location?
         };
     };
 
-    // Handle changes to the view of the map
-    // event.detail contains { center, zoom, tilt, heading }
-    const handleCameraChange = (event) => {
-        console.log(event.detail);
-    };
-
     if (!apiKey) {
-        // Use Alert for API key error
         return <Alert severity="error">Error: API key is missing.</Alert>
     }
 
     return (
-        // Wrap everything in a fragment or div if needed, but apply mapContainer style to the Map's parent
         <>
             <APIProvider apiKey={apiKey}>
                 {!attractionId && (
                     <>
-                        {/* Group search controls */}
                         <div className={styles.searchControls}>
                             <InputField
                                 type='text'
@@ -203,7 +160,6 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
                             <ButtonSecondary onClick={handleSearch}>Search</ButtonSecondary>
                         </div>
 
-                        {/* Display feedback using Typography and Alert */}
                         {geocodeData?.placeDetails.displayName.text && (
                             <Paragraph>Place: {geocodeData.placeDetails.displayName.text}</Paragraph>
                         )}
@@ -212,7 +168,6 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
                         )}
                         {error && <Alert severity="error">{error}</Alert>}
 
-                        {/* Group add controls - only show if coordinates are found */}
                         {coordinates && (
                             <div className={styles.addControls}>
                                 <ButtonPrimary onClick={handleAdd}>Add Location</ButtonPrimary>
@@ -220,18 +175,13 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
                         )}
                     </>
                 )}
-                {/* Apply map container style here */}
                 <div className={styles.mapContainer}>
                     <Map
                         defaultZoom={10}
                         center={coordinates || { lat: -33.860664, lng: 151.208138 }}
-                        onCameraChanged={handleCameraChange}
-                        // Remove inline style
-                        // style={{ width: '50%', height: '400px' }}
-                        mapId={'YOUR_MAP_ID'} // Recommended by @vis.gl/react-google-maps for styling/control options
-                        // Ensure interaction controls are enabled (usually default)
-                        gestureHandling={'greedy'} // Ensures map handles gestures
-                        disableDefaultUI={false} // Ensure default controls (zoom, fullscreen) are shown
+                        mapId={'YOUR_MAP_ID'} 
+                        gestureHandling={'greedy'}
+                        disableDefaultUI={false}
                     >
                         {coordinates && <Marker position={coordinates} />}
                     </Map>
