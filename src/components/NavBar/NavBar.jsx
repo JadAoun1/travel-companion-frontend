@@ -20,6 +20,7 @@ const NavBar = () => {
     <header className={styles.navbarContainer}>
       <div className={styles.contentWrapper}>
         <div className={styles.navLinks}>
+            <h1>TripLab</h1>
           {user ? (
             <NavLink to="/">Dashboard</NavLink>
           ) : (
