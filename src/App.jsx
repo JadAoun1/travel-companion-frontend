@@ -33,6 +33,15 @@ const App = () => {
     // Empty dependency array means the function will only ever be created once when the component first mounts.
   }, []);
 
+  const isViewer = useCallback(
+    (trip) =>
+      trip?.travellers.some(  
+        (traveller) =>
+          traveller.role === "Viewer" && user && traveller.user._id === user._id
+      ),
+    [user]
+  );
+
   return (
     <>
       <NavBar />
@@ -46,15 +55,19 @@ const App = () => {
         <Route
           path="/trips/:tripId"
           element={
-            <TripDetails trip={trip} fetchTripDetails={fetchTripDetails} />
+            <TripDetails
+              trip={trip}
+              fetchTripDetails={fetchTripDetails}
+              isViewer={isViewer(trip)}
+            />
           }
         />
         <Route path="/trips/:tripId/edit" element={<TripForm />} />
-        <Route path="/trips/:tripId/destinations/:destinationId" element={<DestinationDetails />} />
-        <Route path="/trips/:tripId/destinations/:destinationId/attractions/:attractionId" element={<AttractionDetails />} />
+        <Route path="/trips/:tripId/destinations/:destinationId" element={<DestinationDetails isViewer={isViewer(trip)}/>} />
+        <Route path="/trips/:tripId/destinations/:destinationId/attractions/:attractionId" element={<AttractionDetails isViewer={isViewer(trip)}/>} />
         <Route path="/trips/:tripId/travellers" element={<TravellerForm trip={trip} fetchTripDetails={fetchTripDetails} />} />
         {/* Just for testing purposes at this point... */}
-        <Route path='/map' element={<MapView />} />
+        <Route path='/map' element={<MapView isViewer={isViewer(trip)} />} />
       </Routes>
     </>
   );

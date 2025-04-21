@@ -1,47 +1,66 @@
 // src/components/AttractionDetails/AttractionDetails.jsx
 
-import { useNavigate, useParams } from 'react-router';
-import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from "react-router";
+import { useState, useEffect } from "react";
 
-import * as attractionService from '../../services/attractionService.js';
-import MapView from '../MapView/MapView.jsx';
+import * as attractionService from "../../services/attractionService.js";
+import MapView from "../MapView/MapView.jsx";
 
-const AttractionDetails = () => {
-    const { tripId, destinationId, attractionId } = useParams();
-    const [attraction, setAttraction] = useState(null);
-    const navigate = useNavigate();
+const AttractionDetails = ({ isViewer }) => {
+  const { tripId, destinationId, attractionId } = useParams();
+  const [attraction, setAttraction] = useState(null);
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        const fetchAttractionDetails = async () => {
-            const attractionDetails = await attractionService.showAttraction(tripId, destinationId, attractionId);
-            setAttraction(attractionDetails);
-        };
-        fetchAttractionDetails();
-    }, [attractionId]);
-
-    if (!attraction) {
-        return <div>Looks like you haven't added any attractions yet!</div>
+  useEffect(() => {
+    const fetchAttractionDetails = async () => {
+      const attractionDetails = await attractionService.showAttraction(
+        tripId,
+        destinationId,
+        attractionId
+      );
+      setAttraction(attractionDetails);
     };
+    fetchAttractionDetails();
+  }, [attractionId]);
 
-    const handleDeleteAttraction = async () => {
-        try {
-            const deletedAttraction = await attractionService.deleteAttraction(tripId, destinationId, attractionId);
-            console.log(deletedAttraction);
-            navigate(`/trips/${tripId}/destinations/${destinationId}`);
-        } catch (error) {
-            console.log(error);
-        };
-    };
+  if (!attraction) {
+    return <div>Looks like you haven't added any attractions yet!</div>;
+  }
 
-    return (
-        <>
-            <h1>{attraction.name}</h1>
-            <MapView />
-            <button onClick={() => handleDeleteAttraction()}>Delete Attraction</button>
-            {/* Back to Destination Details Button */}
-            <button onClick={() => navigate(`/trips/${tripId}/destinations/${destinationId}`)}>Back</button>
-        </>
-    );
+  const handleDeleteAttraction = async () => {
+    try {
+      const deletedAttraction = await attractionService.deleteAttraction(
+        tripId,
+        destinationId,
+        attractionId
+      );
+      console.log(deletedAttraction);
+      navigate(`/trips/${tripId}/destinations/${destinationId}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return (
+    <>
+      <h1>{attraction.name}</h1>
+      <MapView />
+      {!isViewer && (
+        <button onClick={() => handleDeleteAttraction()}>
+          Delete Attraction
+        </button>
+      )}
+
+      {/* Back to Destination Details Button */}
+      <button
+        onClick={() =>
+          navigate(`/trips/${tripId}/destinations/${destinationId}`)
+        }
+      >
+        Back
+      </button>
+    </>
+  );
 };
 
 export default AttractionDetails;

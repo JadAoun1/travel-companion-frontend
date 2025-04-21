@@ -44,13 +44,17 @@ const TripDetails = ({ trip, fetchTripDetails }) => {
     return <Paragraph>Loading...</Paragraph>;
   }
 
-  // Check to see if user is in travellers and is the owner of the trip 
-  // Adding so only owner can delete the complete trip. 
+  // Check to see if user is in travellers and is the owner of the trip
+  // Adding so only owner can delete the complete trip.
   const isOwner = trip.travellers.some(
     (traveller) =>
-      traveller.role === "Owner" && user && traveller.user._id === user._id // SignOut functionality was not working in deployed server and giving error in local server because user was not being passed in as a prop to the NavBar component, adding user adds a null check before accessing traveller.user._id and allowing signout to function without error. 
+      traveller.role === "Owner" && user && traveller.user._id === user._id // SignOut functionality was not working in deployed server and giving error in local server because user was not being passed in as a prop to the NavBar component, adding user adds a null check before accessing traveller.user._id and allowing signout to function without error.
   );
 
+  const isViewer = trip.travellers.some(
+    (traveller) =>
+      traveller.role === "Viewer" && user && traveller.user._id === user._id
+  );
 
   const handleDeleteTrip = async (tripId) => {
     try {
@@ -81,11 +85,15 @@ const TripDetails = ({ trip, fetchTripDetails }) => {
           <ButtonSecondary onClick={() => navigate("/trips")}>
             Back
           </ButtonSecondary>
-          <ButtonSecondary
-            onClick={() => navigate(`/trips/${trip._id}/edit`)}
-          >
-            Edit Trip
-          </ButtonSecondary>
+
+          {!isViewer && (
+            <ButtonSecondary
+              onClick={() => navigate(`/trips/${trip._id}/edit`)}
+            >
+              Edit Trip
+            </ButtonSecondary>
+          )}
+
           {isOwner && (
             <ButtonTertiary onClick={() => handleDeleteTrip(trip._id)}>
               Delete Trip
@@ -130,9 +138,13 @@ const TripDetails = ({ trip, fetchTripDetails }) => {
             </ListItem>
           ))}
         </UnorderedList>
-        <ButtonPrimary onClick={() => navigate(`/trips/${tripId}/travellers/`)}>
-          Add Traveller
-        </ButtonPrimary>
+        {!isViewer && (
+          <ButtonPrimary
+            onClick={() => navigate(`/trips/${tripId}/travellers/`)}
+          >
+            Add Traveller
+          </ButtonPrimary>
+        )}
       </DashboardBox>
     </main>
   );
