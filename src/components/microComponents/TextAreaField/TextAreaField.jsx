@@ -12,9 +12,7 @@ const TextAreaField = ({
     disabled = false,
     error = null,
     ...props
-}) => {
-    // Generate a unique ID if one isn't provided
-    const textAreaId = id || `textarea-${label.replace(/\s+/g, '').toLowerCase()}`;
+}) => {const textAreaId = id || `textarea-${label.replace(/\s+/g, '').toLowerCase()}`;
 
     return (
         <div className={styles.container}>

@@ -1,5 +1,4 @@
 .navLink {
-    /* Layout & Box Model */
     display: inline-block;
     padding: var(--space-sm) var(--space-md);
     border: var(--border-width-medium) solid var(--color-black);
@@ -8,11 +7,8 @@
     position: relative;
     cursor: pointer;
 
-    /* Color & Background */
     background-color: var(--color-surface);
     color: var(--color-text-primary);
-
-    /* Typography */
     font-family: var(--font-family-primary);
     font-size: var(--font-size-md);
     font-weight: var(--font-weight-black);
@@ -20,10 +16,8 @@
     text-decoration: none;
     letter-spacing: var(--letter-spacing-wide);
 
-    /* Brutalist Shadow */
     box-shadow: var(--box-shadow-hard);
 
-    /* Transitions */
     transition:
         transform var(--transition-duration-fast) var(--transition-timing-function),
         box-shadow var(--transition-duration-fast) var(--transition-timing-function);
@@ -48,7 +42,6 @@
     box-shadow: 2px 2px 0 var(--color-black);
 }
 
-/* Active state */
 .navLink.active {
     color: var(--color-black);
     background-color: var(--color-accent);

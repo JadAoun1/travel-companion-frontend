@@ -1,34 +1,22 @@
 .dashboardBox {
-    /* Box Model */
     display: flex;
     flex-direction: column;
-    /* height: 100%; */
-    /* Remove fixed height */
+
     padding: var(--space-md);
-    /* Reduced padding */
     border: var(--border-width-thick) solid var(--color-black);
     border-radius: var(--border-radius-sharp);
     position: relative;
-    /* margin: 4px 0 var(--space-lg) 0; */
-    /* Removed top/bottom margin if any */
     margin: 0;
 
-    /* Color & Background */
     background-color: var(--color-surface);
 
-    /* Brutalist Shadow */
     box-shadow: var(--box-shadow-hard);
 
-    /* Transitions */
     transition:
-        /* transform var(--transition-duration-fast) var(--transition-timing-function), */
-        /* Already removed transform */
         box-shadow var(--transition-duration-fast) var(--transition-timing-function);
 }
 
 .dashboardBox:hover {
-    /* transform: translate(-3px, -3px); */
-    /* Already removed */
     box-shadow: 8px 8px 0 var(--color-black);
 }
 
@@ -40,17 +28,16 @@
     flex-shrink: 0;
     border-bottom: var(--border-width-medium) solid var(--color-black);
     padding-bottom: var(--space-md);
-    height: 48px; /* Increased height to accommodate the additional padding */
+    height: 48px;
 }
 
 .title {
     margin-bottom: 0;
-    /* Removed margin since titleContainer handles spacing */
     flex-shrink: 0;
     font-weight: var(--font-weight-black);
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-wide);
-    line-height: 1.2; /* Consistent line height */
+    line-height: 1.2;
 }
 
 .rightElement {
@@ -63,5 +50,4 @@
     flex-grow: 1;
     overflow: auto;
     padding-top: var(--space-md);
-    /* Added consistent top padding */
 }

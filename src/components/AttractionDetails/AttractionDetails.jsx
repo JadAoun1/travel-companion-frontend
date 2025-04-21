@@ -49,7 +49,6 @@ const AttractionDetails = ({ isViewer }) => {
         destinationId,
         attractionId
       );
-      // Navigate back to the destination details page
       navigate(`/trips/${tripId}/destinations/${destinationId}`);
     } catch (err) {
       console.error("Error deleting attraction:", err);
@@ -62,8 +61,6 @@ const AttractionDetails = ({ isViewer }) => {
     return <Paragraph>Loading attraction details...</Paragraph>;
   }
 
-  // Error State - Render within the main layout for consistency if possible
-  // Or use a dedicated error component/page
 
   return (
     <main className={styles.detailsContainer}>
@@ -102,7 +99,6 @@ const AttractionDetails = ({ isViewer }) => {
           </DashboardBox>
         </>
       )}
-      {/* Show message if attraction is null but no error (e.g., after deletion failed?) */}
       {!attraction && !error && <Paragraph>Attraction data not found.</Paragraph>}
     </main>
   );

@@ -16,9 +16,7 @@ import styles from './MapView.module.css';
 const MapView = ({ onAddAttraction, onAddDestination }) => {
     const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
     const { tripId, destinationId, attractionId } = useParams();
-    // Store user input in search field:
     const [location, setLocation] = useState('');
-    // Store location as lat/lng once fetched from Google Geocoding API:
     const [coordinates, setCoordinates] = useState(null);
     const [error, setError] = useState(null);
     const [attractions, setAttractions] = useState([]);
@@ -29,7 +27,7 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
         setLocation(event.target.value);
     };
 
-    // Adding so that destination and attraction show pages show marker at the lat and lng
+    // Centers map marker based on attraction or destination ID in params
     useEffect(() => {
         const fetchLocation = async () => {
             try {
@@ -58,10 +56,7 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
             const data = await response.json();
 
             if (data.status === 'OK') {
-                // Extract lat and lng and set equal to the deconstructed object from the API
-                // data.results[0] => results of possible matches from the API call; takes the first (and most likely) match
                 const result = data.results[0];
-                // geometry = an object from the returned API results that holds spatial info; location holds lat and lng within the geometry object, so it's just pulling that data and setting it to lat and lng
                 const { lat, lng } = result.geometry.location;
                 const placeId = result.place_id
                 setCoordinates({ lat, lng });
@@ -69,7 +64,6 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
                 const placeDetails = await fetchPlaceDetails(placeId);
 
                 if (placeDetails) {
-                    // This means that we can now access placeDetails (from Places API) via geocodeData.placeDetails
                     setGeocodeData({
                         ...result,
                         placeDetails,
@@ -117,7 +111,7 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
             if (destinationId) {
                 const newAttraction = await attractionService.createAttraction(tripId, destinationId, newLocation);
                 setAttractions([...attractions, newAttraction]);
-                // Once setAttractions successfully updates, call the function and pass it newAttraction (which prompts the function in DestinationDetails to run again, state updates and React responds by rerendering so the new attraction shows up on the page)
+                // If passed from parent, call callback to update parent state (e.g., DestinationDetails)
                 if (onAddAttraction) onAddAttraction(newAttraction);
                 setLocation('');
                 setGeocodeData(null);
@@ -126,6 +120,7 @@ const MapView = ({ onAddAttraction, onAddDestination }) => {
             else if (tripId) {
                 const newDestination = await destinationService.createDestination(tripId, newLocation);
                 setDestinations([...destinations, newDestination]);
+                // If passed from parent, call callback to update parent state (e.g., TripDetails)
                 if (onAddDestination) {
                     await onAddDestination(newDestination)
                 };

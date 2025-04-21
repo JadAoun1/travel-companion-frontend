@@ -3,23 +3,19 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  max-width: 900px; /* Or adjust as needed */
-  margin: 1rem auto; /* Center container on page */
+  max-width: 900px; 
+  margin: 1rem auto; 
 }
 
-.infoBox {
-  /* Styles for info box if needed */
-}
 
 .mapBox {
-  /* Styles for map box if needed */
-  min-height: 400px; /* Ensure map box has some height */
+  min-height: 400px;
 }
 
 .buttonGroup {
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
-  justify-content: space-between; /* Back button left, delete button right */
+  justify-content: space-between;
   align-items: center;
 } 
