@@ -1,5 +1,4 @@
 .button {
-    /* Reset Button Defaults */
     background: none;
     border: none;
     padding: var(--space-xs) var(--space-sm);
@@ -7,10 +6,8 @@
     cursor: pointer;
     position: relative;
 
-    /* Color */
     color: var(--color-accent);
 
-    /* Typography */
     font-family: var(--font-family-primary);
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-black);
@@ -19,10 +16,8 @@
     letter-spacing: var(--letter-spacing-wide);
     text-transform: uppercase;
 
-    /* Brutalist Border Bottom Only */
     border-bottom: var(--border-width-medium) solid var(--color-black);
 
-    /* Transitions */
     transition:
         transform var(--transition-duration-fast) var(--transition-timing-function),
         color var(--transition-duration-fast) var(--transition-timing-function);

@@ -1,5 +1,4 @@
 .sidebarLink {
-    /* Layout & Box Model */
     display: flex;
     align-items: center;
     padding: var(--space-sm) var(--space-md);
@@ -9,11 +8,9 @@
     border-radius: var(--border-radius-sharp);
     cursor: pointer;
 
-    /* Color & Background */
     color: var(--color-text-primary);
     background-color: var(--color-surface);
 
-    /* Typography & Content Alignment */
     font-family: var(--font-family-primary);
     font-size: var(--font-size-md);
     font-weight: var(--font-weight-black);
@@ -21,10 +18,8 @@
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-wide);
 
-    /* Brutalist Shadow */
     box-shadow: var(--box-shadow-hard);
 
-    /* Transitions */
     transition:
         transform var(--transition-duration-fast) var(--transition-timing-function),
         box-shadow var(--transition-duration-fast) var(--transition-timing-function);
@@ -61,7 +56,6 @@
     box-shadow: 2px 2px 0 var(--color-black);
 }
 
-/* Active state */
 .sidebarLink.active {
     color: var(--color-black);
     background-color: var(--color-accent);

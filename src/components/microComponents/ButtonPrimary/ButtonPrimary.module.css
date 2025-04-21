@@ -1,5 +1,4 @@
 .button {
-    /* Layout & Box Model */
     display: inline-block;
     padding: var(--space-sm) var(--space-lg);
     border: var(--border-width-thick) solid var(--color-black);
@@ -8,11 +7,9 @@
     position: relative;
     margin: 2px 0;
 
-    /* Color & Background */
     background-color: var(--color-accent);
     color: var(--color-black);
 
-    /* Typography */
     font-family: var(--font-family-primary);
     font-size: var(--font-size-md);
     font-weight: var(--font-weight-black);
@@ -21,10 +18,8 @@
     text-align: center;
     letter-spacing: var(--letter-spacing-wide);
 
-    /* Brutalist Shadow */
     box-shadow: var(--box-shadow-hard);
 
-    /* Transitions */
     transition:
         transform var(--transition-duration-fast) var(--transition-timing-function),
         box-shadow var(--transition-duration-fast) var(--transition-timing-function);

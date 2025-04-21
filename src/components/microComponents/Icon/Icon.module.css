@@ -5,7 +5,6 @@
     justify-content: center;
 }
 
-/* Container styles for different icon variants */
 .iconContainer {
     display: inline-flex;
     align-items: center;
@@ -13,7 +12,6 @@
     position: relative;
 }
 
-/* Bordered icon style */
 .bordered {
     padding: var(--space-xs);
     border: var(--border-width-medium) solid var(--color-black);
@@ -22,7 +20,6 @@
     box-shadow: var(--box-shadow-hard);
 }
 
-/* Background icon style */
 .background {
     padding: var(--space-xs);
     background-color: var(--color-accent);
@@ -32,7 +29,6 @@
     box-shadow: var(--box-shadow-hard);
 }
 
-/* Interactive icon */
 .interactive {
     cursor: pointer;
     transition:
@@ -50,7 +46,6 @@
     box-shadow: 1px 1px 0 var(--color-black);
 }
 
-/* Sizes */
 .size-sm {
     font-size: var(--font-size-sm);
     padding: calc(var(--space-xs) * 0.5);

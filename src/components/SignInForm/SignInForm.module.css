@@ -3,10 +3,8 @@
     justify-content: center;
     align-items: flex-start;
     min-height: calc(100vh - var(--navbar-height, 4rem));
-    /* Adjust if navbar is present */
     padding: var(--space-xl, 2rem);
     padding-top: 4rem;
-    /* Reduced top padding */
     background-color: var(--color-background, #ffffff);
 }
 
@@ -14,7 +12,6 @@
     display: flex;
     flex-direction: column;
     gap: var(--space-lg, 1.5rem);
-    /* Spacing between form elements */
     padding: var(--space-xl, 2rem);
     border: var(--border-width-medium, 2px) solid var(--color-border, #000000);
     background-color: var(--color-surface, #ffffff);
@@ -22,28 +19,23 @@
     box-shadow: var(--box-shadow-hard, 4px 4px 0 var(--color-black));
     width: 100%;
     max-width: 500px;
-    /* Increased to match Sign Up */
-    /* Limit form width */
+
     box-sizing: border-box;
 }
 
 .formHeader {
     text-align: center;
     margin-bottom: var(--space-sm, 0.75rem);
-    /* Additional header styles if needed */
 }
 
 .buttonGroup {
     display: flex;
     justify-content: center;
-    /* Center button */
     gap: var(--space-md, 1rem);
     margin-top: var(--space-sm, 0.75rem);
 }
 
-/* Style for the Alert component if needed */
 .errorMessage {
-    /* Ensure alert takes appropriate space */
     width: 100%;
     box-sizing: border-box;
 }

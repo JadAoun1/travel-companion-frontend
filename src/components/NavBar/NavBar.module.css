@@ -1,52 +1,51 @@
 .navbarContainer {
     display: flex;
     flex-direction: column;
-    /* Stack items vertically */
     justify-content: flex-start;
-    /* Align items to the top */
-    /* align-items: stretch; */
-    /* Let items stretch, maybe not needed? */
+
     height: auto;
-    /* Adjust height automatically or set a new min-height */
     min-height: var(--navbar-height, 4rem);
     padding: var(--space-xl, 2rem) var(--space-lg, 1.5rem) 0;
-    /* Increased top padding again, remove bottom padding */
     background-color: var(--color-surface, #ffffff);
-    /* Use theme variable with fallback */
-    /* border-bottom: var(--border-width-thin, 1px) solid var(--color-border, #000000); */
-    /* Bottom border removed */
+
     box-sizing: border-box;
-    /* Include padding and border in height */
 }
 
 .contentWrapper {
-    /* New style for the wrapper */
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    /* Keep original alignment for content */
+    align-items: center; 
     width: 100%;
-    /* Take full width */
     margin-bottom: var(--space-xs, 0.5rem);
-    /* Space between content and divider */
 }
 
-.navLinks,
-.userActions {
+
+.navLeft {
     display: flex;
     align-items: center;
     gap: var(--space-md, 1rem);
-    /* Spacing between links/buttons */
+    flex-grow: 0;
+    flex-shrink: 0;
+    justify-content: flex-start;
 }
 
-/* Add styles for NavLink if needed, or rely on NavLink's internal styles */
-/* Example:
-.navLink {
-    color: var(--color-text-primary);
-    text-decoration: none;
+.navCenter {
+    flex-grow: 1;
+    text-align: center; 
 }
 
-.navLink:hover {
-    color: var(--color-accent);
+.navCenter h1 {
+    margin: 0; 
+
 }
-*/
+
+.navRight {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md, 1rem);
+    flex-grow: 0;
+    flex-shrink: 0;
+    justify-content: flex-end; 
+}
+
+
