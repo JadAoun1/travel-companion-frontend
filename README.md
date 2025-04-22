@@ -50,9 +50,9 @@ TripLab is a collaborative travel planning platform designed to make organizing 
 * Utilize more capababilities of the Google Maps Places (New) API to allow users to find additional nearby attractions.
 
 ## <a name="Team"></a>Team
-* Scrummaster: Jad Aaoun
-* Backend Lead: Anna Steckel
-* Frontend Lead: Amen Ali
+* Scrum Master: Jad Aoun ([LinkedIn](https://www.linkedin.com/in/jad-aoun/))
+* Backend Lead: Anna Steckel ([LinkedIn](https://www.linkedin.com/in/annasteckel/))
+* Frontend Lead: Amen Ali ([LinkedIn](www.linkedin.com/in/amen-ali-53430a155))
 
 ## <a name="workscited"></a>Works Cited:
 * **[General Assembly Hoot Front-End](https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-hoot-front-end/setup/)**: Helped with initial front end set-up. 
