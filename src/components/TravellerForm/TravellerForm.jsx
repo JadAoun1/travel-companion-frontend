@@ -3,7 +3,7 @@ import * as userService from "../../services/userService";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 
-import { Heading2 } from "../microComponents/Typography"; 
+import { Heading2 } from "../microComponents/Typography";
 import ButtonPrimary from "../microComponents/ButtonPrimary/ButtonPrimary";
 import ButtonSecondary from "../microComponents/ButtonSecondary/ButtonSecondary";
 import Alert from "../microComponents/Alert/Alert";
@@ -33,7 +33,7 @@ const TravellerForm = ({ trip, fetchTripDetails }) => {
 
     if (tripId) {
       fetchTripDetails(tripId).then(() => {
-        if (trip) { 
+        if (trip) {
           fetchUsers();
         }
       });
@@ -63,7 +63,7 @@ const TravellerForm = ({ trip, fetchTripDetails }) => {
       navigate(`/trips/${tripId}`);
     } catch (error) {
       console.log(error);
-      setMessage("Failed to add traveller. Please try again."); 
+      setMessage("Failed to add traveller. Please try again.");
     }
   };
 
@@ -72,7 +72,6 @@ const TravellerForm = ({ trip, fetchTripDetails }) => {
       <DashboardBox className={styles.formBox}>
         <Heading2>Add a Traveller</Heading2>
         <form onSubmit={handleSubmit}>
-          {/* User Selection Field */}
           <div className={styles.fieldGroup}>
             <label htmlFor="user">Select User:</label>
             <select
@@ -81,7 +80,7 @@ const TravellerForm = ({ trip, fetchTripDetails }) => {
               value={selectedUsers}
               onChange={(event) => {
                 setSelectedUsers(event.target.value);
-                setMessage(""); 
+                setMessage("");
               }}
               required
             >
@@ -94,7 +93,6 @@ const TravellerForm = ({ trip, fetchTripDetails }) => {
             </select>
           </div>
 
-          {/* Role Selection Field */}
           <div className={styles.fieldGroup}>
             <label htmlFor="role">Select Role:</label>
             <select
@@ -103,7 +101,7 @@ const TravellerForm = ({ trip, fetchTripDetails }) => {
               value={role}
               onChange={(event) => {
                 setRole(event.target.value)
-                setMessage(""); 
+                setMessage("");
               }}
               required
             >
@@ -114,14 +112,12 @@ const TravellerForm = ({ trip, fetchTripDetails }) => {
             </select>
           </div>
 
-          {/* Display Message/Alert */}
           {message && (
             <Alert severity="warning" style={{ marginTop: '1rem' }}>
               {message}
             </Alert>
           )}
 
-          {/* Button Group */}
           <div className={styles.buttonGroup}>
             <ButtonSecondary type="button" onClick={() => navigate(`/trips/${tripId}`)}>
               Cancel

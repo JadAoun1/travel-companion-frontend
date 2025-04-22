@@ -39,7 +39,7 @@ TripLab is a collaborative travel planning platform designed to make organizing 
 * [Google Maps JavaScript API](https://developers.google.com/maps/documentation/javascript/overview): client-side web API used alongside [react-google-maps](https://visgl.github.io/react-google-maps/) to integrate Google Maps into a React application
 
 ## <a name="design"></a>Design
-* Notable design details including what inspired the design.
+* For the website's design, we looked at several different themes. We agreed that we liked the Brutalist/Neo-Brutalist style the best, so we chose that. After deciding on the style, we found resources and examples of it to use as inspiration.
 
 ## <a name="nextsteps"></a>Project Next Steps
 * Replace current dropdown for adding users to a trip with a searchable input field allowing users to search by usernames to easily add others to their trips. 

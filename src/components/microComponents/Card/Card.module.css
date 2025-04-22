@@ -1,22 +1,13 @@
 .card {
-  /* Box Model */
   padding: var(--space-lg);
-  /* Generous internal padding */
   border: var(--border-width-thick) solid var(--color-black);
-  /* Use thick border */
-  border-radius: var(--border-radius-sharp);
-  /* Sharp corners */
-  position: relative;
+  border-radius: var(--border-radius-sharp);  position: relative;
   margin: 4px 0 var(--space-lg) 0;
 
-  /* Color & Background */
   background-color: var(--color-surface);
-  /* Use surface color, distinct from main bg if needed */
 
-  /* Brutalist Shadow */
   box-shadow: var(--box-shadow-hard);
 
-  /* Transitions */
   transition:
     transform var(--transition-duration-fast) var(--transition-timing-function),
     box-shadow var(--transition-duration-fast) var(--transition-timing-function);
@@ -27,7 +18,6 @@
   box-shadow: 8px 8px 0 var(--color-black);
 }
 
-/* Interactive card style for clickable cards */
 .interactive {
   cursor: pointer;
 }
@@ -37,10 +27,3 @@
   box-shadow: 3px 3px 0 var(--color-black);
 }
 
-/* Example modifier for a card with a different background or border */
-/*
-.card.alternative {
-  background-color: var(--color-gray-light);
-  border-color: var(--color-black);
-}
-*/

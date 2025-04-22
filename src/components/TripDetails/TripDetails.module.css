@@ -1,13 +1,28 @@
 .dashboardGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust minmax as needed */
-  gap: 1rem; /* Adjust gap as needed */
-  padding: 1rem; /* Add padding around the grid */
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  grid-template-areas:
+    "info       map"
+    "dests      map"
+    "travellers map";
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.infoBox {
+  grid-area: info;
 }
 
 .mapBox {
-  /* Allow the map box to span 2 columns if space allows */
-  grid-column: span 2;
+  grid-area: map;
 }
 
-/* Add any additional styles for TripDetails here */ 
+.destinationsBox {
+  grid-area: dests;
+}
+
+.travellersBox {
+  grid-area: travellers;
+}
+

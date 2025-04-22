@@ -13,7 +13,6 @@ const InputField = ({
     error = null,
     ...props
 }) => {
-    // Generate a unique ID if one isn't provided
     const inputId = id || `input-${label.replace(/\s+/g, '').toLowerCase()}`;
 
     return (

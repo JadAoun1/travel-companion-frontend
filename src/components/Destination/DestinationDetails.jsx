@@ -20,13 +20,13 @@ import styles from "./DestinationDetails.module.css";
 const DestinationDetails = ({ isViewer }) => {
   const { tripId, destinationId } = useParams();
   const [destination, setDestination] = useState(null);
-  const [error, setError] = useState(null); 
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDestinationDetails = async () => {
       try {
-        setError(null); 
+        setError(null);
         const destinationData = await destinationService.showDestination(
           tripId,
           destinationId
@@ -35,7 +35,7 @@ const DestinationDetails = ({ isViewer }) => {
       } catch (err) {
         console.error("Error fetching destination details:", err);
         setError("Failed to load destination details.");
-        setDestination(null); 
+        setDestination(null);
       }
     };
     if (tripId && destinationId) {
@@ -74,7 +74,6 @@ const DestinationDetails = ({ isViewer }) => {
 
   return (
     <main className={styles.detailsGrid}>
-      {/* Destination Info and Actions Box */}
       <DashboardBox className={styles.infoBox}>
         <Heading1>{destination.name}</Heading1>
         <div>
@@ -82,7 +81,7 @@ const DestinationDetails = ({ isViewer }) => {
           <ButtonSecondary onClick={() => navigate(`/trips/${tripId}`)}>
             Back to Trip
           </ButtonSecondary>
-          {/* <ButtonSecondary onClick={() => navigate(`/trips/${tripId}/destinations/${destinationId}/edit`)}>Edit</ButtonSecondary> */}
+
           {!isViewer && (
             <ButtonTertiary onClick={handleDeleteDestination}>
               Delete Destination
@@ -91,7 +90,6 @@ const DestinationDetails = ({ isViewer }) => {
         </div>
       </DashboardBox>
 
-      {/* Map View Box */}
       <DashboardBox className={styles.mapBox}>
         <Heading2>Add Attractions</Heading2>
         <Paragraph>
@@ -100,7 +98,6 @@ const DestinationDetails = ({ isViewer }) => {
         <MapView onAddAttraction={handleAddAttraction} />
       </DashboardBox>
 
-      {/* Attractions List Box */}
       <DashboardBox className={styles.attractionsBox}>
         <Heading2>Planned Attractions</Heading2>
         {destination.attractions && destination.attractions.length > 0 ? (

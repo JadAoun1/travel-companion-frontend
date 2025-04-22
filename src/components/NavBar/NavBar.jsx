@@ -13,14 +13,14 @@ const NavBar = () => {
   const handleSignOut = () => {
     localStorage.removeItem("token");
     setUser(null);
-    navigate("/"); 
+    navigate("/");
   }
 
   return (
     <header className={styles.navbarContainer}>
       <div className={styles.contentWrapper}>
-        <div className={styles.navLinks}>
-            <h1>TripLab</h1>
+        {/* Left Section */}
+        <div className={styles.navLeft}>
           {user ? (
             <NavLink to="/">Dashboard</NavLink>
           ) : (
@@ -28,9 +28,16 @@ const NavBar = () => {
           )}
         </div>
 
-        <div className={styles.userActions}>
+        {/* Center Section */}
+        <div className={styles.navCenter}>
+          <h1>TripLab</h1>
+        </div>
+
+        {/* Right Section */}
+        <div className={styles.navRight}>
           {user ? (
             <>
+              {/* Maybe add username here? <span className={styles.username}>{user.username}</span> */}
               <ButtonSecondary onClick={handleSignOut}>Sign Out</ButtonSecondary>
             </>
           ) : (

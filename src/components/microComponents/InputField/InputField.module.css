@@ -17,7 +17,6 @@
 }
 
 .input {
-    /* Box Model */
     display: block;
     width: 100%;
     padding: var(--space-sm) var(--space-md);
@@ -27,20 +26,16 @@
     position: relative;
     margin: 2px 0;
 
-    /* Color & Background */
     background-color: var(--color-surface);
     color: var(--color-text-primary);
 
-    /* Typography */
     font-family: var(--font-family-primary);
     font-size: var(--font-size-md);
     line-height: var(--line-height-base);
     font-weight: var(--font-weight-medium);
 
-    /* Brutalist Shadow */
     box-shadow: var(--box-shadow-hard);
 
-    /* Transitions */
     transition:
         transform var(--transition-duration-fast) var(--transition-timing-function),
         box-shadow var(--transition-duration-fast) var(--transition-timing-function);

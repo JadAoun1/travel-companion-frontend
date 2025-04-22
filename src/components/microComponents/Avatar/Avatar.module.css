@@ -1,12 +1,10 @@
 .avatar {
     display: inline-flex;
-    /* Use inline-flex for alignment */
     align-items: center;
     justify-content: center;
     vertical-align: middle;
     overflow: hidden;
     border-radius: var(--border-radius-sharp);
-    /* Force sharp corners */
     background-color: var(--color-surface);
     color: var(--color-black);
     border: var(--border-width-thick) solid var(--color-black);
@@ -14,10 +12,8 @@
     box-shadow: var(--box-shadow-hard);
 }
 
-/* Sizes */
 .size-sm {
     width: calc(var(--spacing-unit) * 1.5);
-    /* ~24px */
     height: calc(var(--spacing-unit) * 1.5);
     font-size: var(--font-size-xs);
     box-shadow: 2px 2px 0 var(--color-black);
@@ -25,7 +21,6 @@
 
 .size-md {
     width: calc(var(--spacing-unit) * 2.5);
-    /* ~40px */
     height: calc(var(--spacing-unit) * 2.5);
     font-size: var(--font-size-md);
     box-shadow: 3px 3px 0 var(--color-black);
@@ -33,42 +28,31 @@
 
 .size-lg {
     width: calc(var(--spacing-unit) * 4);
-    /* ~64px */
     height: calc(var(--spacing-unit) * 4);
     font-size: var(--font-size-lg);
     box-shadow: 4px 4px 0 var(--color-black);
 }
 
-/* Shapes */
-/* Removed shape-circle and shape-square rules */
-
-/* Border */
 .bordered {
     border-width: var(--border-width-thick);
     border-color: var(--color-black);
 }
 
-/* Image */
 .image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Cover the area, crop if needed */
 }
 
-/* Initials */
 .initials {
     font-family: var(--font-family-primary);
     font-weight: var(--font-weight-black);
     text-transform: uppercase;
     line-height: 1;
-    /* Ensure text stays centered vertically */
     user-select: none;
-    /* Prevent text selection */
     letter-spacing: var(--letter-spacing-wide);
 }
 
-/* Interactive avatar - optional for clickable avatars */
 .interactive {
     cursor: pointer;
     transition:
